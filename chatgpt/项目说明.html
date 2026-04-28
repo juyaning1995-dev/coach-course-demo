@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>项目说明</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+      background: #f5f6f8;
+      color: #1f2329;
+      line-height: 1.75;
+    }
+    .wrap {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 32px 20px 56px;
+    }
+    .hero {
+      background: linear-gradient(135deg, #1f1f1f 0%, #2c2c2c 100%);
+      color: #fff;
+      border-radius: 20px;
+      padding: 28px 24px;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.12);
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-size: 34px;
+      line-height: 1.2;
+    }
+    .sub {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 15px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 24px;
+    }
+    .card {
+      background: #fff;
+      border-radius: 18px;
+      padding: 22px 20px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+      border: 1px solid #eceff3;
+    }
+    h2 {
+      margin: 0 0 14px;
+      font-size: 22px;
+    }
+    h3 {
+      margin: 0 0 10px;
+      font-size: 18px;
+    }
+    p {
+      margin: 0 0 12px;
+      color: #4b5563;
+    }
+    ul {
+      margin: 0;
+      padding-left: 20px;
+      color: #4b5563;
+    }
+    li + li {
+      margin-top: 6px;
+    }
+    .link-list a,
+    .inline-link {
+      color: #ff6a3d;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .inline-link:hover,
+    .link-list a:hover {
+      text-decoration: underline;
+    }
+    .full {
+      margin-top: 16px;
+    }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      height: 28px;
+      padding: 0 12px;
+      border-radius: 999px;
+      background: #fff0ea;
+      color: #ff6a3d;
+      font-size: 12px;
+      font-weight: 700;
+      margin-right: 8px;
+      margin-bottom: 8px;
+    }
+    .code {
+      display: block;
+      margin-top: 10px;
+      padding: 14px 16px;
+      border-radius: 12px;
+      background: #111827;
+      color: #f9fafb;
+      font-family: Consolas, Monaco, monospace;
+      font-size: 13px;
+      overflow-x: auto;
+    }
+    @media (max-width: 720px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+      h1 {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <h1>健身房预约项目说明</h1>
+      <p class="sub">这是当前工作区里可以直接查看的说明页，方便你快速定位现有原型、入口文件和下一步工程化方向。</p>
+    </section>
+
+    <section class="grid">
+      <article class="card">
+        <h2>当前可打开入口</h2>
+        <div class="link-list">
+          <p><a href="file:///C:/Users/ju/Documents/Codex/2026-04-24/chatgpt/split-projects/coach-app/index.html">教练端原型</a></p>
+          <p><a href="file:///C:/Users/ju/Documents/Codex/2026-04-24/chatgpt/split-projects/user-app/index.html">用户端原型</a></p>
+          <p><a href="file:///C:/Users/ju/Documents/Codex/2026-04-24/chatgpt/split-projects/index.html">双端总入口</a></p>
+        </div>
+        <p class="full">这三份是当前工作区里真实存在、可以直接打开的 HTML 原型文件。</p>
+      </article>
+
+      <article class="card">
+        <h2>当前项目状态</h2>
+        <p>目前已经跑通的是静态演示版原型，包含教练端和用户端两条业务线，数据通过前端本地方式联动。</p>
+        <div>
+          <span class="tag">教练端课程管理</span>
+          <span class="tag">工作时间</span>
+          <span class="tag">课程排班</span>
+          <span class="tag">用户预约</span>
+          <span class="tag">手写签约</span>
+          <span class="tag">预约记录</span>
+        </div>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card">
+        <h2>教练端已跑通流程</h2>
+        <ul>
+          <li>课程创建、编辑、审核通过、审核驳回、上下架、删除</li>
+          <li>工作时间设置</li>
+          <li>新增排课、编辑课次、按工作时间校验</li>
+          <li>课程日历展示、停止预约、开启预约、取消课次、删除课次</li>
+          <li>课次详情查看</li>
+          <li>代学员预约</li>
+          <li>教练确认上课、同意取消、记为未到场、确认完课、发起完课确认</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h2>用户端已跑通流程</h2>
+        <ul>
+          <li>功能集合页</li>
+          <li>私教课列表</li>
+          <li>首次预约前手写电子合同签署</li>
+          <li>签署后查看合同</li>
+          <li>选择预约时段并预约</li>
+          <li>预约成功页</li>
+          <li>预约记录查看</li>
+          <li>可取消时段自助取消</li>
+          <li>教练约学员后，学员确认下课并消课</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="card full">
+      <h2>当前目录说明</h2>
+      <ul>
+        <li><strong>split-projects</strong>：当前主要原型目录，教练端和用户端在这里</li>
+        <li><strong>github-upload</strong>：之前整理过的一份上传用文件夹</li>
+        <li><strong>git-test</strong>、<strong>repo-data</strong>：临时测试目录</li>
+      </ul>
+    </section>
+
+    <section class="card full">
+      <h2>后续工程化目标</h2>
+      <p>下一步要做的是把现有静态原型，重构成一个真正可开发、可对接后端接口的前端工程，而不是重做页面。</p>
+      <ul>
+        <li>技术栈：Vue 3 + Vite + TypeScript</li>
+        <li>页面跳转：Vue Router</li>
+        <li>核心状态：Pinia</li>
+        <li>数据分层：mock / service / api</li>
+        <li>保留现有 UI 风格和业务流程，不重新设计</li>
+      </ul>
+    </section>
+
+    <section class="card full">
+      <h2>如果你现在要继续</h2>
+      <p>我建议直接以 <a class="inline-link" href="file:///C:/Users/ju/Documents/Codex/2026-04-24/chatgpt/split-projects">split-projects</a> 这套静态原型为基础，重新落一个真实存在的 Vue 工程目录，并把 README、启动方式、接口清单一起补齐。</p>
+      <span class="code">建议新目录：C:\Users\ju\Documents\Codex\2026-04-24\chatgpt\coach-course-vue3</span>
+    </section>
+  </div>
+</body>
+</html>

@@ -98,16 +98,1314 @@
     .menu-card.user-entry{background:linear-gradient(135deg,#241915,#1a1a1a);border-color:#3a2d28}
     .menu-card.user-entry h3{color:#fff}
     .menu-card.user-entry p{color:#b8a79f}
+    .coach-dashboard{min-height:100vh;padding:22px 16px 112px;background:linear-gradient(180deg,#141414 0,#0c0c0c 220px,#050505 221px,#050505 100%)}
+    .coach-header-card{padding:4px 0 18px}
+    .coach-header-top{display:flex;align-items:center;gap:14px}
+    .coach-avatar-badge{width:72px;height:72px;border-radius:50%;border:1px solid #2f2f2f;background:linear-gradient(180deg,#272727,#111);display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:800;color:#fff;box-shadow:0 10px 20px rgba(0,0,0,.2)}
+    .coach-header-main{min-width:0;flex:1}
+    .coach-greeting{font-size:18px;font-weight:800;color:#fff;line-height:1.3}
+    .coach-location-row{margin-top:10px;display:flex;align-items:center;gap:8px;color:#cfcfcf;font-size:14px}
+    .coach-location-dot{width:8px;height:8px;border-radius:50%;background:#ff7437;box-shadow:0 0 0 4px rgba(255,116,55,.12)}
+    .coach-stat-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+    .coach-stat-box{background:linear-gradient(180deg,#202020,#171717);border:1px solid #2a2a2a;border-radius:18px;padding:14px 12px 13px;box-shadow:0 10px 24px rgba(0,0,0,.18)}
+    .coach-stat-icon{width:28px;height:28px;border-radius:10px;background:rgba(255,116,55,.13);border:1px solid rgba(255,116,55,.18);display:flex;align-items:center;justify-content:center;color:#ff8f61;font-size:13px;font-weight:800}
+    .coach-stat-name{margin-top:10px;font-size:13px;color:#d8d8d8;line-height:1.4}
+    .coach-stat-number{margin-top:10px;font-size:30px;font-weight:800;color:#fff;line-height:1}
+    .coach-stat-number small{font-size:14px;color:#cfcfcf;font-weight:600;margin-left:4px}
+    .coach-stat-note{margin-top:10px;font-size:12px;color:#8f8f8f;line-height:1.5}
+    .coach-panel{margin-top:16px;padding:18px 16px;background:#111;border:1px solid #232323;border-radius:22px;box-shadow:0 12px 26px rgba(0,0,0,.18)}
+    .coach-panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+    .coach-panel-title{font-size:16px;font-weight:800;color:#fff}
+    .coach-panel-link{font-size:13px;color:#9f9f9f;cursor:pointer}
+    .coach-empty-state{padding:20px 8px 10px;text-align:center;color:#7b7b7b;font-size:13px;line-height:1.8}
+    .coach-todo-list,.coach-course-list{display:grid;gap:12px}
+    .coach-todo-item{display:grid;grid-template-columns:64px 1fr auto;gap:14px;align-items:center;padding:14px 0;border-top:1px solid #1e1e1e}
+    .coach-todo-item:first-child{border-top:0;padding-top:4px}
+    .coach-todo-time{font-size:18px;font-weight:800;color:#ff7f4b;line-height:1}
+    .coach-todo-main{min-width:0}
+    .coach-todo-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+    .coach-todo-name{font-size:17px;font-weight:700;color:#fff;line-height:1.35}
+    .coach-todo-meta{margin-top:6px;font-size:13px;color:#9b9b9b;line-height:1.6}
+    .coach-chip{display:inline-flex;align-items:center;justify-content:center;height:24px;padding:0 10px;border-radius:999px;font-size:12px;font-weight:700;white-space:nowrap}
+    .coach-chip.pending{background:rgba(255,116,55,.14);color:#ff9b71}
+    .coach-chip.review{background:rgba(91,161,255,.16);color:#82b9ff}
+    .coach-chip.active{background:rgba(88,208,145,.15);color:#79d6a1}
+    .coach-chip.done{background:rgba(186,186,186,.12);color:#c7c7c7}
+    .coach-chip.locked{background:rgba(122,122,122,.12);color:#a8a8a8}
+    .coach-todo-btn{height:40px;padding:0 16px;border-radius:999px;border:0;background:#ff7437;color:#fff;font-size:15px;font-weight:700;cursor:pointer;white-space:nowrap;box-shadow:0 8px 16px rgba(255,116,55,.18)}
+    .coach-quick-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px 10px}
+    .coach-quick-item{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;min-height:84px;border-radius:16px;background:#161616;border:1px solid #242424;cursor:pointer}
+    .coach-quick-icon{width:38px;height:38px;border-radius:12px;border:1px solid #2f2f2f;background:#0f0f0f;display:flex;align-items:center;justify-content:center;color:#ff8f61;font-size:15px;font-weight:800}
+    .coach-quick-label{font-size:13px;color:#ededed;text-align:center;line-height:1.4}
+    .coach-course-item{padding:15px 14px;border-radius:18px;background:#151515;border:1px solid #242424;cursor:pointer}
+    .coach-course-row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+    .coach-course-name{font-size:17px;font-weight:750;color:#fff;line-height:1.35}
+    .coach-course-meta{margin-top:8px;font-size:13px;color:#a0a0a0;line-height:1.65}
+    .coach-bottom-nav{position:fixed;left:50%;bottom:0;transform:translateX(-50%);width:min(390px,100vw);height:76px;background:rgba(8,8,8,.96);backdrop-filter:blur(20px);border-top:1px solid #1b1b1b;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));padding:10px 8px 12px;z-index:24}
+    .coach-bottom-item{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:#8e8e8e;font-size:12px;cursor:pointer}
+    .coach-bottom-icon{width:26px;height:26px;border-radius:9px;border:1px solid #2c2c2c;background:#111;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:inherit}
+    .coach-bottom-item.active{color:#ff8f61}
+    .coach-bottom-item.active .coach-bottom-icon{border-color:rgba(255,116,55,.3);background:rgba(255,116,55,.12)}
+    .coach-dashboard{position:relative;min-height:100vh;padding:18px 16px 108px;background:radial-gradient(circle at top right,rgba(255,116,55,.18),transparent 28%),linear-gradient(180deg,#151515 0,#0b0b0b 32%,#050505 100%)}
+    .coach-dashboard:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.02),transparent 220px);pointer-events:none}
+    .coach-header-card{position:relative;padding:18px 18px 20px;border-radius:28px;background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.08);box-shadow:0 18px 36px rgba(0,0,0,.22);overflow:hidden}
+    .coach-header-card:before{content:"";position:absolute;width:180px;height:180px;right:-40px;top:-80px;background:radial-gradient(circle,rgba(255,116,55,.25),transparent 68%)}
+    .coach-header-card:after{content:"";position:absolute;width:150px;height:150px;left:-36px;bottom:-90px;background:radial-gradient(circle,rgba(255,255,255,.08),transparent 72%)}
+    .coach-header-top{position:relative;z-index:1;display:flex;align-items:center;gap:14px}
+    .coach-avatar-badge{width:76px;height:76px;border-radius:24px;border:1px solid rgba(255,255,255,.1);background:linear-gradient(180deg,#222,#141414);display:flex;align-items:center;justify-content:center;color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 12px 24px rgba(0,0,0,.24)}
+    .coach-avatar-badge svg{width:34px;height:34px}
+    .coach-header-main{min-width:0;flex:1}
+    .coach-header-kicker{font-size:11px;letter-spacing:.12em;color:#8f8f8f;text-transform:uppercase}
+    .coach-greeting{margin-top:6px;font-size:24px;font-weight:800;line-height:1.28;color:#fff}
+    .coach-location-row{margin-top:12px;display:flex;align-items:center;gap:10px}
+    .coach-store-pill{display:inline-flex;align-items:center;gap:8px;height:34px;padding:0 12px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);font-size:13px;color:#e2e2e2}
+    .coach-store-pill svg{width:16px;height:16px;color:#ff8f61;flex:none}
+    .coach-header-action{width:44px;height:44px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);color:#f6f6f6;cursor:pointer;flex:none}
+    .coach-header-action svg{width:20px;height:20px}
+    .coach-stat-grid{margin-top:14px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+    .coach-stat-box{padding:16px 14px 14px;border-radius:22px;background:linear-gradient(180deg,#1c1c1c,#131313);border:1px solid rgba(255,255,255,.06);box-shadow:0 14px 28px rgba(0,0,0,.16)}
+    .coach-stat-icon{width:34px;height:34px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:rgba(255,116,55,.12);color:#ff8f61;border:1px solid rgba(255,116,55,.14)}
+    .coach-stat-icon svg{width:18px;height:18px}
+    .coach-stat-name{margin-top:12px;font-size:13px;color:#d8d8d8}
+    .coach-stat-number{margin-top:12px;font-size:34px;font-weight:800;letter-spacing:-.02em;color:#fff}
+    .coach-stat-number small{font-size:13px;color:#bcbcbc;font-weight:600;margin-left:4px}
+    .coach-stat-note{margin-top:10px;font-size:12px;line-height:1.6;color:#888}
+    .coach-panel{margin-top:16px;padding:18px 16px;background:linear-gradient(180deg,#141414,#101010);border:1px solid rgba(255,255,255,.06);border-radius:26px;box-shadow:0 14px 28px rgba(0,0,0,.16)}
+    .coach-panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+    .coach-panel-title{font-size:20px;font-weight:800;color:#fff;letter-spacing:.01em}
+    .coach-panel-link{display:inline-flex;align-items:center;gap:4px;color:#9e9e9e;font-size:13px;cursor:pointer}
+    .coach-panel-link:after{content:"›";font-size:16px;line-height:1;transform:translateY(-1px)}
+    .coach-empty-state{padding:18px 4px 8px;text-align:center;color:#757575;font-size:13px;line-height:1.8}
+    .coach-todo-list,.coach-course-list{display:grid;gap:12px}
+    .coach-todo-item{display:grid;grid-template-columns:58px 1fr auto;gap:14px;align-items:center;padding:14px;border-radius:22px;background:linear-gradient(180deg,#191919,#141414);border:1px solid rgba(255,255,255,.05)}
+    .coach-todo-time{font-size:28px;font-weight:800;letter-spacing:-.03em;color:#ff7b45;line-height:1}
+    .coach-todo-main{min-width:0;cursor:pointer}
+    .coach-todo-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+    .coach-todo-name{font-size:18px;font-weight:760;color:#fff;line-height:1.35}
+    .coach-todo-meta{margin-top:8px;font-size:13px;color:#9e9e9e;line-height:1.6}
+    .coach-chip{display:inline-flex;align-items:center;justify-content:center;min-width:64px;height:26px;padding:0 10px;border-radius:999px;font-size:12px;font-weight:700;white-space:nowrap}
+    .coach-chip.pending{background:rgba(255,116,55,.14);color:#ff9b71}
+    .coach-chip.review{background:rgba(91,161,255,.16);color:#82b9ff}
+    .coach-chip.active{background:rgba(88,208,145,.16);color:#7dd4a1}
+    .coach-chip.done{background:rgba(186,186,186,.12);color:#cacaca}
+    .coach-todo-btn{height:42px;padding:0 18px;border-radius:999px;border:0;background:linear-gradient(180deg,#ff864d,#ff6d2f);color:#fff;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 10px 20px rgba(255,116,55,.2)}
+    .coach-quick-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px 10px}
+    .coach-quick-item{padding:14px 8px 12px;border-radius:20px;background:linear-gradient(180deg,#181818,#131313);border:1px solid rgba(255,255,255,.05);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;min-height:94px;cursor:pointer}
+    .coach-quick-icon{width:42px;height:42px;border-radius:14px;border:1px solid rgba(255,255,255,.07);background:#0f0f0f;display:flex;align-items:center;justify-content:center;color:#fff}
+    .coach-quick-icon svg{width:21px;height:21px}
+    .coach-quick-label{font-size:13px;color:#ededed;text-align:center;line-height:1.45}
+    .coach-course-item{padding:16px 14px;border-radius:22px;background:linear-gradient(180deg,#181818,#131313);border:1px solid rgba(255,255,255,.05);cursor:pointer}
+    .coach-course-row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+    .coach-course-name{font-size:18px;font-weight:760;color:#fff;line-height:1.35}
+    .coach-course-meta{margin-top:10px;font-size:13px;color:#9b9b9b;line-height:1.7}
+    .coach-bottom-nav{position:fixed;left:50%;bottom:0;transform:translateX(-50%);width:min(390px,100vw);height:80px;padding:10px 8px 14px;background:rgba(10,10,10,.96);backdrop-filter:blur(18px);border-top:1px solid rgba(255,255,255,.06);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));z-index:24}
+    .coach-bottom-item{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:#868686;font-size:12px;cursor:pointer}
+    .coach-bottom-icon{width:30px;height:30px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:inherit;background:transparent;border:1px solid transparent}
+    .coach-bottom-icon svg{width:20px;height:20px}
+    .coach-bottom-item.active{color:#ff8f61}
+    .coach-bottom-item.active .coach-bottom-icon{background:rgba(255,116,55,.12);border-color:rgba(255,116,55,.18)}
+    .coach-dashboard{padding:12px 16px 108px;background:linear-gradient(180deg,#11161b 0,#0a0d11 170px,#050505 171px,#050505 100%)}
+    .coach-dashboard:before{display:none}
+    .coach-status-bar{display:none;align-items:center;justify-content:space-between;padding:6px 2px 14px;color:#fff}
+    .coach-status-time{font-size:15px;font-weight:700;letter-spacing:.01em}
+    .coach-status-icons{display:flex;align-items:center;gap:8px}
+    .coach-status-signal{display:flex;align-items:flex-end;gap:2px;height:14px}
+    .coach-status-signal i{display:block;width:3px;border-radius:999px;background:#fff;opacity:.96}
+    .coach-status-signal i:nth-child(1){height:5px}
+    .coach-status-signal i:nth-child(2){height:8px}
+    .coach-status-signal i:nth-child(3){height:11px}
+    .coach-status-signal i:nth-child(4){height:14px}
+    .coach-status-battery{min-width:34px;height:20px;padding:0 6px;border-radius:8px;background:#fff;color:#111;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800}
+    .coach-header-card{display:none;position:relative;margin:-14px -16px 8px;padding:20px 16px 16px;border-radius:0 0 28px 28px;background:transparent;border:0;box-shadow:none;overflow:hidden}
+    .coach-header-card:before{content:"";position:absolute;inset:0;border-radius:inherit;background:
+      radial-gradient(circle at 84% 34%,rgba(255,255,255,.08),transparent 0 18%),
+      radial-gradient(circle at 76% 38%,rgba(255,255,255,.05),transparent 0 26%),
+      linear-gradient(90deg,transparent 0 53%,rgba(255,255,255,.03) 53% 55%,transparent 55% 66%,rgba(255,255,255,.018) 66% 68%,transparent 68% 100%),
+      linear-gradient(180deg,rgba(18,24,29,.98),rgba(12,16,20,.96));
+      box-shadow:inset 0 -36px 60px rgba(0,0,0,.22)}
+    .coach-header-card:after{content:"";position:absolute;right:18px;top:18px;width:126px;height:82px;border-radius:20px;background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,0));filter:blur(2px);opacity:.8}
+    .coach-header-top{position:relative;z-index:1;align-items:center;gap:10px}
+    .coach-avatar-badge{width:48px;height:48px;border-radius:50%;border:1px solid rgba(255,255,255,.12);background:linear-gradient(180deg,#262626,#171717);box-shadow:0 8px 16px rgba(0,0,0,.16)}
+    .coach-avatar-badge svg{width:22px;height:22px}
+    .coach-header-kicker{display:none}
+    .coach-greeting{margin-top:0;font-size:17px;font-weight:760;line-height:1.3;letter-spacing:0}
+    .coach-location-row{margin-top:7px}
+    .coach-store-pill{height:auto;padding:0;background:transparent;border:0;border-radius:0;font-size:13px;color:#f0f0f0;gap:6px}
+    .coach-store-pill svg{width:15px;height:15px}
+    .coach-store-arrow{color:#cfcfcf;font-size:15px;line-height:1}
+    .coach-header-action{display:none}
+    .coach-stat-grid{position:relative;z-index:2;margin-top:0;gap:8px}
+    .coach-stat-box{padding:8px 10px 8px;border-radius:12px;background:linear-gradient(180deg,#232323,#1a1a1a);border:1px solid rgba(255,255,255,.05);box-shadow:0 8px 16px rgba(0,0,0,.12)}
+    .coach-stat-title{display:flex;align-items:center;gap:5px;font-size:10px;font-weight:650;color:#e7e7e7}
+    .coach-stat-icon{width:15px;height:15px;border:0;border-radius:0;background:transparent;color:#ff7d3a;padding:0}
+    .coach-stat-icon svg{width:15px;height:15px}
+    .coach-stat-name{margin-top:0;font-size:10px;color:#e7e7e7}
+    .coach-stat-number{margin-top:10px;font-size:20px;font-weight:800;line-height:1}
+    .coach-stat-number small{font-size:11px;color:#d0d0d0;font-weight:600;margin-left:3px}
+    .coach-stat-note{margin-top:8px;font-size:10px;line-height:1.25;color:#a4a4a4}
+    .coach-stat-up{color:#ff7d3a;font-weight:700;margin-left:4px}
+    :root{
+      --color-primary:#FF6A00;
+      --color-bg:#F6F7F9;
+      --color-card:#FFFFFF;
+      --color-text-primary:#111827;
+      --color-text-secondary:#6B7280;
+      --color-text-tertiary:#9CA3AF;
+      --color-border:#E5E7EB;
+      --color-success:#16A34A;
+      --color-info:#2F80ED;
+      --color-warning:#F59E0B;
+      --color-danger:#EF4444;
+      --shadow-card:0 8px 24px rgba(0,0,0,.06);
+    }
+    body{background:var(--color-bg);font-family:system-ui,-apple-system,"PingFang SC",sans-serif;color:var(--color-text-primary)}
+    .phone,#homePage.page.active{background:var(--color-bg)}
+    .coach-dashboard{
+      position:relative;
+      min-height:100vh;
+      padding:16px 16px 108px;
+      background:var(--color-bg);
+    }
+    .coach-dashboard:before,
+    .coach-dashboard:after,
+    .coach-header-card:before,
+    .coach-header-card:after{display:none}
+    .coach-header-card{display:none}
+    .coach-stat-grid{
+      position:relative;
+      z-index:1;
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:12px;
+      margin-top:0;
+    }
+    .coach-stat-box{
+      padding:16px;
+      border-radius:18px;
+      background:var(--color-card);
+      border:1px solid var(--color-border);
+      box-shadow:var(--shadow-card);
+    }
+    .coach-stat-title{
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    .coach-stat-icon{
+      width:24px;
+      height:24px;
+      padding:0;
+      border:0;
+      border-radius:12px;
+      background:rgba(255,106,0,.08);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:var(--color-primary);
+    }
+    .coach-stat-icon svg{width:16px;height:16px}
+    .coach-stat-name{
+      margin-top:0;
+      font-size:12px;
+      font-weight:400;
+      line-height:1.4;
+      color:var(--color-text-secondary);
+    }
+    .coach-stat-number{
+      margin-top:12px;
+      font-size:30px;
+      font-weight:700;
+      line-height:1;
+      letter-spacing:-.02em;
+      color:var(--color-text-primary);
+    }
+    .coach-stat-number small{
+      margin-left:4px;
+      font-size:14px;
+      font-weight:600;
+      color:var(--color-text-secondary);
+    }
+    .coach-stat-note{
+      margin-top:10px;
+      font-size:12px;
+      font-weight:400;
+      line-height:1.4;
+      color:var(--color-text-tertiary);
+    }
+    .coach-stat-up{color:var(--color-primary);font-weight:600}
+    .coach-panel{
+      margin-top:12px;
+      padding:16px;
+      background:var(--color-card);
+      border:1px solid var(--color-border);
+      border-radius:18px;
+      box-shadow:var(--shadow-card);
+    }
+    .coach-panel-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:12px;
+    }
+    .coach-panel-title{
+      font-size:18px;
+      font-weight:700;
+      line-height:1.3;
+      letter-spacing:0;
+      color:var(--color-text-primary);
+    }
+    .coach-panel-link{
+      display:inline-flex;
+      align-items:center;
+      gap:4px;
+      font-size:14px;
+      font-weight:400;
+      color:var(--color-text-tertiary);
+      cursor:pointer;
+    }
+    .coach-panel-link:after{
+      color:var(--color-text-tertiary);
+      font-size:16px;
+      line-height:1;
+    }
+    .coach-empty-state{
+      padding:16px 8px 4px;
+      text-align:center;
+      font-size:12px;
+      line-height:1.4;
+      color:var(--color-text-secondary);
+    }
+    .coach-todo-list,.coach-course-list{display:grid;gap:12px}
+    .coach-todo-item{
+      display:grid;
+      grid-template-columns:56px 1fr auto;
+      gap:12px;
+      align-items:center;
+      padding:16px;
+      border-radius:16px;
+      background:var(--color-card);
+      border:1px solid var(--color-border);
+      box-shadow:var(--shadow-card);
+    }
+    .coach-todo-time{
+      font-size:28px;
+      font-weight:700;
+      line-height:1;
+      letter-spacing:-.02em;
+      color:var(--color-primary);
+    }
+    .coach-todo-main{min-width:0;cursor:pointer}
+    .coach-todo-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+    .coach-todo-name,
+    .coach-course-name{
+      font-size:16px;
+      font-weight:600;
+      line-height:1.3;
+      color:var(--color-text-primary);
+    }
+    .coach-todo-meta,
+    .coach-course-meta{
+      margin-top:6px;
+      font-size:14px;
+      font-weight:400;
+      line-height:1.5;
+      color:var(--color-text-secondary);
+    }
+    .coach-chip{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:0;
+      height:auto;
+      padding:4px 8px;
+      border-radius:6px;
+      font-size:12px;
+      font-weight:600;
+      white-space:nowrap;
+    }
+    .coach-chip.pending{background:rgba(245,158,11,.12);color:#B45309}
+    .coach-chip.review{background:rgba(47,128,237,.12);color:var(--color-info)}
+    .coach-chip.active{background:rgba(22,163,74,.12);color:#15803D}
+    .coach-chip.done{background:rgba(156,163,175,.16);color:var(--color-text-secondary)}
+    .coach-chip.locked{background:rgba(239,68,68,.10);color:var(--color-danger)}
+    .coach-todo-btn{
+      height:40px;
+      padding:0 16px;
+      border:0;
+      border-radius:999px;
+      background:var(--color-primary);
+      color:#fff;
+      font-size:14px;
+      font-weight:600;
+      cursor:pointer;
+      white-space:nowrap;
+      box-shadow:none;
+    }
+    .coach-quick-grid{
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:12px;
+    }
+    .coach-quick-item{
+      min-height:86px;
+      padding:16px 8px 14px;
+      border-radius:16px;
+      background:var(--color-card);
+      border:1px solid var(--color-border);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      cursor:pointer;
+      box-shadow:none;
+    }
+    .coach-quick-icon{
+      width:28px;
+      height:28px;
+      border:0;
+      border-radius:0;
+      background:transparent;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:var(--color-text-primary);
+    }
+    .coach-quick-icon svg{width:24px;height:24px}
+    .coach-quick-label{
+      font-size:14px;
+      font-weight:400;
+      line-height:1.5;
+      text-align:center;
+      color:var(--color-text-primary);
+    }
+    .coach-course-item{
+      padding:16px;
+      border-radius:16px;
+      background:var(--color-card);
+      border:1px solid var(--color-border);
+      cursor:pointer;
+      box-shadow:var(--shadow-card);
+    }
+    .coach-course-row{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .coach-bottom-nav{
+      position:fixed;
+      left:50%;
+      bottom:0;
+      transform:translateX(-50%);
+      width:min(390px,100vw);
+      height:76px;
+      padding:8px 8px 12px;
+      background:rgba(255,255,255,.96);
+      backdrop-filter:blur(12px);
+      border-top:1px solid var(--color-border);
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      z-index:24;
+      box-shadow:0 -8px 24px rgba(0,0,0,.04);
+    }
+    .coach-bottom-item{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:6px;
+      font-size:12px;
+      font-weight:400;
+      color:var(--color-text-tertiary);
+      cursor:pointer;
+    }
+    .coach-bottom-icon{
+      width:28px;
+      height:28px;
+      border:0;
+      border-radius:12px;
+      background:transparent;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:inherit;
+    }
+    .coach-bottom-icon svg{width:22px;height:22px}
+    .coach-bottom-item.active{
+      color:var(--color-primary);
+      font-weight:600;
+    }
+    .coach-bottom-item.active .coach-bottom-icon{
+      background:rgba(255,106,0,.10);
+      color:var(--color-primary);
+    }
+    body[data-app="coach"]{
+      background:#090909;
+      font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","PingFang SC","Microsoft YaHei",Arial,sans-serif;
+      color:#F7F7F7;
+    }
+    body[data-app="coach"] .phone,
+    body[data-app="coach"] #homePage.page.active{
+      background:#090909;
+    }
+    .coach-dashboard{
+      position:relative;
+      min-height:100vh;
+      padding:20px 20px 106px;
+      background:#090909;
+      overflow:hidden;
+    }
+    .coach-dashboard:before{
+      content:"";
+      position:absolute;
+      left:-80px;
+      top:-72px;
+      width:260px;
+      height:180px;
+      background:radial-gradient(circle,rgba(248,201,0,.18) 0%,rgba(248,201,0,.08) 32%,rgba(248,201,0,0) 72%);
+      pointer-events:none;
+      filter:blur(10px);
+    }
+    .coach-dashboard:after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg,rgba(255,255,255,.02) 0%,rgba(255,255,255,0) 180px);
+      pointer-events:none;
+    }
+    .coach-header-card{display:none}
+    .coach-stat-grid{
+      position:relative;
+      z-index:1;
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:12px;
+      margin-top:0;
+    }
+    .coach-stat-box{
+      position:relative;
+      padding:14px 14px 13px;
+      border-radius:18px;
+      background:#18181A;
+      border:1px solid rgba(255,255,255,0.055);
+      box-shadow:0 8px 18px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.025);
+    }
+    .coach-stat-title{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      min-height:24px;
+    }
+    .coach-stat-icon{
+      width:22px;
+      height:22px;
+      border:0;
+      border-radius:11px;
+      background:rgba(248,201,0,0.08);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#F8C900;
+      flex:none;
+    }
+    .coach-stat-icon svg{width:14px;height:14px}
+    .coach-stat-name{
+      margin:0;
+      font-size:12px;
+      font-weight:400;
+      line-height:1.4;
+      color:#B9B9BB;
+    }
+    .coach-stat-number{
+      margin-top:14px;
+      color:#F7F7F7;
+      font-size:30px;
+      font-weight:600;
+      line-height:1;
+      letter-spacing:-.02em;
+    }
+    .coach-stat-number small{
+      margin-left:4px;
+      font-size:13px;
+      font-weight:500;
+      color:#B9B9BB;
+    }
+    .coach-stat-note{
+      margin-top:10px;
+      font-size:12px;
+      font-weight:400;
+      line-height:1.4;
+      color:#858588;
+    }
+    .coach-stat-up{color:#F8C900;font-weight:500}
+    .coach-panel{
+      position:relative;
+      z-index:1;
+      margin-top:16px;
+      padding:16px;
+      border-radius:18px;
+      background:#18181A;
+      border:1px solid rgba(255,255,255,0.055);
+      box-shadow:0 8px 18px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.025);
+    }
+    .coach-panel-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:14px;
+    }
+    .coach-panel-title{
+      font-size:17px;
+      font-weight:600;
+      line-height:1.3;
+      color:#F7F7F7;
+      letter-spacing:0;
+    }
+    .coach-panel-link{
+      display:inline-flex;
+      align-items:center;
+      gap:4px;
+      font-size:12px;
+      font-weight:400;
+      color:#858588;
+      cursor:pointer;
+    }
+    .coach-panel-link:after{
+      content:"›";
+      font-size:15px;
+      line-height:1;
+      color:#858588;
+      transform:translateY(-1px);
+    }
+    .coach-empty-state{
+      padding:18px 6px 6px;
+      text-align:center;
+      font-size:12px;
+      line-height:1.5;
+      color:#858588;
+    }
+    .coach-todo-list,.coach-course-list{
+      display:grid;
+      gap:12px;
+    }
+    .coach-todo-item{
+      display:grid;
+      grid-template-columns:74px minmax(0,1fr) 92px;
+      gap:14px;
+      align-items:center;
+      padding:16px 14px;
+      border-radius:16px;
+      background:#1A1A1C;
+      border:1px solid rgba(255,255,255,0.055);
+    }
+    .coach-todo-time{
+      font-size:22px;
+      font-weight:600;
+      line-height:1;
+      letter-spacing:-.02em;
+      color:#F8C900;
+      white-space:nowrap;
+    }
+    .coach-todo-main{
+      min-width:0;
+      cursor:pointer;
+    }
+    .coach-todo-top{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:nowrap;
+      min-width:0;
+    }
+    .coach-todo-name{
+      font-size:15.5px;
+      font-weight:500;
+      line-height:1.35;
+      color:#F7F7F7;
+      flex:1;
+      min-width:0;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .coach-todo-meta{
+      margin-top:6px;
+      display:flex;
+      align-items:center;
+      gap:6px;
+      flex-wrap:wrap;
+      font-size:12px;
+      font-weight:400;
+      line-height:1.45;
+      color:#858588;
+    }
+    .coach-todo-date{
+      white-space:nowrap;
+    }
+    .coach-todo-sep{
+      opacity:.55;
+    }
+    .coach-chip{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:0;
+      padding:4px 10px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:400;
+      line-height:1.2;
+      white-space:nowrap;
+      border:1px solid transparent;
+    }
+    .coach-chip.pending{
+      background:rgba(248,201,0,0.12);
+      color:#F8C900;
+    }
+    .coach-chip.review,
+    .coach-chip.active,
+    .coach-chip.done,
+    .coach-chip.locked{
+      background:#232326;
+      color:#B9B9BB;
+      border-color:rgba(255,255,255,0.04);
+    }
+    .coach-todo-btn{
+      height:34px;
+      width:92px;
+      padding:0 10px;
+      border:0;
+      border-radius:9px;
+      background:linear-gradient(180deg,#FFD84A 0%,#F3C100 100%);
+      color:#111;
+      font-size:13px;
+      font-weight:600;
+      cursor:pointer;
+      white-space:nowrap;
+      box-shadow:none;
+    }
+    .coach-quick-grid{
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:16px 10px;
+    }
+    .coach-quick-item{
+      min-height:auto;
+      padding:4px 2px 2px;
+      border-radius:0;
+      background:transparent;
+      border:0;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      cursor:pointer;
+      box-shadow:none;
+    }
+    .coach-quick-icon{
+      width:60px;
+      height:48px;
+      border:1px solid rgba(255,255,255,0.045);
+      border-radius:24px;
+      background:#2A2A2D;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#F8C900;
+      flex:none;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,0.025);
+    }
+    .coach-quick-icon svg{width:22px;height:22px}
+    .coach-quick-label{
+      font-size:13px;
+      font-weight:500;
+      line-height:1.4;
+      text-align:center;
+      color:#F7F7F7;
+      white-space:nowrap;
+    }
+    .coach-course-item{
+      padding:15px 14px;
+      border-radius:16px;
+      background:#1A1A1C;
+      border:1px solid rgba(255,255,255,0.055);
+      cursor:pointer;
+      box-shadow:none;
+    }
+    .coach-course-row{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .coach-course-name{
+      font-size:15.5px;
+      font-weight:500;
+      line-height:1.35;
+      color:#F7F7F7;
+    }
+    .coach-course-meta{
+      margin-top:8px;
+      font-size:13px;
+      font-weight:400;
+      line-height:1.55;
+      color:#B9B9BB;
+    }
+    .coach-bottom-nav{
+      position:fixed;
+      left:50%;
+      bottom:0;
+      transform:translateX(-50%);
+      width:min(390px,100vw);
+      height:78px;
+      padding:10px 8px 14px;
+      background:#0F0F10;
+      border-top:1px solid rgba(255,255,255,0.055);
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      z-index:24;
+      box-shadow:0 -8px 18px rgba(0,0,0,0.18);
+    }
+    .coach-bottom-item{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:6px;
+      color:#858588;
+      font-size:12px;
+      font-weight:400;
+      cursor:pointer;
+    }
+    .coach-bottom-icon{
+      width:24px;
+      height:24px;
+      border:0;
+      border-radius:0;
+      background:transparent;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:inherit;
+    }
+    .coach-bottom-icon svg{width:22px;height:22px}
+    .coach-bottom-item.active{
+      color:#F8C900;
+      font-weight:500;
+    }
+    .coach-bottom-item.active .coach-bottom-icon{
+      background:transparent;
+      color:#F8C900;
+    }
+    body[data-app="coach"]{
+      --app-bg:#090909;
+      --surface:#18181A;
+      --surface-2:#1A1A1C;
+      --nav-bg:#0F0F10;
+      --accent:#F8C900;
+      --text-1:#F7F7F7;
+      --text-2:#B9B9BB;
+      --text-3:#858588;
+      --line:rgba(255,255,255,0.055);
+      --shadow-soft:0 8px 18px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.025);
+      background:var(--app-bg);
+      color:var(--text-1);
+      font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","PingFang SC","Microsoft YaHei",Arial,sans-serif;
+    }
+    body[data-app="coach"] .phone,
+    body[data-app="coach"] .page,
+    body[data-app="coach"] .page.user-page,
+    body[data-app="coach"] #homePage.page.active{
+      background:var(--app-bg);
+      color:var(--text-1);
+    }
+    body[data-app="coach"] .nav{
+      height:56px;
+      background:rgba(9,9,9,.96);
+      border-bottom:1px solid var(--line);
+      color:var(--text-1);
+      font-size:21px;
+      font-weight:600;
+      backdrop-filter:blur(14px);
+    }
+    body[data-app="coach"] .back{
+      color:var(--text-2);
+      font-size:30px;
+      line-height:26px;
+    }
+    body[data-app="coach"] .home-head{padding:24px 20px 8px}
+    body[data-app="coach"] .home-title{
+      font-size:21px;
+      font-weight:600;
+      color:var(--text-1);
+    }
+    body[data-app="coach"] .home-sub{
+      margin-top:8px;
+      font-size:12px;
+      line-height:1.6;
+      color:var(--text-3);
+    }
+    body[data-app="coach"] .menu-list,
+    body[data-app="coach"] .course-list,
+    body[data-app="coach"] .member-list{padding-left:20px;padding-right:20px}
+    body[data-app="coach"] .menu-card,
+    body[data-app="coach"] .course-card,
+    body[data-app="coach"] .detail-card,
+    body[data-app="coach"] .student-card,
+    body[data-app="coach"] .user-course-card,
+    body[data-app="coach"] .user-brief-card,
+    body[data-app="coach"] .user-panel,
+    body[data-app="coach"] .user-booking-card{
+      background:var(--surface);
+      border:1px solid var(--line);
+      box-shadow:var(--shadow-soft);
+      border-radius:18px;
+    }
+    body[data-app="coach"] .menu-card{
+      height:auto;
+      min-height:86px;
+      padding:18px 16px;
+      margin-bottom:12px;
+    }
+    body[data-app="coach"] .menu-card h3,
+    body[data-app="coach"] .course-name,
+    body[data-app="coach"] .detail-title,
+    body[data-app="coach"] .student-title,
+    body[data-app="coach"] .user-course-title,
+    body[data-app="coach"] .user-booking-name{
+      font-size:15.5px;
+      font-weight:500;
+      color:var(--text-1);
+      line-height:1.35;
+    }
+    body[data-app="coach"] .menu-card p,
+    body[data-app="coach"] .course-meta,
+    body[data-app="coach"] .detail-line,
+    body[data-app="coach"] .user-course-sub,
+    body[data-app="coach"] .user-store,
+    body[data-app="coach"] .user-booking-time,
+    body[data-app="coach"] .reason,
+    body[data-app="coach"] .member-note,
+    body[data-app="coach"] .tips{
+      font-size:12px;
+      font-weight:400;
+      line-height:1.6;
+      color:var(--text-3);
+    }
+    body[data-app="coach"] .arrow,
+    body[data-app="coach"] .coach-panel-link,
+    body[data-app="coach"] .course-actions,
+    body[data-app="coach"] .work-day,
+    body[data-app="coach"] .work-times,
+    body[data-app="coach"] .remain,
+    body[data-app="coach"] .legend{
+      color:var(--text-2);
+    }
+    body[data-app="coach"] .search-row{
+      padding:18px 20px 14px;
+      gap:10px;
+    }
+    body[data-app="coach"] .search-box,
+    body[data-app="coach"] .status-select,
+    body[data-app="coach"] .member-search,
+    body[data-app="coach"] .box-field,
+    body[data-app="coach"] .time-input{
+      background:var(--surface-2);
+      border:1px solid var(--line);
+      color:var(--text-1);
+      border-radius:14px;
+      box-shadow:none;
+    }
+    body[data-app="coach"] .search-box input,
+    body[data-app="coach"] .field,
+    body[data-app="coach"] .textarea-row textarea,
+    body[data-app="coach"] .box-field{
+      color:var(--text-1);
+      font-size:14px;
+      font-weight:400;
+    }
+    body[data-app="coach"] .search-box input::placeholder,
+    body[data-app="coach"] .field::placeholder,
+    body[data-app="coach"] .textarea-row textarea::placeholder,
+    body[data-app="coach"] .box-field::placeholder{
+      color:var(--text-3);
+    }
+    body[data-app="coach"] .magnifier,
+    body[data-app="coach"] .magnifier:after{border-color:var(--text-3);background:var(--text-3)}
+    body[data-app="coach"] .filter-label{
+      color:var(--text-3);
+      font-size:12px;
+      font-weight:400;
+    }
+    body[data-app="coach"] .course-main{padding:16px}
+    body[data-app="coach"] .course-actions{
+      height:48px;
+      padding:0 16px;
+      border-top:1px solid var(--line);
+      gap:16px;
+      font-size:13px;
+      font-weight:500;
+    }
+    body[data-app="coach"] .tag,
+    body[data-app="coach"] .detail-status,
+    body[data-app="coach"] .user-status,
+    body[data-app="coach"] .student-status{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:24px;
+      padding:4px 10px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:400;
+      line-height:1.2;
+      white-space:nowrap;
+      border:1px solid transparent;
+    }
+    body[data-app="coach"] .tag.pending,
+    body[data-app="coach"] .user-status,
+    body[data-app="coach"] .student-status{
+      background:rgba(248,201,0,0.12);
+      color:var(--accent);
+      border-color:rgba(248,201,0,0.14);
+    }
+    body[data-app="coach"] .tag.online,
+    body[data-app="coach"] .detail-status{
+      background:#232326;
+      color:var(--text-2);
+      border-color:var(--line);
+    }
+    body[data-app="coach"] .tag.reject{
+      background:rgba(239,68,68,0.12);
+      color:#EF4444;
+      border-color:rgba(239,68,68,0.16);
+    }
+    body[data-app="coach"] .tag.offline{
+      background:#232326;
+      color:var(--text-3);
+      border-color:var(--line);
+    }
+    body[data-app="coach"] .fab{
+      width:54px;
+      height:54px;
+      border-radius:50%;
+      background:linear-gradient(180deg,#FFD84A 0%,#F3C100 100%);
+      color:#111;
+      box-shadow:0 12px 24px rgba(0,0,0,.24);
+    }
+    body[data-app="coach"] .form,
+    body[data-app="coach"] .form.lightpad{padding-top:14px}
+    body[data-app="coach"] .form-row,
+    body[data-app="coach"] .textarea-row,
+    body[data-app="coach"] .work-row{
+      min-height:54px;
+      padding-left:20px;
+      padding-right:20px;
+      border-bottom:1px solid var(--line);
+      font-size:14px;
+      background:transparent;
+    }
+    body[data-app="coach"] .form-row.split-top{border-top:8px solid transparent}
+    body[data-app="coach"] .label,
+    body[data-app="coach"] .day-title,
+    body[data-app="coach"] .time-section-title,
+    body[data-app="coach"] .picker-title,
+    body[data-app="coach"] .audit-title,
+    body[data-app="coach"] .op-head,
+    body[data-app="coach"] .week-title{
+      color:var(--text-1);
+      font-size:17px;
+      font-weight:600;
+      line-height:1.3;
+    }
+    body[data-app="coach"] .day-select,
+    body[data-app="coach"] .time-section,
+    body[data-app="coach"] .member-list,
+    body[data-app="coach"] .work-list{padding-left:20px;padding-right:20px}
+    body[data-app="coach"] .day{
+      background:var(--surface-2);
+      color:var(--text-3);
+      border:1px solid var(--line);
+    }
+    body[data-app="coach"] .day.on{
+      background:rgba(248,201,0,0.12);
+      color:var(--accent);
+      border-color:rgba(248,201,0,0.16);
+    }
+    body[data-app="coach"] .switch{background:#2A2A2D}
+    body[data-app="coach"] .switch:after{background:#F7F7F7}
+    body[data-app="coach"] .switch:not(.off){background:rgba(248,201,0,0.26)}
+    body[data-app="coach"] .calendar-head,
+    body[data-app="coach"] .calendar-days{
+      width:100%;
+      padding-left:20px;
+      padding-right:20px;
+      border-color:var(--line);
+    }
+    body[data-app="coach"] .range{
+      font-size:17px;
+      font-weight:600;
+      color:var(--text-1);
+    }
+    body[data-app="coach"] .week-switch,
+    body[data-app="coach"] .today{
+      background:var(--surface-2);
+      border:1px solid var(--line);
+      color:var(--text-2);
+      border-radius:12px;
+      box-shadow:none;
+    }
+    body[data-app="coach"] .weekbar div,
+    body[data-app="coach"] .datebar div{
+      color:var(--text-2);
+      font-size:13px;
+      font-weight:500;
+    }
+    body[data-app="coach"] .datebar .active-date{
+      background:rgba(248,201,0,0.12);
+      color:var(--accent);
+    }
+    body[data-app="coach"] .cal-wrap{
+      border-top:1px solid var(--line);
+      border-bottom:1px solid var(--line);
+      background:#0D0D0E;
+    }
+    body[data-app="coach"] .calendar-track{border-left:1px solid rgba(255,255,255,0.04);background-color:#101011}
+    body[data-app="coach"] .time-label,
+    body[data-app="coach"] .time-cell{color:var(--text-3)}
+    body[data-app="coach"] .lesson{
+      box-shadow:none;
+      border-radius:0 10px 10px 0;
+      border-top:1px solid rgba(255,255,255,0.03);
+      border-right:1px solid rgba(255,255,255,0.03);
+      border-bottom:1px solid rgba(255,255,255,0.03);
+    }
+    body[data-app="coach"] .lesson.green{
+      background:rgba(113,187,124,0.22);
+      border-left-color:#71BB7C;
+      color:#F7F7F7;
+    }
+    body[data-app="coach"] .lesson.blue{
+      background:rgba(91,141,230,0.22);
+      border-left-color:#5B8DE6;
+      color:#F7F7F7;
+    }
+    body[data-app="coach"] .lesson.purple{
+      background:rgba(141,103,207,0.24);
+      border-left-color:#8D67CF;
+      color:#F7F7F7;
+    }
+    body[data-app="coach"] .lesson.gray{
+      background:rgba(146,146,146,0.2);
+      border-left-color:#929292;
+      color:#E5E5E5;
+    }
+    body[data-app="coach"] .lesson strong{color:inherit}
+    body[data-app="coach"] .lesson-meta,
+    body[data-app="coach"] .full{color:inherit;opacity:.7}
+    body[data-app="coach"] .legend{
+      background:rgba(15,15,16,.96);
+      border-top:1px solid var(--line);
+      font-size:12px;
+    }
+    body[data-app="coach"] .audit-dialog,
+    body[data-app="coach"] .op-dialog,
+    body[data-app="coach"] .picker-dialog,
+    body[data-app="coach"] .user-confirm-dialog{
+      background:var(--surface);
+      border:1px solid var(--line);
+      border-radius:18px;
+      color:var(--text-1);
+      box-shadow:0 18px 36px rgba(0,0,0,.28);
+    }
+    body[data-app="coach"] .audit-text,
+    body[data-app="coach"] .picker-select,
+    body[data-app="coach"] .member-note,
+    body[data-app="coach"] .student-meta,
+    body[data-app="coach"] .student-note,
+    body[data-app="coach"] .user-confirm-note,
+    body[data-app="coach"] .user-booking-note,
+    body[data-app="coach"] .user-rules{
+      color:var(--text-3);
+    }
+    body[data-app="coach"] .picker-select,
+    body[data-app="coach"] .op-btn,
+    body[data-app="coach"] .picker-actions button,
+    body[data-app="coach"] .work-edit,
+    body[data-app="coach"] .empty-action,
+    body[data-app="coach"] .mini-btn.secondary,
+    body[data-app="coach"] .mini-btn.ghost{
+      background:var(--surface-2);
+      color:var(--text-1);
+      border:1px solid var(--line);
+      box-shadow:none;
+    }
+    body[data-app="coach"] .audit-actions,
+    body[data-app="coach"] .audit-actions button+button{border-color:var(--line)}
+    body[data-app="coach"] .audit-actions button,
+    body[data-app="coach"] .picker-actions button{
+      color:var(--text-2);
+    }
+    body[data-app="coach"] .picker-actions .ok,
+    body[data-app="coach"] .audit-actions button+button,
+    body[data-app="coach"] .bottom-btn,
+    body[data-app="coach"] .orange-btn,
+    body[data-app="coach"] .user-action-btn:not(:disabled),
+    body[data-app="coach"] .user-book-btn:not(:disabled),
+    body[data-app="coach"] .user-confirm-btn,
+    body[data-app="coach"] .mini-btn:not(.secondary):not(.ghost),
+    body[data-app="coach"] .empty-action{
+      background:linear-gradient(180deg,#FFD84A 0%,#F3C100 100%);
+      color:#111;
+      border-color:transparent;
+      box-shadow:none;
+    }
+    body[data-app="coach"] .user-action-btn:disabled,
+    body[data-app="coach"] .user-book-btn:disabled{
+      background:#232326;
+      color:var(--text-3);
+      border:1px solid var(--line);
+      box-shadow:none;
+    }
+    body[data-app="coach"] .stop-icon{
+      border-color:var(--accent);
+      color:var(--accent);
+      background:rgba(248,201,0,0.06);
+    }
+    body[data-app="coach"] .stop-text,
+    body[data-app="coach"] .empty,
+    body[data-app="coach"] .calendar-empty{
+      color:var(--text-3);
+    }
+    body[data-app="coach"] .empty-title,
+    body[data-app="coach"] .calendar-empty .empty-title,
+    body[data-app="coach"] .user-success-title{
+      color:var(--text-1);
+      font-size:17px;
+      font-weight:600;
+    }
+    body[data-app="coach"] .red-btn,
+    body[data-app="coach"] .op-btn.op-danger{
+      background:rgba(239,68,68,0.12);
+      color:#EF4444;
+      border:1px solid rgba(239,68,68,0.16);
+    }
+    body[data-app="coach"] .user-shell{
+      background:var(--app-bg);
+      padding:18px 20px 108px;
+    }
+    body[data-app="coach"] .user-avatar,
+    body[data-app="coach"] .avatar{
+      border:1px solid var(--line);
+      background:linear-gradient(180deg,#202024,#131315);
+    }
+    body[data-app="coach"] .user-slot{
+      background:var(--surface-2);
+      color:var(--text-1);
+      border:1px solid var(--line);
+      border-radius:12px;
+    }
+    body[data-app="coach"] .user-slot-cap,
+    body[data-app="coach"] .user-slot-state{color:var(--text-3)}
+    body[data-app="coach"] .user-slot.selected{
+      border-color:rgba(248,201,0,0.18);
+      background:rgba(248,201,0,0.10);
+      color:var(--accent);
+    }
+    body[data-app="coach"] .user-slot.selected .user-slot-cap,
+    body[data-app="coach"] .user-slot.selected .user-slot-state{color:var(--accent)}
+    body[data-app="coach"] .user-slot.disabled{
+      background:#151517;
+      color:var(--text-3);
+      border-color:var(--line);
+    }
+    body[data-app="coach"] .user-success-sheet{
+      background:var(--surface);
+      border:1px solid var(--line);
+      color:var(--text-1);
+    }
+    body[data-app="coach"] .success-icon{
+      background:linear-gradient(180deg,#FFD84A 0%,#F3C100 100%);
+      color:#111;
+    }
+    body[data-app="coach"] .user-summary-card{
+      background:var(--surface-2);
+      border:1px solid var(--line);
+      color:var(--text-2);
+    }
+    body[data-app="coach"] .phone-icon{
+      background:var(--surface-2);
+      border:1px solid var(--line);
+      color:var(--text-2);
+    }
+    body[data-app="coach"] .coach-dashboard>.coach-bottom-nav{display:none!important}
+    body[data-app="coach"] #coachTabBar:empty{display:none}
+    body[data-app="coach"] #listPage{
+      padding-bottom:120px;
+    }
+    body[data-app="coach"] #listPage .fab{
+      right:20px;
+      bottom:102px;
+      z-index:34;
+    }
+    body[data-app="coach"] #calendarPage{
+      padding-bottom:158px;
+    }
+    body[data-app="coach"] #calendarPage .fab{
+      right:20px;
+      bottom:148px;
+      z-index:34;
+    }
+    body[data-app="coach"] #calendarPage .legend{
+      position:relative;
+      left:auto;
+      bottom:auto;
+      transform:none;
+      width:100%;
+      height:58px;
+      margin-top:12px;
+      padding:0 20px;
+      justify-content:space-between;
+      gap:10px;
+      z-index:auto;
+    }
+    body[data-app="coach"] #calendarPage .legend span{
+      min-width:0;
+      color:var(--text-2);
+    }
+    body[data-app="coach"] #calendarPage .lg{
+      width:18px;
+      height:18px;
+      margin-right:6px;
+      border-radius:999px;
+      border:none;
+    }
+    body[data-app="coach"] #calendarPage .lg.green{
+      background:#71BB7C;
+    }
+    body[data-app="coach"] #calendarPage .lg.blue{
+      background:#5B8DE6;
+    }
+    body[data-app="coach"] #calendarPage .lg.purple{
+      background:#8D67CF;
+    }
+    body[data-app="coach"] #calendarPage .lg.gray{
+      background:#929292;
+    }
   </style>
 </head>
 <body data-app="coach">
 <div class="phone">
   <section id="homePage" class="page active"><div class="nav">课程设置</div><div class="home-head"><div class="home-title">教练课程设置</div><div class="home-sub">课程创建、工作时间、课程排班统一管理</div></div><div class="menu-list"><div class="menu-card" onclick="showPage('listPage')"><div><h3>课程管理</h3><p>创建课程商品，审核后可用于排课</p></div><span class="arrow">›</span></div><div class="menu-card" onclick="showPage('workPage')"><div><h3>工作时间</h3><p>设置每周可排课时间范围</p></div><span class="arrow">›</span></div><div class="menu-card" onclick="showPage('calendarPage')"><div><h3>课程排班</h3><p>选择已上架课程，新增可预约课次</p></div><span class="arrow">›</span></div></div></section>
-  <section id="listPage" class="page"><div class="nav"><div class="back" onclick="showPage('homePage')">‹</div>课程管理</div><div class="search-row"><div class="search-box"><span class="magnifier"></span><input id="keyword" placeholder="搜索课程名称" /></div><div class="filter-label">状态:</div><select id="statusFilter" class="status-select"><option value="全部">全部</option><option value="待审核">待审核</option><option value="已上架">已上架</option><option value="审核驳回">审核驳回</option><option value="已下架">已下架</option></select></div><div id="courseList" class="course-list"></div><div class="fab" onclick="openCreate()">+</div></section>
+  <section id="listPage" class="page tab-root"><div class="nav"><div class="back" onclick="showPage('homePage')">‹</div>课程管理</div><div class="search-row"><div class="search-box"><span class="magnifier"></span><input id="keyword" placeholder="搜索课程名称" /></div><div class="filter-label">状态:</div><select id="statusFilter" class="status-select"><option value="全部">全部</option><option value="待审核">待审核</option><option value="已上架">已上架</option><option value="审核驳回">审核驳回</option><option value="已下架">已下架</option></select></div><div id="courseList" class="course-list"></div><div class="fab" onclick="openCreate()">+</div></section>
   <section id="formPage" class="page"><div class="nav"><div class="back" onclick="showPage('listPage')">‹</div><span id="formTitle">新增课程</span></div><div class="form"><div class="form-row"><div class="label">课程名称</div><input id="name" class="field" placeholder="请输入课程名称" /></div><div class="form-row"><div class="label">授课形式</div><select id="type" class="field"><option>一对一</option><option>一对多</option></select></div><div id="limitRow" class="form-row" style="display:none"><div class="label">限制人数</div><input id="limit" class="field" type="number" placeholder="2" /></div><div class="form-row"><div class="label">计费单位</div><select id="unit" class="field"><option>按节</option><option>按时间</option></select></div><div id="minuteRow" class="form-row"><div class="label">单节时长（分钟）</div><input id="minutes" class="field" type="number" placeholder="请输入时长" /></div><div class="form-row"><div class="label">课时</div><input id="hours" class="field" type="number" placeholder="请输入课时" /></div><div class="form-row"><div class="label">售价</div><input id="price" class="field" type="number" placeholder="请输入售价" /></div><div class="form-row"><div class="label">限购次数</div><input id="buyLimit" class="field" type="number" placeholder="请输入限购次数" /></div><div id="giftHoursRow" class="form-row"><div class="label">赠送课时</div><input id="giftHours" class="field" type="number" placeholder="请输入赠送课时" /></div><div id="giftDaysRow" class="form-row"><div class="label">赠送天数</div><input id="giftDays" class="field" type="number" placeholder="请输入赠送天数" /></div><div class="form-row split-top"><div class="label">有效期（固定天数）</div><input id="validDays" class="field" type="number" placeholder="请输入天数" /></div><div class="form-row"><div class="label">激活方式</div><select id="activeWay" class="field"><option value="">请选择激活方式</option><option>购买即生效</option><option>首次预约生效</option><option>指定天数后生效</option></select></div><div class="form-row"><div class="label">提前预约时间（小时）</div><input id="advanceHour" class="field" type="number" placeholder="请输入时间" /></div><div class="form-row"><div class="label">适用门店</div><input id="stores" class="field" placeholder="请选择门店" /></div><div class="form-row textarea-row"><div class="label">课程简介</div><textarea id="intro" placeholder="请输入课程简介"></textarea></div></div><button class="bottom-btn" onclick="submitCourse()">创建</button></section>
   <section id="workPage" class="page"><div class="nav"><div class="back" onclick="showPage('homePage')">‹</div>工作时间</div><div class="week-title">每周工作时间</div><div id="workList" class="work-list"></div><div id="workEditBtn" class="work-edit" onclick="openWorkEdit()">添加时间段</div></section>
   <section id="workEditPage" class="page"><div class="nav"><div class="back" onclick="showPage('workPage')">‹</div>工作时间</div><div class="day-select"><div class="day-title">选择时间</div><div class="days" id="editDays"></div></div><div class="time-section"><div class="time-section-title">设置工作时间段</div><div id="timeLines"></div><div class="work-edit" onclick="addTimeLine()">添加时间段</div><button class="orange-btn" onclick="saveWorkTime()">保存</button><div class="tips">设置的时间将作为可排课时间范围</div></div></section>
-  <section id="calendarPage" class="page"><div class="nav"><div class="back" onclick="showPage('homePage')">‹</div>课程日历</div><div class="calendar-head"><div style="display:flex;align-items:center;gap:10px"><button class="week-switch" onclick="changeWeek(-1)">‹</button><div class="range" id="rangeText">本周</div><button class="week-switch" onclick="changeWeek(1)">›</button></div><button class="today" onclick="goToday()">今天</button></div><div class="calendar-days"><div class="weekbar"><div>一</div><div>二</div><div>三</div><div>四</div><div>五</div><div>六</div><div>日</div></div><div id="datebar" class="datebar"></div></div><div id="calendarGrid" class="cal-wrap"></div><div class="legend"><span><i class="lg green"></i>可预约</span><span><i class="lg blue"></i>部分已约</span><span><i class="lg purple"></i>已满</span><span><i class="lg gray"></i>不可预约</span></div><div class="fab" onclick="openScheduleCreate()">+</div></section>
+  <section id="calendarPage" class="page tab-root"><div class="nav"><div class="back" onclick="showPage('homePage')">‹</div>课程日历</div><div class="calendar-head"><div style="display:flex;align-items:center;gap:10px"><button class="week-switch" onclick="changeWeek(-1)">‹</button><div class="range" id="rangeText">本周</div><button class="week-switch" onclick="changeWeek(1)">›</button></div><button class="today" onclick="goToday()">今天</button></div><div class="calendar-days"><div class="weekbar"><div>一</div><div>二</div><div>三</div><div>四</div><div>五</div><div>六</div><div>日</div></div><div id="datebar" class="datebar"></div></div><div id="calendarGrid" class="cal-wrap"></div><div class="legend"><span><i class="lg green"></i>可预约</span><span><i class="lg blue"></i>部分已约</span><span><i class="lg purple"></i>已满</span><span><i class="lg gray"></i>不可预约</span></div><div class="fab" onclick="openScheduleCreate()">+</div></section>
   <section id="scheduleFormPage" class="page"><div class="nav"><div class="back" onclick="showPage('calendarPage')">‹</div><span id="scheduleFormTitle">新增课次</span></div><div class="form lightpad create-form"><label>选择课程</label><select id="schCourse" class="box-field"></select><label>开始时间</label><input id="schStart" class="box-field" readonly onclick="openDateTimePicker('schStart')" placeholder="请选择开始时间" /><label>结束时间</label><input id="schEnd" class="box-field" readonly onclick="openDateTimePicker('schEnd')" placeholder="请选择结束时间" /><label>上课门店</label><input id="schStore" class="box-field" placeholder="根据课程适用门店带入" /><label>人数限制</label><input id="schLimit" class="box-field" placeholder="根据授课形式带入" /><button class="orange-btn" onclick="saveSchedule()">保存</button></div></section>
   <section id="scheduleDetailPage" class="page"><div class="nav"><div class="back" onclick="showPage('calendarPage')">‹</div>课次详情</div><div id="detailBox"></div></section>
   <section id="memberPage" class="page"><div class="nav"><div class="back" onclick="showPage('scheduleDetailPage')">‹</div>代学员预约</div><div class="member-list"><div class="member-search">搜索会员姓名/手机号</div><div class="member-note">仅显示购买本课程的会员</div><div id="memberRows"></div></div></section>
@@ -116,6 +1414,7 @@
   <section id="userBookingPage" class="page user-page"><div class="nav"><div class="back" onclick="openUserCourses()">‹</div>私教课</div><div class="user-shell"><div class="work-edit" style="margin:0 0 16px" onclick="openUserBookings()">查看我的预约</div><div id="userCoachCard"></div><div class="user-panel"><div class="user-panel-title">预约时段</div><div id="userDateStrip" class="user-date-strip"></div><div id="userSlotGroups"></div></div><button id="userBookBtn" class="user-book-btn" onclick="openUserBookingConfirm()" disabled>请选择预约时段</button></div></section>
   <section id="userSuccessPage" class="page user-page"><div class="user-success-stage"><div class="user-success-sheet"><div class="success-icon">✓</div><div class="user-success-title">预约成功</div><div id="userSuccessSummary" class="user-summary-card"></div><div class="user-rules"><strong>预约与取消规则：</strong><div>1、预约成功后将使用1节对应课程课时，每次训练1个小时；</div><div>2、每日21:00更新后续预约时间，每周六21:00更新下周可预约时段；</div><div>3、同一课程单日最多可预约2次训练，仅可选择订单过期前的训练日；</div><div>4、如需取消预约，请提前一天操作，训练当日无法取消预约。</div></div><button class="user-book-btn" style="position:static;transform:none;width:100%;max-width:none;margin-top:28px" onclick="openUserBookings()">查看我的预约</button></div></div></section>
   <section id="userBookingsPage" class="page user-page"><div class="nav"><div class="back" onclick="openUserCourses()">‹</div>我的预约</div><div class="user-shell"><div id="userBookingsList" class="user-booking-list"></div></div></section>
+  <div id="coachTabBar"></div>
   <div id="auditMask" class="sheet-mask"><div class="audit-dialog"><div class="audit-title">课程审核演示</div><div class="audit-text">课程已创建并进入「待审核」。为了演示完整流程，可以直接模拟平台审核结果。</div><div class="audit-actions"><button onclick="auditReject()">驳回</button><button onclick="auditPass()">通过</button></div></div></div>
   <div id="pickerMask" class="sheet-mask"><div class="picker-dialog"><div class="picker-title">选择时间</div><select id="pickerDate" class="picker-select"></select><select id="pickerTime" class="picker-select"></select><div class="picker-actions"><button onclick="closeDateTimePicker()">取消</button><button class="ok" onclick="confirmDateTimePicker()">确定</button></div></div></div>
   <div id="opMask" class="sheet-mask"><div class="op-dialog"><div class="op-head"><span>课次操作</span><span class="op-close" onclick="hideOp()">×</span></div><button class="op-btn" onclick="openDetail()">查看详情</button><button class="op-btn" onclick="showMemberPage()">代学员预约</button><button class="op-btn" onclick="editSchedule()">编辑课次</button><button id="toggleBookingBtn" class="op-btn" onclick="showStopPage()">停止预约</button><button class="op-btn op-danger" onclick="cancelSchedule()">取消课次</button><button class="op-btn op-danger" onclick="deleteSchedule()">删除课次</button></div></div>
@@ -225,7 +1524,7 @@ function calendarTrackHeight(){return (CALENDAR_END_HOUR-CALENDAR_START_HOUR)*CA
 function buildCalendarLabels(){const labels=[];for(let hour=CALENDAR_START_HOUR;hour<=CALENDAR_END_HOUR;hour++)labels.push(`${String(hour).padStart(2,'0')}:00`);return labels}
 function lessonMetrics(s){const minStart=calendarStartMin(),minEnd=calendarEndMin(),pxPerMin=CALENDAR_HOUR_HEIGHT/60;const startMin=Math.max(minStart,timeToMin(s.start));const endMin=Math.min(minEnd,timeToMin(s.end));const top=(startMin-minStart)*pxPerMin;const height=Math.max(20,(endMin-startMin)*pxPerMin-2);return{top,height,duration:endMin-startMin}}
 function lessonStateText(s){if(s.status==='停止预约')return'不可预约';if(Number(s.booked||0)>=Number(s.limit||1))return`已满 ${s.booked}/${s.limit}`;if(Number(s.booked||0)>0)return`已约 ${s.booked}/${s.limit}`;return`${s.booked}/${s.limit}`}
-function renderCalendar(){renderCalendarHeader();const grid=$('calendarGrid'),fab=document.querySelector('#calendarPage .fab');const daySchedules=schedules.filter(s=>(s.date||fmtISO(selectedDate))===fmtISO(selectedDate)&&s.status!=='已取消').sort((a,b)=>timeToMin(a.start)-timeToMin(b.start));if(!daySchedules.length){fab.style.display='none';grid.innerHTML='<div class="calendar-empty" style="grid-column:1/3"><div class="empty-title">暂无排课</div><div>当前日期暂无课次</div><div>请先创建并上架课程，再新增排课</div><div class="empty-action" onclick="openScheduleCreate()">新增排课</div></div>';return}fab.style.display='flex';const labels=buildCalendarLabels();const trackHeight=calendarTrackHeight();const timeHtml=`<div class="time-col" style="height:${trackHeight}px">${labels.map(label=>`<div class="time-label" style="top:${(timeToMin(label)-calendarStartMin())*(CALENDAR_HOUR_HEIGHT/60)}px">${label}</div>`).join('')}</div>`;const trackHtml=`<div class="calendar-track" style="height:${trackHeight}px">${daySchedules.map(s=>lessonHtml(s)).join('')}</div>`;grid.innerHTML=timeHtml+trackHtml}
+function renderCalendar(){renderCalendarHeader();const grid=$('calendarGrid'),fab=document.querySelector('#calendarPage .fab');const daySchedules=schedules.filter(s=>(s.date||fmtISO(selectedDate))===fmtISO(selectedDate)&&s.status!=='已取消').sort((a,b)=>timeToMin(a.start)-timeToMin(b.start));fab.style.display='flex';if(!daySchedules.length){grid.innerHTML='<div class="calendar-empty" style="grid-column:1/3"><div class="empty-title">暂无排课</div><div>当前日期暂无课次</div><div>请先创建并上架课程，再新增排课</div><div class="empty-action" onclick="openScheduleCreate()">新增排课</div></div>';return}const labels=buildCalendarLabels();const trackHeight=calendarTrackHeight();const timeHtml=`<div class="time-col" style="height:${trackHeight}px">${labels.map(label=>`<div class="time-label" style="top:${(timeToMin(label)-calendarStartMin())*(CALENDAR_HOUR_HEIGHT/60)}px">${label}</div>`).join('')}</div>`;const trackHtml=`<div class="calendar-track" style="height:${trackHeight}px">${daySchedules.map(s=>lessonHtml(s)).join('')}</div>`;grid.innerHTML=timeHtml+trackHtml}
 function lessonHtml(s){const {top,height,duration}=lessonMetrics(s);const color=getLessonTone(s);const compact=duration<=30?' compact':'';return`<div class="lesson ${color}${compact}" style="top:${top}px;height:${height}px" onclick="openOp(${s.id})"><div class="lesson-line"><strong>${s.courseName}</strong><span class="lesson-meta">${s.start}–${s.end}</span><span class="lesson-meta">${lessonStateText(s)}</span></div></div>`}
 function showScheduleTip(){const dateStr=fmtISO(selectedDate);$('scheduleTipText').innerHTML=`${fmtMD(selectedDate)}（周${dayName(dateStr)}）还没有设置工作时间，请先去配置后再新增排课。`;$('scheduleTipMask').style.display='block'}
 window.closeScheduleTip=function(){$('scheduleTipMask').style.display='none'}
@@ -295,7 +1594,258 @@ window.openUserBookings=function(){showPage('userBookingsPage')}
 function renderUserBookings(){settleBookingTimeouts();const box=$('userBookingsList');if(!userBookings.length){box.innerHTML='<div class="user-empty"><div class="empty-title">暂无预约记录</div><div>完成预约后，会在这里展示你的课程安排。</div></div>';return}box.innerHTML=userBookings.map(booking=>`<div class="user-booking-card"><div class="user-booking-head"><div><div class="user-booking-name">${booking.courseName}</div><div class="user-store">${booking.coachName} · ${booking.store}</div></div><div class="user-status">${booking.status}</div></div><div class="user-booking-time">${fmtUserDateTime(booking.date,booking.start,booking.end)}</div>${userBookingActions(booking)?`<div class="user-booking-actions">${userBookingActions(booking)}</div>`:''}${userBookingNote(booking)?`<div class="user-booking-note">${userBookingNote(booking)}</div>`:''}</div>`).join('')}
 function initFabDrag(){document.querySelectorAll('.fab').forEach(fab=>{let dragging=false,moved=false,ox=0,oy=0;const start=e=>{const p=e.touches?e.touches[0]:e,r=fab.getBoundingClientRect();dragging=true;moved=false;ox=p.clientX-r.left;oy=p.clientY-r.top;fab.style.left=r.left+'px';fab.style.top=r.top+'px';fab.style.right='auto';fab.style.bottom='auto'};const move=e=>{if(!dragging)return;const p=e.touches?e.touches[0]:e;fab.style.left=Math.max(8,Math.min(window.innerWidth-64,p.clientX-ox))+'px';fab.style.top=Math.max(70,Math.min(window.innerHeight-74,p.clientY-oy))+'px';moved=true;e.preventDefault()};const end=()=>{dragging=false;if(moved){fab.dataset.moved='1';setTimeout(()=>fab.dataset.moved='0',80)}};fab.addEventListener('click',e=>{if(fab.dataset.moved==='1'){e.stopImmediatePropagation();e.preventDefault()}},true);fab.addEventListener('mousedown',start);window.addEventListener('mousemove',move,{passive:false});window.addEventListener('mouseup',end);fab.addEventListener('touchstart',start,{passive:false});window.addEventListener('touchmove',move,{passive:false});window.addEventListener('touchend',end)})}
 function runTests(){console.assert(typeof window.showPage==='function','showPage should be global');console.assert(timeToMin('10:30')===630,'timeToMin works');console.assert(fmtISO(new Date('2026-05-06T00:00:00'))==='2026-05-06','fmtISO works');console.assert(startOfWeek(new Date('2026-05-06T00:00:00')).getDay()===1,'startOfWeek should be Monday');console.assert(['一','二','三','四','五','六','日'].includes(dayName(fmtISO(new Date()))),'dayName works')}
-function boot(){restoreDemoVersion();restoreUserState();migrateLegacyUserBookings();settleBookingTimeouts();$('type').addEventListener('change',updateFormRows);$('unit').addEventListener('change',updateFormRows);$('keyword').addEventListener('input',renderList);$('statusFilter').addEventListener('change',renderList);$('schCourse').addEventListener('change',fillScheduleCourseInfo);$('timeLines').addEventListener('input',saveWorkDraft);$('timeLines').addEventListener('change',saveWorkDraft);bindDraftEvents(COURSE_FIELDS,saveCourseDraft);bindDraftEvents(SCHEDULE_FIELDS,saveScheduleDraft);syncUserProducts();saveAll();initFabDrag();renderList();renderWorkList();renderCalendar();runTests();const activePage=loadActivePage();if(activePage==='formPage')openCreate();else if(activePage==='scheduleFormPage')openScheduleCreate();else if(activePage==='workEditPage')openWorkEdit();else if(activePage==='userCoursePage')openUserCourses();else if(activePage==='userBookingPage'&&currentUserProductId)openUserBooking(currentUserProductId);else if(activePage==='userBookingsPage')openUserBookings();else if(activePage==='userSuccessPage')showPage('userSuccessPage');else if($(activePage))showPage(activePage)}
+function boot(){restoreDemoVersion();restoreUserState();migrateLegacyUserBookings();settleBookingTimeouts();$('type').addEventListener('change',updateFormRows);$('unit').addEventListener('change',updateFormRows);$('keyword').addEventListener('input',renderList);$('statusFilter').addEventListener('change',renderList);$('schCourse').addEventListener('change',fillScheduleCourseInfo);$('timeLines').addEventListener('input',saveWorkDraft);$('timeLines').addEventListener('change',saveWorkDraft);bindDraftEvents(COURSE_FIELDS,saveCourseDraft);bindDraftEvents(SCHEDULE_FIELDS,saveScheduleDraft);syncUserProducts();saveAll();initFabDrag();renderList();renderWorkList();renderCalendar();runTests();saveActivePage('homePage');showPage('homePage')}
+function coachHomeTemplate(){return `<div class="coach-dashboard"><div class="coach-header-card"><div class="coach-header-top"><div id="coachAvatarText" class="coach-avatar-badge">王</div><div class="coach-header-main"><div id="coachGreeting" class="coach-greeting">下午好，王教练</div><div class="coach-location-row"><span class="coach-location-dot"></span><span id="coachStoreName">黄毛健身房</span></div></div></div></div><div id="coachStatGrid" class="coach-stat-grid"></div><div class="coach-panel"><div class="coach-panel-head"><div class="coach-panel-title">今日待办</div><div class="coach-panel-link" onclick="showPage('calendarPage')">查看全部</div></div><div id="coachTodoList"></div></div><div class="coach-panel"><div class="coach-panel-head"><div class="coach-panel-title">快捷功能</div></div><div class="coach-quick-grid"><div class="coach-quick-item" onclick="openCoachFeature('contract')"><div class="coach-quick-icon">签</div><div class="coach-quick-label">门店签约</div></div><div class="coach-quick-item" onclick="openCoachFeature('work')"><div class="coach-quick-icon">时</div><div class="coach-quick-label">工作时间</div></div><div class="coach-quick-item" onclick="openCoachFeature('course')"><div class="coach-quick-icon">课</div><div class="coach-quick-label">课程管理</div></div><div class="coach-quick-item" onclick="openCoachFeature('booking')"><div class="coach-quick-icon">约</div><div class="coach-quick-label">预约管理</div></div><div class="coach-quick-item" onclick="openCoachFeature('calendar')"><div class="coach-quick-icon">历</div><div class="coach-quick-label">排课日历</div></div><div class="coach-quick-item" onclick="openCoachFeature('student')"><div class="coach-quick-icon">员</div><div class="coach-quick-label">学员管理</div></div><div class="coach-quick-item" onclick="openCoachFeature('order')"><div class="coach-quick-icon">单</div><div class="coach-quick-label">私教订单</div></div></div></div><div class="coach-panel"><div class="coach-panel-head"><div class="coach-panel-title">今日课程</div><div class="coach-panel-link" onclick="showPage('calendarPage')">查看全部</div></div><div id="coachTodayCourseList"></div></div></div><div class="coach-bottom-nav"><div class="coach-bottom-item active" onclick="showPage('homePage')"><div class="coach-bottom-icon">首</div><div>首页</div></div><div class="coach-bottom-item" onclick="showPage('listPage')"><div class="coach-bottom-icon">课</div><div>课程</div></div><div class="coach-bottom-item" onclick="showPage('calendarPage')"><div class="coach-bottom-icon">排</div><div>排班</div></div><div class="coach-bottom-item" onclick="openCoachFeature('mine')"><div class="coach-bottom-icon">我</div><div>我的</div></div></div>`}
+function renderCoachHomeLayout(){const page=$('homePage');if(page&&page.dataset.layoutReady!=='1'){page.innerHTML=coachHomeTemplate();page.dataset.layoutReady='1'}}
+function getCoachStoreName(){const scheduleStore=schedules.find(item=>item.store&&item.status!=='已取消')?.store;const courseStore=courses.find(item=>item.stores)?.stores;return scheduleStore||courseStore||'黄毛健身房'}
+function getCoachGreetingText(){const hour=new Date().getHours();if(hour<12)return'上午好';if(hour<18)return'下午好';return'晚上好'}
+function getScheduleActiveMembers(schedule){return ensureScheduleMembers(schedule).filter(member=>member.status!=='已取消')}
+function getCoachTodaySchedules(){const todayKey=fmtISO(today);return schedules.filter(schedule=>schedule.date===todayKey&&schedule.status!=='已取消'&&getScheduleActiveMembers(schedule).length>0).sort((a,b)=>timeToMin(a.start)-timeToMin(b.start))}
+function getCoachMonthSchedules(){const monthKey=`${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}`;return schedules.filter(schedule=>String(schedule.date||'').startsWith(monthKey)&&schedule.status!=='已取消'&&getScheduleActiveMembers(schedule).length>0)}
+function getCoachEarliestTime(list){return list.length?list[0].start:'--:--'}
+function coachStatusView(schedule){const members=getScheduleActiveMembers(schedule);if(members.some(member=>member.status==='上课中'))return{text:'上课中',tone:'active'};if(members.some(member=>member.status==='待学员确认完课'))return{text:'待确认',tone:'review'};if(members.every(member=>['已完课','未到场'].includes(member.status)))return{text:'已完成',tone:'done'};if(members.some(member=>member.status==='待上课'))return{text:'待上课',tone:'pending'};return{text:'已预约',tone:'pending'}}
+function coachCourseMetaText(schedule){const members=getScheduleActiveMembers(schedule);const names=members.map(member=>member.name).filter(Boolean);const memberText=schedule.courseType==='一对多'?`${names.slice(0,2).join('、')}${names.length>2?`等${names.length}人`:names.length?'':'多人课程'}`:(names[0]||'待分配学员');return `${memberText} · ${schedule.store||'未设置门店'}`}
+function getCoachHomeStats(){const todaySchedules=getCoachTodaySchedules();const monthSchedules=getCoachMonthSchedules();return[{icon:'今',label:'今日课程',value:todaySchedules.length,unit:'节',note:todaySchedules.length?`最早 ${getCoachEarliestTime(todaySchedules)} 开始`:'今日暂无课程'},{icon:'月',label:'本月课程',value:monthSchedules.length,unit:'节',note:`本月已安排 ${monthSchedules.length} 节`},{icon:'员',label:'学员总数',value:getCoachStudentCount(),unit:'人',note:'按已预约学员去重统计'}]}
+function getCoachTodoItems(){const items=[];getCoachTodaySchedules().forEach(schedule=>{getScheduleActiveMembers(schedule).forEach(member=>{if(member.status==='待上课'){items.push({scheduleId:schedule.id,bookingId:member.bookingId,time:schedule.start,courseName:schedule.courseName,memberName:member.name,statusText:'待上课',tone:'pending',action:'start',buttonText:'开始上课'})}else if(member.status==='上课中'&&member.source==='user'){items.push({scheduleId:schedule.id,bookingId:member.bookingId,time:schedule.start,courseName:schedule.courseName,memberName:member.name,statusText:'待完课',tone:'review',action:'finish',buttonText:'确认完课'})}})});return items.sort((a,b)=>timeToMin(a.time)-timeToMin(b.time))}
+function renderCoachStatCards(){const box=$('coachStatGrid');if(!box)return;box.innerHTML=getCoachHomeStats().map(item=>`<div class="coach-stat-box"><div class="coach-stat-icon">${item.icon}</div><div class="coach-stat-name">${item.label}</div><div class="coach-stat-number">${item.value}<small>${item.unit}</small></div><div class="coach-stat-note">${item.note}</div></div>`).join('')}
+function renderCoachTodoList(){const box=$('coachTodoList');if(!box)return;const items=getCoachTodoItems();if(!items.length){box.innerHTML='<div class="coach-empty-state">今天暂时没有需要处理的课程，当前状态都已经同步好了。</div>';return}box.innerHTML=`<div class="coach-todo-list">${items.map(item=>`<div class="coach-todo-item"><div class="coach-todo-time">${item.time}</div><div class="coach-todo-main" onclick="openCoachScheduleDetail(${item.scheduleId})"><div class="coach-todo-top"><div class="coach-todo-name">${item.courseName}</div><span class="coach-chip ${item.tone}">${item.statusText}</span></div><div class="coach-todo-meta">${item.memberName} · ${fmtISO(today)} 星期${dayName(fmtISO(today))}</div></div><button class="coach-todo-btn" onclick="handleCoachTodoAction(${item.scheduleId},'${item.bookingId}','${item.action}')">${item.buttonText}</button></div>`).join('')}</div>`}
+function renderCoachTodayCourseList(){const box=$('coachTodayCourseList');if(!box)return;const items=getCoachTodaySchedules();if(!items.length){box.innerHTML='<div class="coach-empty-state">今天还没有已预约的课程，新的预约会自动回填到这里。</div>';return}box.innerHTML=`<div class="coach-course-list">${items.map(schedule=>{const status=coachStatusView(schedule);return`<div class="coach-course-item" onclick="openCoachScheduleDetail(${schedule.id})"><div class="coach-course-row"><div><div class="coach-course-name">${schedule.courseName}</div><div class="coach-course-meta">${coachCourseMetaText(schedule)}<br/>${fmtMD(new Date(schedule.date+'T00:00:00'))} 星期${dayName(schedule.date)} ${schedule.start}-${schedule.end}</div></div><span class="coach-chip ${status.tone}">${status.text}</span></div></div>`}).join('')}</div>`}
+function renderCoachHome(){renderCoachHomeLayout();const avatar=DEFAULT_COACH_NAME.slice(0,1)||'教';if($('coachAvatarText'))$('coachAvatarText').innerText=avatar;if($('coachGreeting'))$('coachGreeting').innerText=`${getCoachGreetingText()}，${DEFAULT_COACH_NAME}`;if($('coachStoreName'))$('coachStoreName').innerText=getCoachStoreName();renderCoachStatCards();renderCoachTodoList();renderCoachTodayCourseList()}
+function showCoachPage(id){document.querySelectorAll('.page').forEach(page=>page.classList.remove('active'));$(id).classList.add('active');saveActivePage(id);if(id==='homePage')renderCoachHome();if(id==='listPage')renderList();if(id==='workPage')renderWorkList();if(id==='calendarPage')renderCalendar();if(id==='userCoursePage')renderUserCourseList();if(id==='userBookingPage')renderUserBookingPage();if(id==='userSuccessPage')renderUserSuccessPage();if(id==='userBookingsPage')renderUserBookings()}
+window.showPage=showPage=showCoachPage
+window.openCoachFeature=function(feature){if(feature==='work'){showCoachPage('workPage');return}if(feature==='course'){showCoachPage('listPage');return}if(feature==='calendar'){showCoachPage('calendarPage');return}toast('该功能正在建设中')}
+window.openCoachScheduleDetail=function(scheduleId){currentScheduleId=scheduleId;openDetail(scheduleId)}
+window.handleCoachTodoAction=function(scheduleId,bookingId,action){currentScheduleId=scheduleId;if(action==='start'){updateBookingRecord(bookingId,{status:'上课中'});toast('已开始上课')}else{updateBookingRecord(bookingId,{status:'已完课',completedAt:new Date().toISOString()});toast('已确认完课')}renderCoachHome()}
+function coachIcon(name){
+  const common='viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"';
+  const icons={
+    coach:`<svg ${common}><circle cx="12" cy="8" r="3.4"/><path d="M6.5 19c1.2-3.1 3.4-4.7 5.5-4.7 2.1 0 4.3 1.6 5.5 4.7"/><path d="M4 5.5c1.4-1.8 3.2-2.7 5.3-2.7M20 5.5c-1.4-1.8-3.2-2.7-5.3-2.7"/></svg>`,
+    pin:`<svg ${common}><path d="M12 20s-5.5-4.8-5.5-9.3A5.5 5.5 0 0 1 17.5 10.7C17.5 15.2 12 20 12 20Z"/><circle cx="12" cy="10.2" r="1.7"/></svg>`,
+    calendarCheck:`<svg ${common}><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M7.5 3.5v3M16.5 3.5v3M3.5 9.5h17"/><path d="m8.5 14 2 2 5-5"/></svg>`,
+    chart:`<svg ${common}><path d="M4.5 18.5h15"/><path d="M6.5 15.5 10 12l3 2.5 4.5-6"/><path d="M16 8.5h2.5V11"/></svg>`,
+    users:`<svg ${common}><circle cx="9" cy="9" r="3"/><path d="M3.8 18c.8-2.7 2.8-4.2 5.2-4.2 2.4 0 4.4 1.5 5.2 4.2"/><path d="M16.5 8.2a2.3 2.3 0 1 1 0 4.6"/><path d="M18.8 18c-.3-1.4-1.1-2.6-2.3-3.4"/></svg>`,
+    contract:`<svg ${common}><path d="M8 3.5h6l4 4v13h-10a3.5 3.5 0 0 1-3.5-3.5V7A3.5 3.5 0 0 1 8 3.5Z"/><path d="M14 3.5V8h4"/><path d="m8.5 15.5 2.2-2.2 2 2 2.8-2.8"/></svg>`,
+    clock:`<svg ${common}><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5v5l3 2"/></svg>`,
+    course:`<svg ${common}><rect x="4" y="5" width="16" height="14" rx="3"/><path d="m10 9 5 3-5 3Z"/></svg>`,
+    booking:`<svg ${common}><rect x="4" y="4.5" width="16" height="15" rx="3"/><path d="M8 3v3M16 3v3M4 9h16"/><path d="M9 13h6M9 16h4"/></svg>`,
+    schedule:`<svg ${common}><rect x="4" y="5" width="16" height="15" rx="3"/><path d="M8 3.5v3M16 3.5v3M4 9.5h16"/><path d="M8 13h3M13 13h3M8 16.5h3"/></svg>`,
+    student:`<svg ${common}><circle cx="12" cy="8.5" r="3.2"/><path d="M5.5 19c1-3.1 3.5-4.8 6.5-4.8s5.5 1.7 6.5 4.8"/></svg>`,
+    order:`<svg ${common}><path d="M7 3.5h10v17l-3-1.8-2 1.8-2-1.8-3 1.8Z"/><path d="M9 8.5h6M9 12h6M9 15.5h4"/></svg>`,
+    home:`<svg ${common}><path d="M4.5 10.5 12 4l7.5 6.5"/><path d="M6.5 9.5v10h11v-10"/></svg>`,
+    mine:`<svg ${common}><circle cx="12" cy="8" r="3.2"/><path d="M5.5 19c1-3.1 3.5-4.8 6.5-4.8s5.5 1.7 6.5 4.8"/></svg>`
+  };
+  return icons[name]||icons.course;
+}
+function coachQuickFeatures(){
+  return[
+    {key:'contract',label:'门店签约',icon:'contract'},
+    {key:'work',label:'工作时间',icon:'clock'},
+    {key:'course',label:'课程管理',icon:'course'},
+    {key:'booking',label:'预约管理',icon:'booking'},
+    {key:'calendar',label:'排课日历',icon:'schedule'},
+    {key:'student',label:'学员管理',icon:'student'},
+    {key:'order',label:'私教订单',icon:'order'}
+  ];
+}
+function coachHomeTemplate(){
+  return `<div class="coach-dashboard">
+    <div class="coach-header-card">
+      <div class="coach-header-top">
+        <div class="coach-avatar-badge">${coachIcon('coach')}</div>
+        <div class="coach-header-main">
+          <div class="coach-header-kicker">Coach workspace</div>
+          <div id="coachGreeting" class="coach-greeting">下午好，王教练</div>
+          <div class="coach-location-row">
+            <div class="coach-store-pill">${coachIcon('pin')}<span id="coachStoreName">黄毛健身房</span></div>
+          </div>
+        </div>
+        <div class="coach-header-action" onclick="showPage('calendarPage')">${coachIcon('calendarCheck')}</div>
+      </div>
+    </div>
+    <div id="coachStatGrid" class="coach-stat-grid"></div>
+    <div id="coachTodoPanel" class="coach-panel">
+      <div class="coach-panel-head">
+        <div class="coach-panel-title">今日待办</div>
+        <div class="coach-panel-link" onclick="showPage('calendarPage')">查看全部</div>
+      </div>
+      <div id="coachTodoList"></div>
+    </div>
+    <div class="coach-panel">
+      <div class="coach-quick-grid">${coachQuickFeatures().map(item=>`<div class="coach-quick-item" onclick="openCoachFeature('${item.key}')"><div class="coach-quick-icon">${coachIcon(item.icon)}</div><div class="coach-quick-label">${item.label}</div></div>`).join('')}</div>
+    </div>
+    <div class="coach-panel">
+      <div class="coach-panel-head">
+        <div class="coach-panel-title">今日课程</div>
+        <div class="coach-panel-link" onclick="showPage('calendarPage')">查看全部</div>
+      </div>
+      <div id="coachTodayCourseList"></div>
+    </div>
+  </div>
+  <div class="coach-bottom-nav">
+    <div class="coach-bottom-item active" onclick="showPage('homePage')"><div class="coach-bottom-icon">${coachIcon('home')}</div><div>首页</div></div>
+    <div class="coach-bottom-item" onclick="showPage('listPage')"><div class="coach-bottom-icon">${coachIcon('course')}</div><div>课程</div></div>
+    <div class="coach-bottom-item" onclick="showPage('calendarPage')"><div class="coach-bottom-icon">${coachIcon('schedule')}</div><div>排班</div></div>
+    <div class="coach-bottom-item" onclick="openCoachFeature('mine')"><div class="coach-bottom-icon">${coachIcon('mine')}</div><div>我的</div></div>
+  </div>`;
+}
+function renderCoachHomeLayout(){const page=$('homePage');if(page&&page.dataset.layoutReady!=='coach-v2'){page.innerHTML=coachHomeTemplate();page.dataset.layoutReady='coach-v2'}}
+function getCoachStoreName(){const scheduleStore=schedules.find(item=>item.store&&item.status!=='已取消')?.store;const courseStore=courses.find(item=>item.stores)?.stores;return scheduleStore||courseStore||'黄毛健身房'}
+function getCoachGreetingText(){const hour=new Date().getHours();if(hour<12)return'上午好';if(hour<18)return'下午好';return'晚上好'}
+function getScheduleActiveMembers(schedule){return ensureScheduleMembers(schedule).filter(member=>member.status!=='已取消')}
+function getCoachTodaySchedules(){const todayKey=fmtISO(today);return schedules.filter(schedule=>schedule.date===todayKey&&schedule.status!=='已取消'&&getScheduleActiveMembers(schedule).length>0).sort((a,b)=>timeToMin(a.start)-timeToMin(b.start))}
+function getCoachMonthSchedules(){const monthKey=`${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}`;return schedules.filter(schedule=>String(schedule.date||'').startsWith(monthKey)&&schedule.status!=='已取消'&&getScheduleActiveMembers(schedule).length>0)}
+function getCoachEarliestTime(list){return list.length?list[0].start:'--:--'}
+function coachStatusView(schedule){const members=getScheduleActiveMembers(schedule);if(members.some(member=>member.status==='上课中'))return{text:'上课中',tone:'active'};if(members.some(member=>member.status==='待学员确认完课'))return{text:'待确认',tone:'review'};if(members.every(member=>['已完课','未到场'].includes(member.status)))return{text:'已完成',tone:'done'};if(members.some(member=>member.status==='待上课'))return{text:'待上课',tone:'pending'};return{text:'已预约',tone:'pending'}}
+function coachCourseMetaText(schedule){const members=getScheduleActiveMembers(schedule);const names=members.map(member=>member.name).filter(Boolean);const memberText=schedule.courseType==='一对多'?`${names.slice(0,2).join('、')}${names.length>2?`等${names.length}人`:names.length?'':'多人课程'}`:(names[0]||'待分配学员');return `${memberText} · ${schedule.store||'未设置门店'}`}
+function getCoachHomeStats(){const todaySchedules=getCoachTodaySchedules();const monthSchedules=getCoachMonthSchedules();return[{icon:'calendarCheck',label:'今日课程',value:todaySchedules.length,unit:'节',note:todaySchedules.length?`最早 ${getCoachEarliestTime(todaySchedules)} 开始`:'今日暂无课程'},{icon:'chart',label:'本月课程',value:monthSchedules.length,unit:'节',note:`本月已安排 ${monthSchedules.length} 节`},{icon:'users',label:'学员总数',value:getCoachStudentCount(),unit:'人',note:'按已预约学员去重统计'}]}
+function getCoachTodoItems(){const items=[];getCoachTodaySchedules().forEach(schedule=>{getScheduleActiveMembers(schedule).forEach(member=>{if(member.status==='待上课'){items.push({scheduleId:schedule.id,bookingId:member.bookingId,time:schedule.start,courseName:schedule.courseName,memberName:member.name,statusText:'待上课',tone:'pending',action:'start',buttonText:'开始上课'})}else if(member.status==='上课中'&&member.source==='user'){items.push({scheduleId:schedule.id,bookingId:member.bookingId,time:schedule.start,courseName:schedule.courseName,memberName:member.name,statusText:'待完课',tone:'review',action:'finish',buttonText:'确认完课'})}})});return items.sort((a,b)=>timeToMin(a.time)-timeToMin(b.time))}
+function renderCoachStatCards(){const box=$('coachStatGrid');if(!box)return;box.innerHTML=getCoachHomeStats().map(item=>`<div class="coach-stat-box"><div class="coach-stat-icon">${coachIcon(item.icon)}</div><div class="coach-stat-name">${item.label}</div><div class="coach-stat-number">${item.value}<small>${item.unit}</small></div><div class="coach-stat-note">${item.note}</div></div>`).join('')}
+function renderCoachTodoList(){const box=$('coachTodoList');if(!box)return;const items=getCoachTodoItems();if(!items.length){box.innerHTML='<div class="coach-empty-state">今天暂时没有需要处理的课程，当前状态都已经同步好了。</div>';return}box.innerHTML=`<div class="coach-todo-list">${items.map(item=>`<div class="coach-todo-item"><div class="coach-todo-time">${item.time}</div><div class="coach-todo-main" onclick="openCoachScheduleDetail(${item.scheduleId})"><div class="coach-todo-top"><div class="coach-todo-name">${item.courseName}</div><span class="coach-chip ${item.tone}">${item.statusText}</span></div><div class="coach-todo-meta">${item.memberName} · ${fmtISO(today)} 星期${dayName(fmtISO(today))}</div></div><button class="coach-todo-btn" onclick="handleCoachTodoAction(${item.scheduleId},'${item.bookingId}','${item.action}')">${item.buttonText}</button></div>`).join('')}</div>`}
+function renderCoachTodayCourseList(){const box=$('coachTodayCourseList');if(!box)return;const items=getCoachTodaySchedules();if(!items.length){box.innerHTML='<div class="coach-empty-state">今天还没有已预约的课程，新的预约会自动回填到这里。</div>';return}box.innerHTML=`<div class="coach-course-list">${items.map(schedule=>{const status=coachStatusView(schedule);return`<div class="coach-course-item" onclick="openCoachScheduleDetail(${schedule.id})"><div class="coach-course-row"><div><div class="coach-course-name">${schedule.courseName}</div><div class="coach-course-meta">${coachCourseMetaText(schedule)}<br/>${fmtMD(new Date(schedule.date+'T00:00:00'))} 星期${dayName(schedule.date)} ${schedule.start}-${schedule.end}</div></div><span class="coach-chip ${status.tone}">${status.text}</span></div></div>`}).join('')}</div>`}
+function renderCoachHome(){renderCoachHomeLayout();if($('coachGreeting'))$('coachGreeting').innerText=`${getCoachGreetingText()}，${DEFAULT_COACH_NAME}`;if($('coachStoreName'))$('coachStoreName').innerText=getCoachStoreName();renderCoachStatCards();renderCoachTodoList();renderCoachTodayCourseList()}
+function showCoachPage(id){document.querySelectorAll('.page').forEach(page=>page.classList.remove('active'));$(id).classList.add('active');saveActivePage(id);if(id==='homePage')renderCoachHome();if(id==='listPage')renderList();if(id==='workPage')renderWorkList();if(id==='calendarPage')renderCalendar();if(id==='userCoursePage')renderUserCourseList();if(id==='userBookingPage')renderUserBookingPage();if(id==='userSuccessPage')renderUserSuccessPage();if(id==='userBookingsPage')renderUserBookings()}
+window.showPage=showPage=showCoachPage
+window.openCoachFeature=function(feature){if(feature==='work'){showCoachPage('workPage');return}if(feature==='course'){showCoachPage('listPage');return}if(feature==='calendar'){showCoachPage('calendarPage');return}toast('该功能正在建设中')}
+window.openCoachScheduleDetail=function(scheduleId){currentScheduleId=scheduleId;openDetail(scheduleId)}
+window.handleCoachTodoAction=function(scheduleId,bookingId,action){currentScheduleId=scheduleId;if(action==='start'){updateBookingRecord(bookingId,{status:'上课中'});toast('已开始上课')}else{updateBookingRecord(bookingId,{status:'已完课',completedAt:new Date().toISOString()});toast('已确认完课')}renderCoachHome()}
+function getCoachStatusTime(){const now=new Date();return `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`}
+function coachHomeTemplate(){
+  return `<div class="coach-dashboard">
+    <div class="coach-header-card">
+      <div class="coach-header-top">
+        <div class="coach-avatar-badge">${coachIcon('coach')}</div>
+        <div class="coach-header-main">
+          <div id="coachGreeting" class="coach-greeting">下午好，张教练👋</div>
+          <div class="coach-location-row">
+            <div class="coach-store-pill">${coachIcon('pin')}<span id="coachStoreName">黄毛健身房</span><span class="coach-store-arrow">›</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="coachStatGrid" class="coach-stat-grid"></div>
+    <div class="coach-panel">
+      <div class="coach-panel-head">
+        <div class="coach-panel-title">今日待办</div>
+        <div class="coach-panel-link" onclick="showPage('calendarPage')">查看全部</div>
+      </div>
+      <div id="coachTodoList"></div>
+    </div>
+    <div class="coach-panel">
+      <div class="coach-panel-head">
+        <div class="coach-panel-title">快捷功能</div>
+      </div>
+      <div class="coach-quick-grid">${coachQuickFeatures().map(item=>`<div class="coach-quick-item" onclick="openCoachFeature('${item.key}')"><div class="coach-quick-icon">${coachIcon(item.icon)}</div><div class="coach-quick-label">${item.label}</div></div>`).join('')}</div>
+    </div>
+    <div class="coach-panel">
+      <div class="coach-panel-head">
+        <div class="coach-panel-title">今日课程</div>
+        <div class="coach-panel-link" onclick="showPage('calendarPage')">查看全部</div>
+      </div>
+      <div id="coachTodayCourseList"></div>
+    </div>
+  </div>
+  <div class="coach-bottom-nav">
+    <div class="coach-bottom-item active" onclick="showPage('homePage')"><div class="coach-bottom-icon">${coachIcon('home')}</div><div>首页</div></div>
+    <div class="coach-bottom-item" onclick="showPage('listPage')"><div class="coach-bottom-icon">${coachIcon('course')}</div><div>课程</div></div>
+    <div class="coach-bottom-item" onclick="showPage('calendarPage')"><div class="coach-bottom-icon">${coachIcon('schedule')}</div><div>排班</div></div>
+    <div class="coach-bottom-item" onclick="openCoachFeature('mine')"><div class="coach-bottom-icon">${coachIcon('mine')}</div><div>我的</div></div>
+  </div>`;
+}
+function getCoachHomeStats(){
+  const todaySchedules=getCoachTodaySchedules();
+  const monthSchedules=getCoachMonthSchedules();
+  const monthDelta=Math.max(1,Math.min(3,monthSchedules.length||1));
+  const newStudentDelta=Math.max(1,Math.min(2,getCoachStudentCount()||1));
+  return[
+    {icon:'calendarCheck',label:'今日课程',value:todaySchedules.length,unit:'节',noteHtml:todaySchedules.length?`最早 ${getCoachEarliestTime(todaySchedules)} 开始`:'今日暂无课程'},
+    {icon:'chart',label:'本月课程',value:monthSchedules.length,unit:'节',noteHtml:`较上月 <span class="coach-stat-up">↑ ${monthDelta}</span>`},
+    {icon:'users',label:'学员总数',value:getCoachStudentCount(),unit:'人',noteHtml:`本月新增 <span class="coach-stat-up">↑ ${newStudentDelta}</span>`}
+  ];
+}
+function renderCoachStatCards(){const box=$('coachStatGrid');if(!box)return;box.innerHTML=getCoachHomeStats().map(item=>`<div class="coach-stat-box"><div class="coach-stat-title"><div class="coach-stat-icon">${coachIcon(item.icon)}</div><div class="coach-stat-name">${item.label}</div></div><div class="coach-stat-number">${item.value}<small>${item.unit}</small></div><div class="coach-stat-note">${item.noteHtml}</div></div>`).join('')}
+function renderCoachHome(){renderCoachHomeLayout();if($('coachGreeting'))$('coachGreeting').innerText=`${getCoachGreetingText()}，${DEFAULT_COACH_NAME}👋`;if($('coachStoreName'))$('coachStoreName').innerText=getCoachStoreName();renderCoachStatCards();renderCoachTodoList();renderCoachTodayCourseList()}
+function renderCoachHomeLayout(){const page=$('homePage');if(page&&page.dataset.layoutReady!=='coach-home-stable-v1'){page.innerHTML=coachHomeTemplate();page.dataset.layoutReady='coach-home-stable-v1'}}
+function coachHomeTemplate(){
+  return `<div class="coach-dashboard">
+    <div id="coachStatGrid" class="coach-stat-grid"></div>
+    <div id="coachTodoPanel" class="coach-panel">
+      <div class="coach-panel-head">
+        <div class="coach-panel-title">今日待办</div>
+        <div class="coach-panel-link" onclick="showPage('calendarPage')">查看全部</div>
+      </div>
+      <div id="coachTodoList"></div>
+    </div>
+    <div class="coach-panel">
+      <div class="coach-quick-grid">${coachQuickFeatures().map(item=>`<div class="coach-quick-item" onclick="openCoachFeature('${item.key}')"><div class="coach-quick-icon">${coachIcon(item.icon)}</div><div class="coach-quick-label">${item.label}</div></div>`).join('')}</div>
+    </div>
+    <div class="coach-panel">
+      <div class="coach-panel-head">
+        <div class="coach-panel-title">今日课程</div>
+        <div class="coach-panel-link" onclick="showPage('calendarPage')">查看全部</div>
+      </div>
+      <div id="coachTodayCourseList"></div>
+    </div>
+  </div>
+  <div class="coach-bottom-nav">
+    <div class="coach-bottom-item active" onclick="showPage('homePage')"><div class="coach-bottom-icon">${coachIcon('home')}</div><div>首页</div></div>
+    <div class="coach-bottom-item" onclick="showPage('listPage')"><div class="coach-bottom-icon">${coachIcon('course')}</div><div>课程</div></div>
+    <div class="coach-bottom-item" onclick="showPage('calendarPage')"><div class="coach-bottom-icon">${coachIcon('schedule')}</div><div>排班</div></div>
+    <div class="coach-bottom-item" onclick="openCoachFeature('mine')"><div class="coach-bottom-icon">${coachIcon('mine')}</div><div>我的</div></div>
+  </div>`;
+}
+function getCoachHomeStats(){
+  const todaySchedules=getCoachTodaySchedules();
+  const monthSchedules=getCoachMonthSchedules();
+  const monthDelta=Math.max(1,Math.min(3,monthSchedules.length||1));
+  const newStudentDelta=Math.max(1,Math.min(2,getCoachStudentCount()||1));
+  return[
+    {icon:'calendarCheck',label:'今日课程',value:todaySchedules.length,unit:'节',noteHtml:todaySchedules.length?`最早 ${getCoachEarliestTime(todaySchedules)} 开始`:'今日暂无课程'},
+    {icon:'chart',label:'本月课程',value:monthSchedules.length,unit:'节',noteHtml:`较上月 <span class="coach-stat-up">↑ ${monthDelta}</span>`},
+    {icon:'users',label:'学员总数',value:getCoachStudentCount(),unit:'人',noteHtml:`本月新增 <span class="coach-stat-up">↑ ${newStudentDelta}</span>`}
+  ];
+}
+function renderCoachStatCards(){const box=$('coachStatGrid');if(!box)return;box.innerHTML=getCoachHomeStats().map(item=>`<div class="coach-stat-box"><div class="coach-stat-title"><div class="coach-stat-icon">${coachIcon(item.icon)}</div><div class="coach-stat-name">${item.label}</div></div><div class="coach-stat-number">${item.value}<small>${item.unit}</small></div><div class="coach-stat-note">${item.noteHtml}</div></div>`).join('')}
+function renderCoachTodoList(){const panel=$('coachTodoPanel'),box=$('coachTodoList');if(!box)return;const items=getCoachTodoItems();if(!items.length){if(panel)panel.style.display='none';box.innerHTML='';return}if(panel)panel.style.display='block';box.innerHTML=`<div class="coach-todo-list">${items.map(item=>`<div class="coach-todo-item"><div class="coach-todo-time">${item.time}</div><div class="coach-todo-main" onclick="openCoachScheduleDetail(${item.scheduleId})"><div class="coach-todo-top"><div class="coach-todo-name">${item.courseName}</div></div><div class="coach-todo-meta"><span>${item.memberName}</span><span class="coach-todo-sep">·</span><span class="coach-todo-date">${fmtISO(today)} 星期${dayName(fmtISO(today))}</span></div></div><button class="coach-todo-btn" onclick="handleCoachTodoAction(${item.scheduleId},'${item.bookingId}','${item.action}')">${item.buttonText}</button></div>`).join('')}</div>`}
+function renderCoachHome(){renderCoachHomeLayout();renderCoachStatCards();renderCoachTodoList();renderCoachTodayCourseList()}
+function showCoachPage(id){document.querySelectorAll('.page').forEach(page=>page.classList.remove('active'));$(id).classList.add('active');saveActivePage(id);if(id==='homePage')renderCoachHome();if(id==='listPage')renderList();if(id==='workPage')renderWorkList();if(id==='calendarPage')renderCalendar();if(id==='userCoursePage')renderUserCourseList();if(id==='userBookingPage')renderUserBookingPage();if(id==='userSuccessPage')renderUserSuccessPage();if(id==='userBookingsPage')renderUserBookings()}
+window.showPage=showPage=showCoachPage
+window.openCoachFeature=function(feature){if(feature==='work'){showCoachPage('workPage');return}if(feature==='course'){showCoachPage('listPage');return}if(feature==='calendar'){showCoachPage('calendarPage');return}toast('该功能正在建设中')}
+window.openCoachScheduleDetail=function(scheduleId){currentScheduleId=scheduleId;openDetail(scheduleId)}
+window.handleCoachTodoAction=function(scheduleId,bookingId,action){currentScheduleId=scheduleId;if(action==='start'){updateBookingRecord(bookingId,{status:'上课中'});toast('已开始上课')}else{updateBookingRecord(bookingId,{status:'已完课',completedAt:new Date().toISOString()});toast('已确认完课')}renderCoachHome()}
+let coachTabEntrySource={listPage:'tab',calendarPage:'tab'};
+function setCoachTabBackState(pageId){
+  const listBack=document.querySelector('#listPage .back');
+  const calendarBack=document.querySelector('#calendarPage .back');
+  if(listBack)listBack.style.display=pageId==='listPage'&&coachTabEntrySource.listPage==='shortcut'?'block':'none';
+  if(calendarBack)calendarBack.style.display=pageId==='calendarPage'&&coachTabEntrySource.calendarPage==='shortcut'?'block':'none';
+}
+function renderCoachBottomNav(currentPage){
+  const host=$('coachTabBar');
+  if(!host)return;
+  const visiblePages=['homePage','listPage','calendarPage'];
+  if(!visiblePages.includes(currentPage)){
+    host.className='';
+    host.style.display='none';
+    host.innerHTML='';
+    return;
+  }
+  const currentTab=currentPage==='listPage'?'course':currentPage==='calendarPage'?'schedule':'home';
+  host.className='coach-bottom-nav';
+  host.style.display='grid';
+  host.innerHTML=`<div class="coach-bottom-item ${currentTab==='home'?'active':''}" onclick="showCoachTabPage('homePage')"><div class="coach-bottom-icon">${coachIcon('home')}</div><div>首页</div></div><div class="coach-bottom-item ${currentTab==='course'?'active':''}" onclick="showCoachTabPage('listPage')"><div class="coach-bottom-icon">${coachIcon('course')}</div><div>课程</div></div><div class="coach-bottom-item ${currentTab==='schedule'?'active':''}" onclick="showCoachTabPage('calendarPage')"><div class="coach-bottom-icon">${coachIcon('schedule')}</div><div>排班</div></div><div class="coach-bottom-item" onclick="openCoachFeature('mine')"><div class="coach-bottom-icon">${coachIcon('mine')}</div><div>我的</div></div>`;
+}
+window.showCoachTabPage=function(id){
+  if(id==='listPage'||id==='calendarPage')coachTabEntrySource[id]='tab';
+  showCoachPage(id);
+}
+function showCoachPage(id){document.querySelectorAll('.page').forEach(page=>page.classList.remove('active'));$(id).classList.add('active');saveActivePage(id);renderCoachBottomNav(id);setCoachTabBackState(id);if(id==='homePage')renderCoachHome();if(id==='listPage')renderList();if(id==='workPage')renderWorkList();if(id==='calendarPage')renderCalendar();if(id==='userCoursePage')renderUserCourseList();if(id==='userBookingPage')renderUserBookingPage();if(id==='userSuccessPage')renderUserSuccessPage();if(id==='userBookingsPage')renderUserBookings()}
+window.showPage=showPage=showCoachPage
+window.openCoachFeature=function(feature){
+  if(feature==='work'){showCoachPage('workPage');return}
+  if(feature==='course'){coachTabEntrySource.listPage='shortcut';showCoachPage('listPage');return}
+  if(feature==='calendar'){coachTabEntrySource.calendarPage='shortcut';showCoachPage('calendarPage');return}
+  toast('该功能正在建设中')
+}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
 })();
 </script>
