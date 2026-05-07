@@ -187,6 +187,48 @@
     </section>
 
     <section class="card full">
+      <h2>文件夹层级关系</h2>
+      <span class="code">chatgpt（当前项目总目录，里面放了原型页、拆分项目、上传整理文件和 Git 相关测试数据）
+├─ split-projects（当前最清晰的一套双端拆分原型目录，建议后续继续基于它做工程化）
+│  ├─ index.html（双端总入口页，用来选择进入教练端或用户端）
+│  ├─ coach-app（教练端独立原型目录）
+│  │  └─ index.html（教练端主页面文件，包含课程管理、工作时间、课程排班等流程）
+│  └─ user-app（用户端独立原型目录）
+│     └─ index.html（用户端主页面文件，包含私教课、签约、预约、预约记录等流程）
+├─ github-upload（之前为了上传 GitHub 整理出来的一份静态文件打包目录）
+│  ├─ .gitignore（上传时用的忽略规则文件）
+│  ├─ coach-course-demo-coach.html（教练端演示页副本）
+│  ├─ coach-course-demo-empty.html（空白数据演示页副本）
+│  ├─ coach-course-demo-user.html（用户端演示页副本）
+│  ├─ coach-course-demo.html（综合演示页副本）
+│  ├─ preview-server.js（本地预览服务脚本副本）
+│  └─ user-booking-demo.html（用户预约演示页副本）
+├─ repo-data（一个 Git 仓库的内部数据目录，主要是版本记录和对象索引，不是业务页面）
+│  ├─ hooks（Git 钩子脚本目录，放的是提交和推送前后的示例脚本）
+│  ├─ info（Git 辅助信息目录，通常放忽略规则等内部配置）
+│  ├─ logs（Git 提交和分支变更日志目录）
+│  ├─ objects（Git 对象存储目录，真正保存提交、树和文件快照）
+│  ├─ refs（Git 分支和标签引用目录）
+│  ├─ COMMIT_EDITMSG（最近一次提交说明的临时记录文件）
+│  ├─ config（当前 Git 仓库配置文件）
+│  ├─ description（Git 仓库描述信息文件）
+│  ├─ HEAD（当前分支指向文件）
+│  └─ index（Git 暂存区索引文件）
+├─ git-test（临时 Git 测试目录，目前没有实际业务内容）
+├─ .gitignore（当前根目录忽略规则文件）
+├─ coach-course-demo-coach.html（单独教练端演示页）
+├─ coach-course-demo-empty.html（空白数据版演示页）
+├─ coach-course-demo-user.html（单独用户端演示页）
+├─ coach-course-demo.html（最早的大单文件综合演示版）
+├─ git_write_test.tmp（临时写入测试文件）
+├─ preview-server.js（本地预览服务脚本）
+├─ push-github.cmd（Windows 一键推送 GitHub 的脚本）
+├─ push-github.ps1（PowerShell 版 GitHub 推送脚本）
+├─ user-booking-demo.html（偏用户预约流程的单独演示页）
+└─ 项目说明.html（当前这份可视化说明页，方便直接在浏览器里查看项目情况）</span>
+    </section>
+
+    <section class="card full">
       <h2>后续工程化目标</h2>
       <p>下一步要做的是把现有静态原型，重构成一个真正可开发、可对接后端接口的前端工程，而不是重做页面。</p>
       <ul>
