@@ -5,8 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>用户端</title>
   <link rel="stylesheet" href="../shared/css/coach-base.css">
-  <link rel="stylesheet" href="../shared/css/user-base.css">
-<link rel="stylesheet" href="../shared/css/skin-toggle.css"></head>
+  <link rel="stylesheet" href="../shared/css/user-base.css"></head>
 <body data-app="user">
 <div class="phone">
   <div class="status-bar"><span class="status-time">9:41</span><span class="status-icons"><svg width="14" height="10" viewBox="0 0 14 10"><rect x="0" y="6" width="2" height="4" rx="1" fill="currentColor"/><rect x="3.5" y="4" width="2" height="6" rx="1" fill="currentColor"/><rect x="7" y="2" width="2" height="8" rx="1" fill="currentColor"/><rect x="10.5" y="0" width="2" height="10" rx="1" fill="currentColor"/></svg><svg width="20" height="10" viewBox="0 0 20 10" style="margin-left:6px"><rect x="0" y="1" width="16" height="8" rx="2" fill="none" stroke="currentColor" stroke-width="1"/><rect x="17" y="3.5" width="2" height="3" rx="1" fill="currentColor"/><rect x="2" y="3" width="12" height="4" rx="1" fill="currentColor"/></svg></span></div>
@@ -37,25 +36,5 @@
   <div id="toast" class="toast"></div>
   </div>
 <script src="js/app.js"></script>
-
-<script>
-(function(){
-var SW=document.getElementById('skinSwitch');
-if(!SW)return;
-var skinLink=document.createElement('link');
-skinLink.rel='stylesheet';
-skinLink.href='../shared/css/skin-original.css';
-skinLink.id='skinOriginalCSS';
-skinLink.disabled=true;
-document.head.appendChild(skinLink);
-function setSkin(skin){
-document.body.dataset.skin=skin;
-skinLink.disabled=(skin!=='light');
-localStorage.setItem('appSkin',skin);
-SW.querySelector('select').value=skin;
-}
-SW.querySelector('select').addEventListener('change',function(){setSkin(this.value)});
-setSkin(localStorage.getItem('appSkin')||'dark');
-})();
-</script></body>
+</body>
 </html>
