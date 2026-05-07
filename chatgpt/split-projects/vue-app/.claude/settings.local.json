@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -e \"const fs=require\\('fs'\\);const p='C:/Users/ju/Documents/Codex/2026-04-24/chatgpt/split-projects/shared/css/user-base.css';let c=fs.readFileSync\\(p,'utf8'\\);console.log\\(c.substring\\(c.length-500\\)\\);\")"
+    ]
+  }
+}

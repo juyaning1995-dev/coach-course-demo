@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -e ' *)",
+      "Bash(node --check \"C:\\\\\\\\Users\\\\\\\\ju\\\\\\\\Documents\\\\\\\\Codex\\\\\\\\2026-04-24\\\\\\\\chatgpt\\\\\\\\split-projects\\\\\\\\coach-app\\\\\\\\js\\\\\\\\app.js\")",
+      "Bash(npx vite *)"
+    ]
+  }
+}
