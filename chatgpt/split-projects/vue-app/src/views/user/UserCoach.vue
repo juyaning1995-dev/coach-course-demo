@@ -97,9 +97,9 @@ onUnmounted(() => { if (heroTimer) clearInterval(heroTimer) })
         </div>
         <div v-for="c in privateCourses" :key="c.id" class="uh-course-card">
           <div class="uh-course-name">{{ normalizeUserCourseName(c) }}</div>
-          <div class="uh-course-sub">{{ c.intro || '暂无简介' }}</div>
+          <div class="uh-course-meta">{{ c.type }}｜{{ c.hours || 0 }}节｜{{ c.minutes || '--' }}分钟/节</div>
           <div class="uh-course-row">
-            <span class="uh-course-price">¥{{ c.price || '--' }}</span>
+            <span class="uh-course-price">{{ c.unit === '按时间' ? `¥${((c.price || 0) / Math.max(1, c.hours || 1)).toFixed(1)}/节` : `¥${c.price || '--'}` }}</span>
             <button class="uh-buy-btn" @click="startPurchase(c)">购买</button>
           </div>
         </div>

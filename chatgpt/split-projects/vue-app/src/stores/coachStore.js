@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import { load, save } from '@/services/storage'
+import { load, save, remove, deleteRaw } from '@/services/storage'
 import { fmtISO, startOfWeek, normalizeUserCourseName, makeBookingId, hoursUntilBooking } from '@/utils/date'
 import { useUserStore } from './userStore'
 
@@ -10,7 +10,19 @@ const DEFAULT_STORE_INFO = { name: '振华商厦店', address: '山东省烟台�
 export const useCoachStore = defineStore('coach', () => {
   // ============ State ============
   const courses = ref(load('courses', []))
+  const WORKTIME_VERSION = 2
+  const savedVersion = load('workTimeVersion', 0)
+  if (savedVersion < WORKTIME_VERSION) {
+    save('workTimeVersion', WORKTIME_VERSION)
+    save('workTimes', { 一: [], 二: [], 三: [], 四: [], 五: [], 六: [], 日: [] })
+    save('courses', [])
+    save('schedules', [])
+    deleteRaw('coach_workDraft')
+    deleteRaw('coach_scheduleDraft')
+  }
   const workTimes = ref(load('workTimes', { 一: [], 二: [], 三: [], 四: [], 五: [], 六: [], 日: [] }))
+  const repeatWorkTime = ref(load('repeatWorkTime', true))
+  const workTimeWeekStart = ref(load('workTimeWeekStart', ''))
   const schedules = ref(load('schedules', []))
   const coachProfile = ref(load('coachProfile', DEFAULT_COACH_PROFILE))
   const storeInfo = ref(load('storeInfo', DEFAULT_STORE_INFO))
@@ -33,7 +45,20 @@ export const useCoachStore = defineStore('coach', () => {
     save('schedules', schedules.value)
     save('coachProfile', coachProfile.value)
     save('storeInfo', storeInfo.value)
+    save('repeatWorkTime', repeatWorkTime.value)
+    save('workTimeWeekStart', workTimeWeekStart.value)
   }
+
+  function checkAndClearWorkTime() {
+    if (repeatWorkTime.value) return
+    const currentWeekStart = fmtISO(startOfWeek(new Date()))
+    if (workTimeWeekStart.value && workTimeWeekStart.value !== currentWeekStart) {
+      workTimes.value = { 一: [], 二: [], 三: [], 四: [], 五: [], 六: [], 日: [] }
+      workTimeWeekStart.value = ''
+      persist()
+    }
+  }
+  checkAndClearWorkTime()
 
   // ============ Course Management ============
   function openCreate() {
@@ -51,8 +76,8 @@ export const useCoachStore = defineStore('coach', () => {
   function submitCourse(data) {
     if (editingId.value) {
       const idx = courses.value.findIndex(x => x.id === editingId.value)
-      const needAudit = courses.value[idx].status === '审核驳回' || courses.value[idx].status === '待审核'
-      courses.value[idx] = { ...courses.value[idx], ...data, reason: '', status: needAudit ? '待审核' : courses.value[idx].status }
+      const needAudit = true
+      courses.value[idx] = { ...courses.value[idx], ...data, reason: '', status: '待审核' }
       pendingAuditId.value = needAudit ? courses.value[idx].id : null
       persist()
       syncUserProducts()
@@ -100,6 +125,12 @@ export const useCoachStore = defineStore('coach', () => {
     ['一', '二', '三', '四', '五', '六', '日'].forEach(d => {
       workTimes.value[d] = days.includes(d) ? [...times] : []
     })
+    workTimeWeekStart.value = fmtISO(startOfWeek(new Date()))
+    persist()
+  }
+
+  function setRepeatWorkTime(val) {
+    repeatWorkTime.value = val
     persist()
   }
 
@@ -224,7 +255,6 @@ export const useCoachStore = defineStore('coach', () => {
   }
 
   function updateBookingRecord(bookingId, changes) {
-    reloadSchedules()
     const userStore = useUserStore()
     schedules.value.forEach(s => {
       ensureScheduleMembers(s)
@@ -291,7 +321,7 @@ export const useCoachStore = defineStore('coach', () => {
     return [
       { icon: 'calendarCheck', label: '今日排课', value: todayAll.length, unit: '节', note: todayAll.length ? `${todayAll.length}个课次` : '暂无' },
       { icon: 'chart', label: '今日约课', value: todayBooked, unit: '节', note: todayPendingBooked ? `${todayPendingBooked}节待上课` : '暂无待上课' },
-      { icon: 'users', label: '今日收入', value: '￥' + revenue, unit: '', note: revenue > 0 ? `${completed.length}笔完成` : '暂无' }
+      { icon: 'income', label: '今日收入', value: '￥' + revenue, unit: '', note: revenue > 0 ? `${completed.length}笔完成` : '暂无' }
     ]
   }
 
@@ -323,10 +353,11 @@ export const useCoachStore = defineStore('coach', () => {
   return {
     courses, workTimes, schedules, coachProfile, storeInfo,
     editingId, pendingAuditId, currentScheduleId, editingScheduleId, coachInfoEditing, currentCalendarWeekStart,
+    repeatWorkTime, workTimeWeekStart,
     onlineCourses, today, todayKey,
     persist, reloadSchedules,
     openCreate, editCourse, submitCourse, auditPass, auditReject, changeCourseStatus, removeCourse,
-    saveWorkTime, getWorkRangesForDate, hasWorkTimeForDate,
+    saveWorkTime, setRepeatWorkTime, getWorkRangesForDate, hasWorkTimeForDate,
     saveSchedule, cancelSchedule, deleteSchedule, toggleStopBooking,
     ensureScheduleMembers, getScheduleActiveMembers, syncScheduleBookedCount,
     confirmMemberBook, updateBookingRecord, cancelBookingSeat,

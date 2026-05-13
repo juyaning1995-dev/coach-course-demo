@@ -2,12 +2,13 @@
 import { computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useCoachStore } from '@/stores/coachStore'
+import { icons } from '@/components/icons'
 
 const router = useRouter()
 const route = useRoute()
 const coach = useCoachStore()
 
-const s = computed(() => coach.schedules.find(s => s.id === Number(route.params.id)))
+const s = computed(() => coach.schedules.find(s => String(s.id) === String(route.params.id)))
 
 const members = computed(() => {
   if (!s.value) return []
@@ -62,6 +63,7 @@ function deleteThisSchedule() {
 <template>
   <div class="phone">
     <div class="page active">
+      <div class="status-bar"><span>9:41</span><span class="status-icons"><span v-html="icons.signal" style="width:16px;height:12px"></span><span v-html="icons.battery" style="width:27px;height:12px;margin-left:6px"></span></span></div>
       <div class="nav"><div class="back" @click="router.push('/coach/calendar')">‹</div>课次详情<div class="nav-capsule"><button class="nav-capsule-btn" aria-label="更多"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="4" cy="8" r="1.5" fill="currentColor"/><circle cx="8" cy="8" r="1.5" fill="currentColor"/><circle cx="12" cy="8" r="1.5" fill="currentColor"/></svg></button><div class="nav-capsule-divider"></div><button class="nav-capsule-btn" aria-label="关闭"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="8" r="2.2" fill="currentColor"/></svg></button></div></div>
       <div v-if="s">
         <div class="detail-card">
@@ -94,13 +96,6 @@ function deleteThisSchedule() {
             </div>
             <div v-if="coachBookingNote(m)" class="student-note">{{ coachBookingNote(m) }}</div>
           </div>
-        </div>
-        <button class="orange-btn" style="width:calc(100% - 36px);margin-left:18px" @click="router.push(`/coach/schedule/${s.id}/members`)">代学员预约</button>
-        <div class="detail-actions">
-          <button class="mini-btn" @click="router.push(`/coach/schedule/${s.id}/edit`)">编辑课次</button>
-          <button class="mini-btn" @click="router.push(`/coach/schedule/${s.id}/stop`)">{{ s.status === '停止预约' ? '开启预约' : '停止预约' }}</button>
-          <button class="mini-btn secondary" @click="cancelThisSchedule">取消课次</button>
-          <button class="mini-btn secondary" @click="deleteThisSchedule">删除课次</button>
         </div>
       </div>
       <div v-else style="padding:40px;text-align:center;color:var(--text-3)">课次不存在</div>

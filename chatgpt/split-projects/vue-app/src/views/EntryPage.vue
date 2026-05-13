@@ -1,6 +1,19 @@
 <script setup>
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 const router = useRouter()
+
+const cleared = ref('')
+
+const P = 'coachSplitProject_'
+const coachKeys = ['courses', 'workTimes', 'schedules', 'coachProfile', 'storeInfo']
+const userKeys = ['userProducts', 'userBookings', 'userContracts']
+
+function clearData(type) {
+  const keys = type === 'coach' ? coachKeys : type === 'user' ? userKeys : [...coachKeys, ...userKeys]
+  keys.forEach(k => localStorage.removeItem(P + k))
+  window.location.reload()
+}
 </script>
 
 <template>
@@ -22,6 +35,15 @@ const router = useRouter()
         <p>用户端预约、时段选择、预约确认、我的预约记录在这里独立演示。</p>
         <div class="entry-jump">进入用户端 ›</div>
       </div>
+    </div>
+    <div class="entry-clear">
+      <div class="entry-clear-title">清空数据</div>
+      <div class="entry-clear-btns">
+        <button class="entry-clear-btn" @click="clearData('coach')">清空教练端</button>
+        <button class="entry-clear-btn" @click="clearData('user')">清空用户端</button>
+        <button class="entry-clear-btn danger" @click="clearData('all')">清空全部</button>
+      </div>
+      <div v-if="cleared" class="entry-toast">{{ cleared }}</div>
     </div>
   </div>
 </template>
@@ -99,5 +121,47 @@ const router = useRouter()
 .entry-tag-user {
   background: rgba(248, 201, 0, 0.12);
   color: #F8C900;
+}
+.entry-clear {
+  margin-top: 28px;
+  text-align: center;
+}
+.entry-clear-title {
+  color: #888;
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+.entry-clear-btns {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+.entry-clear-btn {
+  height: 36px;
+  padding: 0 18px;
+  border-radius: 10px;
+  border: 1px solid #333;
+  background: #1a1a1a;
+  color: #bbb;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.entry-clear-btn:hover {
+  border-color: #555;
+  color: #fff;
+}
+.entry-clear-btn.danger {
+  border-color: #4a2020;
+  color: #e07070;
+}
+.entry-clear-btn.danger:hover {
+  border-color: #a04040;
+  background: #2a1414;
+}
+.entry-toast {
+  margin-top: 12px;
+  color: #4ade80;
+  font-size: 13px;
 }
 </style>

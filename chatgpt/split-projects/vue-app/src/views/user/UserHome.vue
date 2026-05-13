@@ -2,11 +2,16 @@
 import { computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/userStore'
+import { useCoachStore } from '@/stores/coachStore'
 
 const router = useRouter()
 const user = useUserStore()
+const coach = useCoachStore()
 
-onMounted(() => { user.reload() })
+onMounted(() => {
+  user.reload()
+  coach.syncUserProducts()
+})
 
 const courseCount = computed(() => user.userProducts.length)
 const remainCount = computed(() => user.userProducts.reduce((s, p) => s + Number(p.remain || 0), 0))
@@ -17,7 +22,7 @@ const pendingCount = computed(() => user.userBookings.filter(b => !['已取消',
 <template>
   <div class="phone">
     <div class="page active">
-      <div class="nav">用户端<div class="nav-capsule"><button class="nav-capsule-btn" aria-label="更多"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="4" cy="8" r="1.5" fill="currentColor"/><circle cx="8" cy="8" r="1.5" fill="currentColor"/><circle cx="12" cy="8" r="1.5" fill="currentColor"/></svg></button><div class="nav-capsule-divider"></div><button class="nav-capsule-btn" aria-label="关闭"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="8" r="2.2" fill="currentColor"/></svg></button></div></div>
+      <div class="nav">首页</div>
       <div class="user-shell">
         <div class="user-home-grid">
           <div class="user-home-card" @click="router.push('/user/courses')">
@@ -34,7 +39,7 @@ const pendingCount = computed(() => user.userBookings.filter(b => !['已取消',
             <div class="user-home-desc">查看全部预约记录，当前还有 {{ pendingCount }} 条待处理或待上课记录。</div>
             <div class="user-home-arrow">进入预约记录 ›</div>
           </div>
-          <div class="user-home-card" style="background:linear-gradient(135deg,#1a1816,#141414);border-color:rgba(248,201,0,0.12)" @click="router.push('/user/coach')">
+          <div class="user-home-card" @click="router.push('/user/coach')">
             <div class="user-home-chip">功能 03</div>
             <div class="user-home-name">教练主页</div>
             <div class="user-home-desc">查看教练资料、课程介绍和门店信息，购买课程后即可在线预约训练时段。</div>

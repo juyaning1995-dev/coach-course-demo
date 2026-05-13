@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useCoachStore } from '@/stores/coachStore'
+import { icons } from '@/components/icons'
 
 const router = useRouter()
 const coach = useCoachStore()
@@ -16,14 +17,14 @@ const hasAny = computed(() => Object.values(coach.workTimes).some(v => v.length)
 <template>
   <div class="phone">
     <div class="page active">
+      <div class="status-bar"><span>9:41</span><span class="status-icons"><span v-html="icons.signal" style="width:16px;height:12px"></span><span v-html="icons.battery" style="width:27px;height:12px;margin-left:6px"></span></span></div>
       <div class="nav"><div class="back" @click="router.push('/coach')">‹</div>工作时间<div class="nav-capsule"><button class="nav-capsule-btn" aria-label="更多"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="4" cy="8" r="1.5" fill="currentColor"/><circle cx="8" cy="8" r="1.5" fill="currentColor"/><circle cx="12" cy="8" r="1.5" fill="currentColor"/></svg></button><div class="nav-capsule-divider"></div><button class="nav-capsule-btn" aria-label="关闭"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="8" r="2.2" fill="currentColor"/></svg></button></div></div>
-      <div class="week-title">每周工作时间</div>
       <div class="work-list">
         <template v-if="!hasAny">
           <div class="empty">
             <div class="empty-title">暂无工作时间</div>
-            <div>先设置可排课时间范围，后续新增课次时按该时间进行排班</div>
             <div class="empty-action" @click="router.push('/coach/worktime/edit')">设置工作时间</div>
+            <div class="empty-hint" style="white-space:nowrap">设置可排课时间范围，新增课次时按该时间进行排班</div>
           </div>
         </template>
         <template v-else>

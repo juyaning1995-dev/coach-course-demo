@@ -8,7 +8,7 @@ import { icons } from '@/components/icons'
 const router = useRouter()
 const coach = useCoachStore()
 
-const CALENDAR_START_HOUR = 9
+const CALENDAR_START_HOUR = 8
 const CALENDAR_END_HOUR = 22
 const CALENDAR_HOUR_HEIGHT = 48
 const pxPerMin = CALENDAR_HOUR_HEIGHT / 60
@@ -109,8 +109,62 @@ function selectDateFn(dateStr) {
   activeDateStr.value = dateStr
 }
 
+// Schedule operation popup
+const showOpMask = ref(false)
+const currentSchedule = ref(null)
+
 function openSchedule(s) {
-  router.push(`/coach/schedule/${s.id}`)
+  if (!s || !s.id) return
+  currentSchedule.value = s
+  showOpMask.value = true
+}
+
+function hideOpMask() { showOpMask.value = false; currentSchedule.value = null }
+
+function openDetail() {
+  const id = currentSchedule.value?.id
+  if (!id) return
+  hideOpMask()
+  router.push(`/coach/schedule/${id}`)
+}
+
+function showMemberPage() {
+  const id = currentSchedule.value?.id
+  if (!id) return
+  hideOpMask()
+  router.push(`/coach/schedule/${id}/members`)
+}
+
+function editSchedule() {
+  const id = currentSchedule.value?.id
+  if (!id) return
+  hideOpMask()
+  router.push(`/coach/schedule/${id}/edit`)
+}
+
+function toggleStopBooking() {
+  const s = currentSchedule.value
+  if (!s) return
+  const wasStopped = s.status === '停止预约'
+  coach.toggleStopBooking(s.id)
+  window.__toast?.(wasStopped ? '已开启预约' : '已停止预约')
+  hideOpMask()
+}
+
+function cancelSchedule() {
+  const s = currentSchedule.value
+  if (!s) return
+  coach.cancelSchedule(s.id)
+  window.__toast?.('已取消课次')
+  hideOpMask()
+}
+
+function deleteSchedule() {
+  const s = currentSchedule.value
+  if (!s) return
+  coach.deleteSchedule(s.id)
+  window.__toast?.('已删除课次')
+  hideOpMask()
 }
 
 // Work-time tip mask
@@ -135,6 +189,7 @@ function goSetWorkTime() { showTipMask.value = false; router.push('/coach/workti
 <template>
   <div class="phone">
     <div id="calendarPage" class="page active">
+      <div class="status-bar"><span>9:41</span><span class="status-icons"><span v-html="icons.signal" style="width:16px;height:12px"></span><span v-html="icons.battery" style="width:27px;height:12px;margin-left:6px"></span></span></div>
       <div class="nav"><div class="back" @click="router.push('/coach')">‹</div>课程日历<div class="nav-capsule"><button class="nav-capsule-btn" aria-label="更多"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="4" cy="8" r="1.5" fill="currentColor"/><circle cx="8" cy="8" r="1.5" fill="currentColor"/><circle cx="12" cy="8" r="1.5" fill="currentColor"/></svg></button><div class="nav-capsule-divider"></div><button class="nav-capsule-btn" aria-label="关闭"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="8" r="2.2" fill="currentColor"/></svg></button></div></div>
       <div class="calendar-head">
         <div style="display:flex;align-items:center;gap:10px">
@@ -156,8 +211,6 @@ function goSetWorkTime() { showTipMask.value = false; router.push('/coach/workti
         <template v-if="!hasDaySchedules">
           <div class="calendar-empty" style="grid-column:1/3">
             <div class="empty-title">暂无排课</div>
-            <div>当前日期暂无课次</div>
-            <div>请先创建并上架课程，再新增排课</div>
             <div class="empty-action" @click="goNewSchedule()">新增排课</div>
           </div>
         </template>
@@ -211,6 +264,19 @@ function goSetWorkTime() { showTipMask.value = false; router.push('/coach/workti
             <button @click="closeTipMask">取消</button>
             <button @click="goSetWorkTime">去设置</button>
           </div>
+        </div>
+      </div>
+
+      <!-- Schedule operation popup -->
+      <div v-if="showOpMask" class="sheet-mask" style="display:block">
+        <div class="op-dialog">
+          <div class="op-head"><span>课次操作</span><span class="op-close" @click="hideOpMask">×</span></div>
+          <button class="op-btn" @click="openDetail">查看详情</button>
+          <button class="op-btn" @click="showMemberPage">代学员预约</button>
+          <button class="op-btn" @click="editSchedule">编辑课次</button>
+          <button class="op-btn" @click="toggleStopBooking">{{ currentSchedule?.status === '停止预约' ? '开启预约' : '停止预约' }}</button>
+          <button class="op-btn op-danger" @click="cancelSchedule">取消课次</button>
+          <button class="op-btn op-danger" @click="deleteSchedule">删除课次</button>
         </div>
       </div>
     </div>

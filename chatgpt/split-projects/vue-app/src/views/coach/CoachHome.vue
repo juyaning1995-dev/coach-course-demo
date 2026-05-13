@@ -9,6 +9,9 @@ const coach = useCoachStore()
 
 const stats = computed(() => coach.getHomeStats())
 
+const statIconBg = { calendarCheck: 'bg-info', chart: 'bg-warning', income: 'bg-success' }
+const quickIconBg = { contract: 'bg-coral', work: 'bg-warning', course: 'bg-coral', booking: 'bg-success', calendar: 'bg-info', student: 'bg-info', order: 'bg-brand' }
+
 const quickFeatures = [
   { key: 'contract', label: '门店签约', icon: icons.contract },
   { key: 'work', label: '工作时间', icon: icons.clock },
@@ -62,13 +65,14 @@ function goDetail(sid) { router.push(`/coach/schedule/${sid}`) }
 <template>
   <div class="phone">
     <div class="page active">
-      <div class="nav">课程设置<div class="nav-capsule"><button class="nav-capsule-btn" aria-label="更多"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="4" cy="8" r="1.5" fill="currentColor"/><circle cx="8" cy="8" r="1.5" fill="currentColor"/><circle cx="12" cy="8" r="1.5" fill="currentColor"/></svg></button><div class="nav-capsule-divider"></div><button class="nav-capsule-btn" aria-label="关闭"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="8" r="2.2" fill="currentColor"/></svg></button></div></div>
+      <div class="status-bar"><span>9:41</span><span class="status-icons"><span v-html="icons.signal" style="width:16px;height:12px"></span><span v-html="icons.battery" style="width:27px;height:12px;margin-left:6px"></span></span></div>
+      <div class="nav">首页<div class="nav-capsule"><button class="nav-capsule-btn" aria-label="更多"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="4" cy="8" r="1.5" fill="currentColor"/><circle cx="8" cy="8" r="1.5" fill="currentColor"/><circle cx="12" cy="8" r="1.5" fill="currentColor"/></svg></button><div class="nav-capsule-divider"></div><button class="nav-capsule-btn" aria-label="关闭"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="8" r="2.2" fill="currentColor"/></svg></button></div></div>
       <div class="coach-dashboard">
         <!-- Stats -->
         <div class="coach-stat-grid">
           <div v-for="s in stats" :key="s.label" class="coach-stat-box">
             <div class="coach-stat-title">
-              <div class="coach-stat-icon" v-html="icons[s.icon]"></div>
+              <div :class="['coach-stat-icon', statIconBg[s.icon] || 'bg-info']" v-html="icons[s.icon]"></div>
               <div class="coach-stat-name">{{ s.label }}</div>
             </div>
             <div class="coach-stat-number">{{ s.value }}<small>{{ s.unit }}</small></div>
@@ -80,7 +84,7 @@ function goDetail(sid) { router.push(`/coach/schedule/${sid}`) }
         <div class="coach-panel">
           <div class="coach-quick-grid">
             <div v-for="f in quickFeatures" :key="f.key" class="coach-quick-item" @click="onQuick(f.key)">
-              <div class="coach-quick-icon" v-html="f.icon"></div>
+              <div :class="['coach-quick-icon', quickIconBg[f.key] || 'bg-brand']" v-html="f.icon"></div>
               <div class="coach-quick-label">{{ f.label }}</div>
             </div>
           </div>
@@ -92,7 +96,7 @@ function goDetail(sid) { router.push(`/coach/schedule/${sid}`) }
             <div class="coach-panel-title">今日课程</div>
             <div class="coach-panel-link" @click="router.push('/coach/calendar')">查看全部</div>
           </div>
-          <div v-if="!todaySchedules.length" class="coach-empty-state">今天还没有已预约的课程，新的预约会自动回填到这里。</div>
+          <div v-if="!todaySchedules.length" class="coach-empty-state">今天还没有已预约的课程</div>
           <div v-else class="ctc-list">
             <template v-for="s in todaySchedules" :key="s.id">
               <div v-for="m in coach.getScheduleActiveMembers(s)" :key="m.bookingId" class="ctc-card" @click="goDetail(s.id)">
@@ -136,3 +140,7 @@ function goDetail(sid) { router.push(`/coach/schedule/${sid}`) }
     </div>
   </div>
 </template>
+
+<style scoped>
+.phone{background:linear-gradient(180deg,#FEE7E3 0%,#F4F2F5 100%) top/100% 280px no-repeat, #F4F2F5!important}
+</style>

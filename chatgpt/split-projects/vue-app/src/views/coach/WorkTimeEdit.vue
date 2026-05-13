@@ -3,16 +3,21 @@ import { reactive, onMounted, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { useCoachStore } from '@/stores/coachStore'
 import { load, save as saveDraftStorage, remove } from '@/services/storage'
+import { icons } from '@/components/icons'
 
 const router = useRouter()
 const coach = useCoachStore()
 
+function toggleRepeat() {
+  coach.setRepeatWorkTime(!coach.repeatWorkTime)
+}
+
 const dayNames = ['一', '二', '三', '四', '五', '六', '日']
 const selectedDays = reactive([])
 const timeLines = reactive([
-  { name: '上午', value: '09:00–12:00', off: false },
-  { name: '下午', value: '14:00–18:00', off: false },
-  { name: '晚上', value: '18:30–21:30', off: false }
+  { name: '上午', value: '08:00–12:00', off: false },
+  { name: '下午', value: '12:00–18:00', off: false },
+  { name: '晚上', value: '19:00–22:00', off: false }
 ])
 
 function collectDraft() {
@@ -38,6 +43,11 @@ function toggleSwitch(line) {
   saveDraft()
 }
 
+function getStartTime(line) { return (line.value || '').split('–')[0] || '' }
+function getEndTime(line) { return (line.value || '').split('–')[1] || '' }
+function setStartTime(line, val) { line.value = val + '–' + getEndTime(line) }
+function setEndTime(line, val) { line.value = getStartTime(line) + '–' + val }
+
 function addTimeLine() {
   timeLines.push({ name: '新增', value: '22:00–23:00', off: false })
   saveDraft()
@@ -57,7 +67,7 @@ function buildDraftFromSaved() {
   if (!activeDays.length) return { days: [], lines: [] }
   const baseDay = activeDays[0]
   const lines = (wt[baseDay] || []).map(value => ({ name: '新增', value, off: false }))
-  return { days: activeDays, lines: lines.length ? lines : [{ name: '上午', value: '09:00–12:00', off: false }, { name: '下午', value: '14:00–18:00', off: false }, { name: '晚上', value: '18:30–21:30', off: false }] }
+  return { days: activeDays, lines: lines.length ? lines : [{ name: '上午', value: '08:00–12:00', off: false }, { name: '下午', value: '12:00–18:00', off: false }, { name: '晚上', value: '19:00–22:00', off: false }] }
 }
 
 // Watch for time-line input changes to save draft
@@ -83,9 +93,16 @@ onMounted(() => {
 <template>
   <div class="phone">
     <div class="page active">
+      <div class="status-bar"><span>9:41</span><span class="status-icons"><span v-html="icons.signal" style="width:16px;height:12px"></span><span v-html="icons.battery" style="width:27px;height:12px;margin-left:6px"></span></span></div>
       <div class="nav"><div class="back" @click="router.push('/coach/worktime')">‹</div>工作时间<div class="nav-capsule"><button class="nav-capsule-btn" aria-label="更多"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="4" cy="8" r="1.5" fill="currentColor"/><circle cx="8" cy="8" r="1.5" fill="currentColor"/><circle cx="12" cy="8" r="1.5" fill="currentColor"/></svg></button><div class="nav-capsule-divider"></div><button class="nav-capsule-btn" aria-label="关闭"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="8" r="2.2" fill="currentColor"/></svg></button></div></div>
       <div class="day-select">
-        <div class="day-title">选择时间</div>
+        <div class="day-title">
+          <span>选择时间</span>
+          <div class="day-title-right">
+            <span class="repeat-label">重复</span>
+            <div :class="['switch', 'switch-sm', { off: !coach.repeatWorkTime }]" @click="toggleRepeat()"></div>
+          </div>
+        </div>
         <div class="days" id="editDays">
           <div v-for="d in dayNames" :key="d" :class="['day', { on: selectedDays.includes(d) }]" @click="toggleDay(d)">{{ d }}</div>
         </div>
@@ -95,7 +112,7 @@ onMounted(() => {
         <div id="timeLines">
           <div v-for="(line, i) in timeLines" :key="i" class="time-line">
             <div class="time-name">{{ line.name }}</div>
-            <input v-model="line.value" class="time-input" />
+            <div class="time-range"><input type="time" :value="getStartTime(line)" @change="e => { setStartTime(line, e.target.value); saveDraft() }" class="time-input-half" /><span class="time-sep">–</span><input type="time" :value="getEndTime(line)" @change="e => { setEndTime(line, e.target.value); saveDraft() }" class="time-input-half" /></div>
             <div :class="['switch', { off: line.off }]" @click="toggleSwitch(line)"></div>
           </div>
         </div>

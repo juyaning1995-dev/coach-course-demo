@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useCoachStore } from '@/stores/coachStore'
 import { useUserStore } from '@/stores/userStore'
@@ -7,6 +7,11 @@ import { useUserStore } from '@/stores/userStore'
 const router = useRouter()
 const coach = useCoachStore()
 const userStore = useUserStore()
+
+onMounted(() => {
+  userStore.reload()
+  coach.syncUserProducts()
+})
 
 const avatarUrl = computed(() => coach.coachProfile?.avatar || '/coach-photo.jpg')
 
@@ -42,11 +47,11 @@ function openContract(productId) {
 <template>
   <div class="phone">
     <div class="page active">
-      <div class="nav"><div class="back" @click="router.push('/user')">‹</div>私教课<div class="nav-capsule"><button class="nav-capsule-btn" aria-label="更多"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="4" cy="8" r="1.5" fill="currentColor"/><circle cx="8" cy="8" r="1.5" fill="currentColor"/><circle cx="12" cy="8" r="1.5" fill="currentColor"/></svg></button><div class="nav-capsule-divider"></div><button class="nav-capsule-btn" aria-label="关闭"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="8" r="2.2" fill="currentColor"/></svg></button></div></div>
+      <div class="nav"><div class="back" @click="router.push('/user')">‹</div>私教课</div>
       <div class="user-shell">
         <div v-if="!products.length" class="user-empty">
-          <div class="empty-title">暂无可预约课程</div>
-          <div>先在教练端创建并上架课程，再配置课次，用户端就会自动回填。</div>
+          <div class="empty-title">暂无已购课程</div>
+          <div>请前往<router-link to="/user/coach" style="color:var(--brand);font-weight:600">教练主页</router-link>浏览并购买课程，支付完成后即可预约训练时段。</div>
         </div>
         <div v-for="p in products" :key="p.id" class="user-course-card">
           <span v-if="hasContract(p.id)" class="user-card-link" @click="openContract(p.id)">查看合同</span>

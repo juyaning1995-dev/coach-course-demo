@@ -3,17 +3,18 @@ import { ref, reactive, watch, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useCoachStore } from '@/stores/coachStore'
 import { load, save, remove } from '@/services/storage'
+import { icons } from '@/components/icons'
 
 const router = useRouter()
 const route = useRoute()
 const coach = useCoachStore()
 
-const COURSE_FIELDS = ['name', 'type', 'unit', 'limit', 'minutes', 'hours', 'price', 'buyLimit', 'giftHours', 'validDays', 'activeWay', 'advanceHour', 'giftDays', 'stores', 'intro', 'desc']
+const COURSE_FIELDS = ['name', 'type', 'unit', 'limit', 'minutes', 'hours', 'unitPrice', 'price', 'buyLimit', 'giftHours', 'validDays', 'activeWay', 'advanceHour', 'giftDays', 'activeDays', 'stores', 'intro', 'desc']
 
 const form = reactive({
   name: '', type: '一对一', unit: '按节', limit: '', minutes: '', hours: '',
-  price: '', buyLimit: '', giftHours: '', validDays: '', activeWay: '',
-  advanceHour: '', giftDays: '', stores: '', intro: '', desc: ''
+  unitPrice: '', price: '', buyLimit: '', giftHours: '', validDays: '', activeWay: '',
+  advanceHour: '', giftDays: '', activeDays: '', stores: '', intro: '', desc: ''
 })
 
 const isEdit = ref(false)
@@ -24,12 +25,17 @@ const showAudit = ref(false)
 const limitRow = ref(false)
 const minuteRow = ref(true)
 const giftHoursRow = ref(true)
+const serviceDaysRow = ref(false)
+const validDaysRow = ref(true)
 const giftDaysRow = ref(false)
 
 function updateRows() {
   limitRow.value = form.type === '一对多'
   minuteRow.value = form.unit === '按节'
+  giftHoursRow.value = form.unit === '按节'
   giftDaysRow.value = form.unit === '按时间'
+  serviceDaysRow.value = form.unit === '按时间'
+  validDaysRow.value = form.unit !== '按时间'
 }
 
 function collect() {
@@ -75,6 +81,7 @@ onMounted(() => {
       isEdit.value = true
     }
   } else {
+    coach.editingId = null
     // Load draft for new courses
     const draft = load('coach_courseDraft', null)
     if (draft) {
@@ -90,6 +97,7 @@ onMounted(() => {
 <template>
   <div class="phone">
     <div class="page active">
+      <div class="status-bar"><span>9:41</span><span class="status-icons"><span v-html="icons.signal" style="width:16px;height:12px"></span><span v-html="icons.battery" style="width:27px;height:12px;margin-left:6px"></span></span></div>
       <div class="nav"><div class="back" @click="router.push('/coach/courses')">‹</div>{{ formTitle }}<div class="nav-capsule"><button class="nav-capsule-btn" aria-label="更多"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="4" cy="8" r="1.5" fill="currentColor"/><circle cx="8" cy="8" r="1.5" fill="currentColor"/><circle cx="12" cy="8" r="1.5" fill="currentColor"/></svg></button><div class="nav-capsule-divider"></div><button class="nav-capsule-btn" aria-label="关闭"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="8" r="2.2" fill="currentColor"/></svg></button></div></div>
       <div class="form">
         <div class="form-row"><div class="label">课程名称</div><input v-model="form.name" class="field" placeholder="请输入课程名称" /></div>
@@ -97,13 +105,17 @@ onMounted(() => {
         <div v-if="limitRow" class="form-row"><div class="label">限制人数</div><input v-model="form.limit" class="field" type="number" placeholder="2" /></div>
         <div class="form-row"><div class="label">计费单位</div><select v-model="form.unit" class="field" @change="updateRows"><option>按节</option><option>按时间</option></select></div>
         <div v-if="minuteRow" class="form-row"><div class="label">单节时长（分钟）</div><input v-model="form.minutes" class="field" type="number" placeholder="请输入时长" /></div>
-        <div class="form-row"><div class="label">课时</div><input v-model="form.hours" class="field" type="number" placeholder="请输入课时" /></div>
-        <div class="form-row"><div class="label">售价</div><input v-model="form.price" class="field" type="number" placeholder="请输入售价" /></div>
+        <div v-if="serviceDaysRow" class="form-row"><div class="label">服务周期</div><input v-model="form.validDays" class="field" type="number" placeholder="请输入天数" /></div>
+        <div class="form-row"><div class="label">{{ form.unit === '按时间' ? '周期内课时' : '课时' }}</div><input v-model="form.hours" class="field" type="number" placeholder="请输入课时" /></div>
+        <div v-if="form.unit === '按时间'" class="form-row"><div class="label">单节时长（分钟）</div><input v-model="form.minutes" class="field" type="number" placeholder="请输入时长" /></div>
+        <div class="form-row"><div class="label">单价</div><input v-model="form.unitPrice" class="field" type="number" placeholder="请输入单价" /></div>
+        <div class="form-row"><div class="label">总价</div><input v-model="form.price" class="field" type="number" placeholder="请输入总价" /></div>
         <div class="form-row"><div class="label">限购次数</div><input v-model="form.buyLimit" class="field" type="number" placeholder="请输入限购次数" /></div>
         <div v-if="giftHoursRow" class="form-row"><div class="label">赠送课时</div><input v-model="form.giftHours" class="field" type="number" placeholder="请输入赠送课时" /></div>
         <div v-if="giftDaysRow" class="form-row"><div class="label">赠送天数</div><input v-model="form.giftDays" class="field" type="number" placeholder="请输入赠送天数" /></div>
-        <div class="form-row split-top"><div class="label">有效期（固定天数）</div><input v-model="form.validDays" class="field" type="number" placeholder="请输入天数" /></div>
-        <div class="form-row"><div class="label">激活方式</div><select v-model="form.activeWay" class="field"><option value="">请选择激活方式</option><option>购买即生效</option><option>首次预约生效</option><option>指定天数后生效</option></select></div>
+        <div v-if="validDaysRow" class="form-row split-top"><div class="label">有效期（固定天数）</div><input v-model="form.validDays" class="field" type="number" placeholder="请输入天数" /></div>
+        <div class="form-row"><div class="label">激活方式</div><select v-model="form.activeWay" class="field"><option value="">请选择激活方式</option><option>购买即生效</option><option>首次预约生效</option><option>购买后指定天数生效</option></select></div>
+        <div v-if="form.activeWay === '购买后指定天数生效'" class="form-row"><div class="label">指定购买天数</div><input v-model="form.activeDays" class="field" type="number" placeholder="请输入天数" /></div>
         <div class="form-row"><div class="label">提前预约时间（小时）</div><input v-model="form.advanceHour" class="field" type="number" placeholder="请输入时间" /></div>
         <div class="form-row"><div class="label">适用门店</div><input v-model="form.stores" class="field" placeholder="请选择门店" /></div>
         <div class="form-row textarea-row"><div class="label">课程简介</div><textarea v-model="form.intro" placeholder="请输入课程简介"></textarea></div>

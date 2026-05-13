@@ -3,13 +3,14 @@ import { ref, computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useCoachStore } from '@/stores/coachStore'
 import { useUserStore } from '@/stores/userStore'
+import { icons } from '@/components/icons'
 
 const router = useRouter()
 const route = useRoute()
 const coach = useCoachStore()
 const user = useUserStore()
 
-const s = computed(() => coach.schedules.find(s => s.id === Number(route.params.id)))
+const s = computed(() => coach.schedules.find(s => String(s.id) === String(route.params.id)))
 const currentRemain = computed(() => {
   if (!s.value) return 0
   return user.userProducts.filter(p => String(p.courseId) === String(s.value.courseId)).reduce((sum, p) => sum + Number(p.remain || 0), 0)
@@ -39,14 +40,15 @@ function confirmBook() {
   const result = coach.confirmMemberBook(pendingName.value, pendingPhone.value, s.value.id)
   showConfirm.value = false
   window.__toast?.(result.msg)
-  if (result.ok) router.push(`/coach/schedule/${s.value.id}`)
+  if (result.ok) router.push('/coach/calendar')
 }
 </script>
 
 <template>
   <div class="phone">
     <div class="page active">
-      <div class="nav"><div class="back" @click="router.push(`/coach/schedule/${route.params.id}`)">‹</div>代学员预约<div class="nav-capsule"><button class="nav-capsule-btn" aria-label="更多"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="4" cy="8" r="1.5" fill="currentColor"/><circle cx="8" cy="8" r="1.5" fill="currentColor"/><circle cx="12" cy="8" r="1.5" fill="currentColor"/></svg></button><div class="nav-capsule-divider"></div><button class="nav-capsule-btn" aria-label="关闭"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="8" r="2.2" fill="currentColor"/></svg></button></div></div>
+      <div class="status-bar"><span>9:41</span><span class="status-icons"><span v-html="icons.signal" style="width:16px;height:12px"></span><span v-html="icons.battery" style="width:27px;height:12px;margin-left:6px"></span></span></div>
+      <div class="nav"><div class="back" @click="router.push('/coach/calendar')">‹</div>代学员预约<div class="nav-capsule"><button class="nav-capsule-btn" aria-label="更多"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="4" cy="8" r="1.5" fill="currentColor"/><circle cx="8" cy="8" r="1.5" fill="currentColor"/><circle cx="12" cy="8" r="1.5" fill="currentColor"/></svg></button><div class="nav-capsule-divider"></div><button class="nav-capsule-btn" aria-label="关闭"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="8" r="2.2" fill="currentColor"/></svg></button></div></div>
       <div class="member-list">
         <div class="member-search">搜索会员姓名/手机号</div>
         <div class="member-note">仅显示购买本课程的会员</div>

@@ -4,6 +4,7 @@ import { useRouter, useRoute } from 'vue-router'
 import { useCoachStore } from '@/stores/coachStore'
 import { fmtISO, dayName, fmtMD as fmtMD_util, timeToMin as timeToMin_util } from '@/utils/date'
 import { load, save as saveDraftStorage, remove } from '@/services/storage'
+import { icons } from '@/components/icons'
 
 const router = useRouter()
 const route = useRoute()
@@ -25,6 +26,12 @@ function fillCourseInfo() {
   if (c) {
     schStore.value = c.stores || ''
     schLimit.value = c.type === '一对多' ? String(c.limit || 2) : '1'
+    if (schStart.value && !schEnd.value) {
+      const dateStr = schStart.value.slice(0, 10)
+      const startTime = schStart.value.slice(11, 16)
+      const endTime = addMinutes(startTime, Number(c.minutes || 60))
+      schEnd.value = `${dateStr}T${endTime}`
+    }
   }
 }
 
@@ -75,7 +82,7 @@ const pickerDates = computed(() => {
 
 const pickerTimes = computed(() => {
   const arr = []
-  for (let h = 9; h <= 22; h++) {
+  for (let h = 8; h <= 22; h++) {
     ['00', '30'].forEach(m => {
       if (h === 22 && m === '30') return
       arr.push(`${String(h).padStart(2, '0')}:${m}`)
@@ -91,20 +98,37 @@ function openPicker(target) {
     pickerDate.value = val.slice(0, 10)
     pickerTime.value = val.slice(11, 16)
   } else {
-    pickerDate.value = pickerDates.value[0]
-    pickerTime.value = target === 'schEnd' && schStart.value ? addOneHour(schStart.value.slice(11, 16)) : '10:00'
+    pickerDate.value = fmtISO(new Date())
+    if (target === 'schStart') {
+      const now = new Date()
+      const h = String(now.getHours()).padStart(2, '0')
+      const m = now.getMinutes() < 30 ? '00' : '30'
+      pickerTime.value = `${h}:${m}`
+    } else if (target === 'schEnd' && schStart.value) {
+      pickerTime.value = addMinutes(schStart.value.slice(11, 16), getCourseDuration())
+    } else {
+      pickerTime.value = '10:00'
+    }
   }
   pickerOpen.value = true
 }
 
-function addOneHour(t) {
+function addMinutes(t, mins) {
   const [h, m] = String(t || '10:00').split(':').map(Number)
-  return `${String(Math.min(22, h + 1)).padStart(2, '0')}:${String(m || 0).padStart(2, '0')}`
+  const total = h * 60 + m + (mins || 60)
+  const eh = Math.min(22, Math.floor(total / 60))
+  const em = total % 60
+  return `${String(eh).padStart(2, '0')}:${String(em).padStart(2, '0')}`
+}
+
+function getCourseDuration() {
+  const c = onlineCourses.value.find(x => String(x.id) === String(schCourse.value))
+  return c ? Number(c.minutes || 60) : 60
 }
 
 function confirmPicker() {
   const val = pickerDate.value + 'T' + pickerTime.value
-  if (pickerTarget.value === 'schStart') schStart.value = val
+  if (pickerTarget.value === 'schStart') { schStart.value = val; fillCourseInfo() }
   else schEnd.value = val
   pickerOpen.value = false
   saveDraft()
@@ -157,6 +181,7 @@ onMounted(() => {
 <template>
   <div class="phone">
     <div class="page active">
+      <div class="status-bar"><span>9:41</span><span class="status-icons"><span v-html="icons.signal" style="width:16px;height:12px"></span><span v-html="icons.battery" style="width:27px;height:12px;margin-left:6px"></span></span></div>
       <div class="nav"><div class="back" @click="router.push('/coach/calendar')">‹</div>{{ formTitle }}<div class="nav-capsule"><button class="nav-capsule-btn" aria-label="更多"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="4" cy="8" r="1.5" fill="currentColor"/><circle cx="8" cy="8" r="1.5" fill="currentColor"/><circle cx="12" cy="8" r="1.5" fill="currentColor"/></svg></button><div class="nav-capsule-divider"></div><button class="nav-capsule-btn" aria-label="关闭"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="8" r="2.2" fill="currentColor"/></svg></button></div></div>
       <div class="form lightpad create-form">
         <label>选择课程</label>
@@ -167,7 +192,7 @@ onMounted(() => {
         <label>开始时间</label>
         <input v-model="schStart" class="box-field" readonly @click="openPicker('schStart')" placeholder="请选择开始时间" />
         <label>结束时间</label>
-        <input v-model="schEnd" class="box-field" readonly @click="openPicker('schEnd')" placeholder="请选择结束时间" />
+        <input v-model="schEnd" class="box-field" readonly @click="openPicker('schEnd')" placeholder="根据课程时长自动计算" />
         <label>上课门店</label>
         <input v-model="schStore" class="box-field" placeholder="根据课程适用门店带入" />
         <label>人数限制</label>

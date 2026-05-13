@@ -1,6 +1,8 @@
 <script setup>
 import { ref, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
+import { useCoachStore } from '@/stores/coachStore'
+import { useUserStore } from '@/stores/userStore'
 
 const router = useRouter()
 const route = useRoute()
@@ -17,9 +19,15 @@ function showToast(msg) {
 
 window.__toast = showToast
 
+let lastMode = ''
 watch(() => route.path, (path) => {
-  if (path.startsWith('/user')) document.body.setAttribute('data-app', 'user')
-  else document.body.setAttribute('data-app', 'coach')
+  const mode = path.startsWith('/user') ? 'user' : 'coach'
+  document.body.setAttribute('data-app', mode)
+  if (mode !== lastMode) {
+    lastMode = mode
+    useCoachStore().reloadSchedules()
+    useUserStore().reload()
+  }
 }, { immediate: true })
 </script>
 

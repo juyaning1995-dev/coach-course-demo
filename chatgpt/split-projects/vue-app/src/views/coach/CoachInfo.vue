@@ -2,6 +2,7 @@
 import { ref, reactive, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useCoachStore } from '@/stores/coachStore'
+import { icons } from '@/components/icons'
 
 const router = useRouter()
 const coach = useCoachStore()
@@ -98,10 +99,10 @@ function uploadAvatar() { const el = document.getElementById('ciAvatarInput'); i
 <template>
   <div class="phone">
     <div class="page active">
+      <div class="status-bar"><span>9:41</span><span class="status-icons"><span v-html="icons.signal" style="width:16px;height:12px"></span><span v-html="icons.battery" style="width:27px;height:12px;margin-left:6px"></span></span></div>
       <div class="nav">
         <div class="back" @click="router.push('/coach/mine')">‹</div>
         教练信息
-        <div class="ci-edit-btn" @click="editing ? cancelEdit() : startEdit()">{{ editing ? '取消' : '编辑' }}</div>
       <div class="nav-capsule"><button class="nav-capsule-btn" aria-label="更多"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="4" cy="8" r="1.5" fill="currentColor"/><circle cx="8" cy="8" r="1.5" fill="currentColor"/><circle cx="12" cy="8" r="1.5" fill="currentColor"/></svg></button><div class="nav-capsule-divider"></div><button class="nav-capsule-btn" aria-label="关闭"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="8" r="2.2" fill="currentColor"/></svg></button></div></div>
       <div class="mine-shell">
         <div class="ci-avatar-stage">
@@ -114,7 +115,7 @@ function uploadAvatar() { const el = document.getElementById('ciAvatarInput'); i
           <div v-if="editing" class="ci-photo-add" @click="addPhoto()">+</div>
         </div>
         <div class="ci-section">
-          <div class="ci-section-title"><i></i>教练信息</div>
+          <div class="ci-section-title"><i></i>教练信息<span class="ci-edit-btn" @click="editing ? cancelEdit() : startEdit()">{{ editing ? '取消' : '编辑' }}</span></div>
           <div class="ci-row">
             <span class="ci-label">姓名</span>
             <input v-if="editing" id="ci_name" v-model="form.name" class="ci-input" />

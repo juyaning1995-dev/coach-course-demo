@@ -6,6 +6,7 @@ const routes = [
   { path: '/coach', name: 'CoachHome', component: () => import('@/views/coach/CoachHome.vue') },
   { path: '/coach/courses', name: 'CourseList', component: () => import('@/views/coach/CourseList.vue') },
   { path: '/coach/courses/new', name: 'CourseForm', component: () => import('@/views/coach/CourseForm.vue') },
+  { path: '/coach/courses/:id/detail', name: 'CourseDetail', component: () => import('@/views/coach/CourseDetail.vue') },
   { path: '/coach/courses/:id/edit', name: 'CourseEdit', component: () => import('@/views/coach/CourseForm.vue') },
   { path: '/coach/worktime', name: 'WorkTime', component: () => import('@/views/coach/WorkTime.vue') },
   { path: '/coach/worktime/edit', name: 'WorkTimeEdit', component: () => import('@/views/coach/WorkTimeEdit.vue') },

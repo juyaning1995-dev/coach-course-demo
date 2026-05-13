@@ -4,6 +4,7 @@ import { useRouter } from 'vue-router'
 import { useCoachStore } from '@/stores/coachStore'
 import { icons } from '@/components/icons'
 
+
 const router = useRouter()
 const coach = useCoachStore()
 const keyword = ref('')
@@ -14,10 +15,17 @@ const filtered = computed(() => coach.courses.filter(c =>
   (statusFilter.value === '全部' || c.status === statusFilter.value)
 ))
 
-function meta(c) {
-  return c.unit === '按时间'
-    ? `${c.type} | ${c.hours || 0}节 | ${c.limit || 2}人 | ¥${c.price || 0}/${c.validDays || 30}天`
-    : `${c.type} | ${c.hours || 0}节 | ¥${c.price || 0}/节`
+function metaLines(c) {
+  if (c.unit === '按时间') {
+    return [
+      `${c.type} | 按时间 | ${c.validDays || '--'}天服务期 | 课时${c.hours || 0}节`,
+      `${c.minutes || '--'}分钟/节 | 总价 ¥${c.price || '--'}`
+    ]
+  }
+  return [
+    `${c.type} | 按节 | ${c.hours || 0}节课 | ${c.minutes || '--'}分钟/节`,
+    `有效期${c.validDays || '--'}天 | 总价 ¥${c.price || '--'}`
+  ]
 }
 
 function actions(c) {
@@ -49,9 +57,10 @@ function statusClass(status) {
 <template>
   <div class="phone">
     <div id="listPage" class="page active">
+      <div class="status-bar"><span>9:41</span><span class="status-icons"><span v-html="icons.signal" style="width:16px;height:12px"></span><span v-html="icons.battery" style="width:27px;height:12px;margin-left:6px"></span></span></div>
       <div class="nav"><div class="back" @click="router.push('/coach')">‹</div>课程管理<div class="nav-capsule"><button class="nav-capsule-btn" aria-label="更多"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="4" cy="8" r="1.5" fill="currentColor"/><circle cx="8" cy="8" r="1.5" fill="currentColor"/><circle cx="12" cy="8" r="1.5" fill="currentColor"/></svg></button><div class="nav-capsule-divider"></div><button class="nav-capsule-btn" aria-label="关闭"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="8" r="2.2" fill="currentColor"/></svg></button></div></div>
       <div class="search-row">
-        <div class="search-box"><span class="magnifier"></span><input v-model="keyword" placeholder="搜索课程名称" /></div>
+        <div class="search-box"><span v-html="icons.search" class="search-icon"></span><input v-model="keyword" placeholder="搜索课程名称" /></div>
         <div class="filter-label">状态:</div>
         <select v-model="statusFilter" class="status-select">
           <option value="全部">全部</option><option value="待审核">待审核</option><option value="已上架">已上架</option><option value="审核驳回">审核驳回</option><option value="已下架">已下架</option>
@@ -60,13 +69,14 @@ function statusClass(status) {
       <div class="course-list">
         <div v-if="!filtered.length" class="empty">
           <div class="empty-title">暂无课程</div>
-          <div>点击下方按钮创建课程，审核通过后可用于课程排班</div>
           <div class="empty-action" @click="router.push('/coach/courses/new')">新增课程</div>
+          <div class="empty-hint">创建的课程需门店进行审核，审核通过后可用于排班</div>
         </div>
-        <div v-for="c in filtered" :key="c.id" class="course-card">
+        <div v-for="c in filtered" :key="c.id" class="course-card" @click="router.push(`/coach/courses/${c.id}/detail`)">
           <div class="course-main">
             <div class="course-name">{{ c.name }}</div>
-            <div class="course-meta">{{ meta(c) }}</div>
+            <div class="course-meta">{{ metaLines(c)[0] }}</div>
+			<div class="course-meta">{{ metaLines(c)[1] }}</div>
             <div v-if="c.reason" class="reason">驳回原因：{{ c.reason }}</div>
             <div :class="`tag ${statusClass(c.status)}`">{{ c.status }}</div>
           </div>

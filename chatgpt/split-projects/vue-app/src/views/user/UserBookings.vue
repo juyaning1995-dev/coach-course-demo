@@ -57,7 +57,7 @@ function handleFinish(b) {
 <template>
   <div class="phone">
     <div class="page active">
-      <div class="nav"><div class="back" @click="router.push('/user/courses')">‹</div>我的预约<div class="nav-capsule"><button class="nav-capsule-btn" aria-label="更多"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="4" cy="8" r="1.5" fill="currentColor"/><circle cx="8" cy="8" r="1.5" fill="currentColor"/><circle cx="12" cy="8" r="1.5" fill="currentColor"/></svg></button><div class="nav-capsule-divider"></div><button class="nav-capsule-btn" aria-label="关闭"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="8" r="2.2" fill="currentColor"/></svg></button></div></div>
+      <div class="nav"><div class="back" @click="router.push('/user/courses')">‹</div>我的预约</div>
       <div class="user-shell">
         <div v-if="!bookings.length" class="user-empty">
           <div class="empty-title">暂无预约记录</div>
