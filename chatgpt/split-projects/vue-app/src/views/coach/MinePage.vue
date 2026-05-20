@@ -14,16 +14,18 @@ const store = computed(() => coach.storeInfo)
 const defaultAvatar = '/coach-photo.jpg'
 
 const menuItems = [
+  { key: 'profile', label: '我的主页', icon: icons.mine },
   { key: 'contract', label: '门店签约', icon: icons.contract },
   { key: 'contracts', label: '会员合同', icon: icons.order },
-  { key: 'work', label: '工作时间', icon: icons.clock },
+  // { key: 'work', label: '工作时间', icon: icons.clock },
   { key: 'course', label: '课程管理', icon: icons.course }
 ]
 
 function onMenu(key) {
-  if (key === 'contract') window.__toast?.('该功能正在建设中')
+  if (key === 'profile') router.push('/coach/profile')
+  else if (key === 'contract') router.push('/coach/store-contracts')
   else if (key === 'contracts') router.push('/coach/contracts')
-  else if (key === 'work') router.push('/coach/worktime')
+  // else if (key === 'work') router.push('/coach/worktime')
   else if (key === 'course') router.push('/coach/courses')
 }
 </script>
@@ -38,7 +40,7 @@ function onMenu(key) {
           <div class="mine-avatar-lg" :style="{ backgroundImage: `url(${profile.avatar || defaultAvatar})` }"></div>
           <div class="mine-header-info">
             <div class="mine-header-name">{{ profile.name || '王美丽' }}</div>
-            <div class="mine-header-store">{{ store.name || '振华商厦店' }}</div>
+            <div class="mine-header-store">{{ store.name || '大明湖店' }}</div>
           </div>
           <span class="mine-menu-arrow" style="flex:none">›</span>
         </div>

@@ -10,6 +10,14 @@ const coach = useCoachStore()
 
 const s = computed(() => coach.schedules.find(s => String(s.id) === String(route.params.id)))
 
+function memberDisplayName(m) {
+  const key = (m.phone || '').trim()
+  const entry = key ? (coach.studentNotes[key] || {}) : {}
+  if (entry.displayName) return entry.displayName
+  if (m.name === '用户本人' || m.name === '当前用户') return '小明'
+  return m.name || ''
+}
+
 const members = computed(() => {
   if (!s.value) return []
   coach.ensureScheduleMembers(s.value)
@@ -86,7 +94,7 @@ function deleteThisSchedule() {
             <div class="student-head">
               <div class="avatar"></div>
               <div class="student-main">
-                <div class="student-name">{{ m.name }}</div>
+                <div class="student-name">{{ memberDisplayName(m) }}</div>
                 <div class="student-meta">{{ m.phone || '未留手机号' }}<br/>预约方式：{{ coachBookingWay(m) }}<br/>预约时间：{{ m.time || '--' }}</div>
               </div>
               <div class="student-status">{{ m.status }}</div>

@@ -5,17 +5,23 @@ import { makeBookingId, normalizeUserCourseName, fmtISO } from '@/utils/date'
 
 export const useUserStore = defineStore('user', () => {
   const userProducts = ref(load('userProducts', []))
+  // migrate legacy products without buyerPhone
+  let migrated = false
+  userProducts.value.forEach(p => {
+    if (!p.buyerPhone) { p.buyerPhone = '188****0000'; migrated = true }
+  })
+  if (migrated) save('userProducts', userProducts.value)
   const userBookings = ref(load('userBookings', []))
   const userContracts = ref(load('userContracts', {}))
 
-  const currentUserProductId = ref(null)
+  const currentUserProductId = ref(load('currentUserProductId', null))
   const currentUserBookingId = ref(null)
   const selectedUserScheduleId = ref(null)
   const selectedUserDate = ref('')
   const currentContractProductId = ref(null)
-  const pendingBookingAfterContract = ref(false)
-  const purchaseProductId = ref(null)
-  const purchaseCourseType = ref(null)
+  const pendingBookingAfterContract = ref(load('pendingBookingAfterContract', false))
+  const purchaseProductId = ref(load('purchaseProductId', null))
+  const purchaseCourseType = ref(load('purchaseCourseType', null))
   const selectedTimelineDate = ref('')
   const selectedTimelineScheduleId = ref(null)
   const newBookingId = ref(null)
@@ -32,6 +38,10 @@ export const useUserStore = defineStore('user', () => {
     save('userProducts', userProducts.value)
     save('userBookings', userBookings.value)
     save('userContracts', userContracts.value)
+    save('purchaseProductId', purchaseProductId.value)
+    save('purchaseCourseType', purchaseCourseType.value)
+    save('currentUserProductId', currentUserProductId.value)
+    save('pendingBookingAfterContract', pendingBookingAfterContract.value)
   }
 
   function reloadContracts() {
@@ -58,7 +68,7 @@ export const useUserStore = defineStore('user', () => {
     return !!slot && !!product && Number(product.remain || 0) > 0 && slot.status !== '停止预约' && slot.status !== '已取消' && getUserRemainingSeats(slot) > 0
   }
 
-  function startPurchase(course, coachName, coachStoreName) {
+  function startPurchase(course, coachName, coachStoreName, buyerPhone) {
     const addRemain = Math.max(1, Number(course.hours) || 1)
     const product = {
       id: `product-${Date.now()}`,
@@ -67,13 +77,42 @@ export const useUserStore = defineStore('user', () => {
       type: course.type,
       remain: addRemain,
       coachName: coachName,
-      store: course.stores || coachStoreName
+      store: course.stores || coachStoreName,
+      buyerPhone: buyerPhone || ''
     }
     userProducts.value.push(product)
+    // Auto-create order record
+    const ts = Date.now()
+    const orderId = 'PO' + new Date(ts).toISOString().replace(/[-T:]/g, '').slice(0, 14) + String(ts % 1000).padStart(3, '0')
+    const orders = load('orders', [])
+    orders.unshift({
+      id: orderId, courseName: product.name, coachName: coachName,
+      amount: Number(course.price || 0),
+      paidAt: new Date(ts).toISOString(),
+      buyerName: '', buyerPhone: buyerPhone || '',
+      status: '已支付'
+    })
+    save('orders', orders)
     persist()
     purchaseProductId.value = product.id
     purchaseCourseType.value = product.type === '一对多' ? 'group' : 'private'
     return product
+  }
+
+  function syncScheduleToStorage(schedule) {
+    const schedules = load('schedules', [])
+    const idx = schedules.findIndex(s => String(s.id) === String(schedule.id))
+    const members = [...(schedule.members || [])]
+    const booked = members.filter(m => m.status !== '已取消').length
+    if (idx > -1) {
+      schedules[idx] = { ...schedules[idx], members, booked }
+      if (schedules[idx].status !== '停止预约' && schedules[idx].status !== '已取消') {
+        schedules[idx].status = booked >= Number(schedules[idx].limit || 1) ? '已满' : '可预约'
+      }
+    } else {
+      schedules.push({ ...schedule, members, booked })
+    }
+    save('schedules', schedules)
   }
 
   function confirmBooking(slot, product) {
@@ -92,6 +131,7 @@ export const useUserStore = defineStore('user', () => {
     slot.members.push(booking)
     upsertBookingMirror(slot, booking)
     newBookingId.value = booking.bookingId
+    syncScheduleToStorage(slot)
     persist()
     return { ok: true, booking }
   }
@@ -108,6 +148,7 @@ export const useUserStore = defineStore('user', () => {
     schedule.members.push(member)
     upsertBookingMirror(schedule, member)
     newBookingId.value = member.bookingId
+    syncScheduleToStorage(schedule)
     persist()
     return { ok: true, booking: member }
   }
@@ -148,6 +189,14 @@ export const useUserStore = defineStore('user', () => {
     const product = getUserProduct(booking.productId)
     if (product) product.remain = Number(product.remain || 0) + 1
     updateBookingInList(bookingId, { status: '已取消', completedAt: new Date().toISOString() })
+    // Sync schedule member status
+    const schedules = load('schedules', [])
+    let changed = false
+    schedules.forEach(s => {
+      const mi = (s.members || []).findIndex(m => String(m.bookingId) === String(bookingId))
+      if (mi > -1) { s.members[mi] = { ...s.members[mi], status: '已取消', completedAt: new Date().toISOString() }; changed = true }
+    })
+    if (changed) save('schedules', schedules)
     persist()
   }
 

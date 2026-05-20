@@ -17,7 +17,13 @@ const routes = [
   { path: '/coach/schedule/:id/members', name: 'MemberPage', component: () => import('@/views/coach/MemberPage.vue') },
   { path: '/coach/schedule/:id/stop', name: 'StopPage', component: () => import('@/views/coach/StopPage.vue') },
   { path: '/coach/mine', name: 'MinePage', component: () => import('@/views/coach/MinePage.vue') },
+  { path: '/coach/bookings', name: 'BookingManagement', component: () => import('@/views/coach/BookingManagement.vue') },
+  { path: '/coach/orders', name: 'OrderManagement', component: () => import('@/views/coach/OrderManagement.vue') },
+  { path: '/coach/students', name: 'StudentManagement', component: () => import('@/views/coach/StudentManagement.vue') },
+  { path: '/coach/student/:phone', name: 'MemberDetail', component: () => import('@/views/coach/MemberDetail.vue') },
   { path: '/coach/contracts', name: 'MemberContracts', component: () => import('@/views/coach/MemberContracts.vue') },
+  { path: '/coach/store-contracts', name: 'StoreContracts', component: () => import('@/views/coach/StoreContracts.vue') },
+  { path: '/coach/profile', name: 'CoachProfilePage', component: () => import('@/views/coach/CoachProfilePage.vue') },
   { path: '/coach/info', name: 'CoachInfo', component: () => import('@/views/coach/CoachInfo.vue') },
   { path: '/coach/user/courses', name: 'CoachUserCourses', component: () => import('@/views/coach/UserCourses.vue') },
   { path: '/coach/user/booking', name: 'CoachUserBooking', component: () => import('@/views/coach/UserBooking.vue') },
@@ -36,6 +42,6 @@ const routes = [
 ]
 
 export default createRouter({
-  history: createWebHistory(),
+  history: createWebHistory('/coach-app/'),
   routes
 })

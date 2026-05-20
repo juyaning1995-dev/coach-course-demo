@@ -41,7 +41,7 @@ watch(() => route.path, (path) => {
 <style scoped>
 .app-shell {
   min-height: 100vh;
-  background: var(--app-bg, #111);
+  background: var(--app-bg, #fff);
 }
 .toast {
   display: none;

@@ -1,6 +1,7 @@
 <script setup>
 import { computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+import { icons } from '@/components/icons'
 import { useCoachStore } from '@/stores/coachStore'
 import { useUserStore } from '@/stores/userStore'
 
@@ -15,7 +16,15 @@ onMounted(() => {
 
 const avatarUrl = computed(() => coach.coachProfile?.avatar || '/coach-photo.jpg')
 
-const products = computed(() => userStore.userProducts)
+const products = computed(() => {
+  const list = [...userStore.userProducts]
+  list.sort((a, b) => {
+    const aAvail = Number(a.remain || 0) > 0 ? 1 : 0
+    const bAvail = Number(b.remain || 0) > 0 ? 1 : 0
+    return bAvail - aAvail
+  })
+  return list
+})
 
 function hasContract(productId) {
   return !!userStore.userContracts[String(productId)]
@@ -47,6 +56,7 @@ function openContract(productId) {
 <template>
   <div class="phone">
     <div class="page active">
+      <div class="status-bar"><span>9:41</span><span class="status-icons"><span v-html="icons.signal" style="width:16px;height:12px"></span><span v-html="icons.battery" style="width:27px;height:12px;margin-left:6px"></span></span></div>
       <div class="nav"><div class="back" @click="router.push('/user')">‹</div>私教课</div>
       <div class="user-shell">
         <div v-if="!products.length" class="user-empty">

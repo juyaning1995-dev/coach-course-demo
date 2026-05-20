@@ -14,7 +14,7 @@ const quickIconBg = { contract: 'bg-coral', work: 'bg-warning', course: 'bg-cora
 
 const quickFeatures = [
   { key: 'contract', label: '门店签约', icon: icons.contract },
-  { key: 'work', label: '工作时间', icon: icons.clock },
+  // { key: 'work', label: '工作时间', icon: icons.clock },
   { key: 'course', label: '课程管理', icon: icons.course },
   { key: 'booking', label: '预约管理', icon: icons.booking },
   { key: 'calendar', label: '排课日历', icon: icons.schedule },
@@ -24,9 +24,13 @@ const quickFeatures = [
 
 function onQuick(key) {
   switch (key) {
-    case 'work': router.push('/coach/worktime'); break
+    // case 'work': router.push('/coach/worktime'); break
     case 'course': router.push('/coach/courses'); break
+    case 'booking': router.push('/coach/bookings'); break
+    case 'order': router.push('/coach/orders'); break
+    case 'student': router.push('/coach/students'); break
     case 'calendar': router.push('/coach/calendar'); break
+    case 'contract': router.push('/coach/store-contracts'); break
     default: window.__toast?.('该功能正在建设中')
   }
 }
@@ -34,6 +38,9 @@ function onQuick(key) {
 const todaySchedules = computed(() => coach.getTodaySchedules())
 
 function memberDisplayName(m) {
+  const key = (m.phone || '').trim()
+  const entry = key ? (coach.studentNotes[key] || {}) : {}
+  if (entry.displayName) return entry.displayName
   if (m.name === '用户本人' || m.name === '当前用户') return '小明'
   return m.name || ''
 }
@@ -45,7 +52,10 @@ function memberStatusChip(m) {
 
 function memberActions(m, sid) {
   const arr = []
-  if (m.status === '待上课') arr.push({ label: '确认上课', cls: 'primary', fn: () => { coach.updateBookingRecord(m.bookingId, { status: '上课中' }); window.__toast?.('已确认上课') } })
+  if (m.status === '待上课') {
+    arr.push({ label: '取消预约', cls: 'secondary', fn: () => { coach.cancelBookingSeat(m.bookingId); window.__toast?.('已取消预约') } })
+    arr.push({ label: '确认上课', cls: 'primary', fn: () => { coach.updateBookingRecord(m.bookingId, { status: '上课中' }); window.__toast?.('已确认上课') } })
+  }
   else if (m.status === '待教练处理取消') {
     arr.push({ label: '同意取消', cls: 'primary', fn: () => { coach.cancelBookingSeat(m.bookingId); window.__toast?.('已同意取消') } })
     arr.push({ label: '未到场', cls: 'secondary', fn: () => { coach.updateBookingRecord(m.bookingId, { status: '未到场', completedAt: new Date().toISOString() }); window.__toast?.('已记为未到场') } })

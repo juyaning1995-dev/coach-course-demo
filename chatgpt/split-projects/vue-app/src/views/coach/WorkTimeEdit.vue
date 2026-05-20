@@ -1,9 +1,10 @@
 <script setup>
-import { reactive, onMounted, watch } from 'vue'
+import { reactive, computed, onMounted, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { useCoachStore } from '@/stores/coachStore'
 import { load, save as saveDraftStorage, remove } from '@/services/storage'
 import { icons } from '@/components/icons'
+import { startOfWeek } from '@/utils/date'
 
 const router = useRouter()
 const coach = useCoachStore()
@@ -13,6 +14,14 @@ function toggleRepeat() {
 }
 
 const dayNames = ['一', '二', '三', '四', '五', '六', '日']
+const weekDates = computed(() => {
+  const base = new Date(startOfWeek(new Date()))
+  return dayNames.map((_, i) => {
+    const d = new Date(base)
+    d.setDate(d.getDate() + i)
+    return `${d.getMonth() + 1}/${d.getDate()}`
+  })
+})
 const selectedDays = reactive([])
 const timeLines = reactive([
   { name: '上午', value: '08:00–12:00', off: false },
@@ -104,7 +113,10 @@ onMounted(() => {
           </div>
         </div>
         <div class="days" id="editDays">
-          <div v-for="d in dayNames" :key="d" :class="['day', { on: selectedDays.includes(d) }]" @click="toggleDay(d)">{{ d }}</div>
+          <div v-for="(d, i) in dayNames" :key="d" class="day-col" @click="toggleDay(d)">
+            <span class="day-date">{{ weekDates[i] }}</span>
+            <div :class="['day', { on: selectedDays.includes(d) }]">{{ d }}</div>
+          </div>
         </div>
       </div>
       <div class="time-section">
@@ -123,3 +135,8 @@ onMounted(() => {
     </div>
   </div>
 </template>
+
+<style scoped>
+.day-col{display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer}
+.day-date{font-size:11px;color:var(--muted-foreground)}
+</style>

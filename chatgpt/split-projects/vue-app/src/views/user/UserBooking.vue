@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+import { icons } from '@/components/icons'
 import { useCoachStore } from '@/stores/coachStore'
 import { useUserStore } from '@/stores/userStore'
 import { fmtISO, dayName, fmtUserDateTime, normalizeUserCourseName } from '@/utils/date'
@@ -12,6 +13,15 @@ const userStore = useUserStore()
 const selectedDate = ref('')
 const selectedScheduleId = ref(null)
 const showConfirm = ref(false)
+const showSuccess = ref(false)
+const successBooking = ref(null)
+const successSchedule = ref(null)
+
+const successCourseDesc = computed(() => {
+  if (!successSchedule.value) return ''
+  const c = coach.courses.find(c => String(c.id) === String(successSchedule.value.courseId))
+  return c?.desc || c?.intro || ''
+})
 
 const avatarUrl = computed(() => coach.coachProfile?.avatar || '/coach-photo.jpg')
 
@@ -125,7 +135,9 @@ function confirmBooking() {
     coach.persist()
     userStore.persist()
     showConfirm.value = false
-    router.push('/user/success')
+    successBooking.value = member
+    successSchedule.value = nextSchedule
+    showSuccess.value = true
     return
   }
 
@@ -156,10 +168,14 @@ function confirmBooking() {
   coach.persist()
   userStore.persist()
   showConfirm.value = false
-  router.push('/user/success')
+  successBooking.value = booking
+  successSchedule.value = slot
+  showSuccess.value = true
 }
 
 onMounted(() => {
+  coach.reloadSchedules()
+  userStore.reload()
   if (availableDates.value.length && !availableDates.value.includes(selectedDate.value)) {
     selectedDate.value = availableDates.value[0]
   }
@@ -169,6 +185,7 @@ onMounted(() => {
 <template>
   <div class="phone">
     <div class="page active">
+      <div class="status-bar"><span>9:41</span><span class="status-icons"><span v-html="icons.signal" style="width:16px;height:12px"></span><span v-html="icons.battery" style="width:27px;height:12px;margin-left:6px"></span></span></div>
       <div class="nav"><div class="back" @click="router.push('/user/coach')">‹</div>{{ isGroup ? '预约小班训练' : '预约私教训练' }}</div>
       <div class="user-shell">
         <!-- Group mode: course card -->
@@ -246,6 +263,39 @@ onMounted(() => {
         <div class="user-confirm-actions">
           <button class="utc-cancel" @click="showConfirm = false">我再看看</button>
           <button class="utc-confirm" @click="confirmBooking">确认预约</button>
+        </div>
+      </div>
+    </div>
+    <!-- Success Sheet -->
+    <div v-if="showSuccess" class="sheet-mask" style="display:block;z-index:30" @click="showSuccess = false">
+      <div class="us-bottom-sheet" style="position:fixed;left:50%;transform:translateX(-50%);bottom:0;width:min(390px,100vw);background:var(--surface);border-radius:24px 24px 0 0;padding:14px 20px 30px;z-index:31">
+        <div class="us-drag-bar" style="width:36px;height:4px;background:var(--border);border-radius:2px;margin:0 auto 16px"></div>
+        <div class="us-icon-wrap" style="display:flex;justify-content:center;margin-bottom:8px"><div class="us-check" style="width:48px;height:48px;border-radius:50%;background:var(--brand);color:var(--brand-foreground);display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:700">&#10003;</div></div>
+        <div class="us-title" style="text-align:center;font-size:18px;font-weight:600;color:var(--foreground);margin-bottom:16px">预约成功</div>
+        <div v-if="successSchedule" class="us-info-card" style="padding:14px 16px;background:var(--muted);border:1px solid var(--border);border-radius:14px;margin-bottom:12px">
+          <div class="us-info-row" style="display:flex;justify-content:space-between;padding:6px 0">
+            <span class="us-info-label" style="font-size:13px;color:var(--muted-foreground);flex:none;width:64px">课程</span>
+            <span class="us-info-value" style="font-size:14px;color:var(--foreground);line-height:1.5">{{ successSchedule.courseName }}</span>
+          </div>
+          <div class="us-info-row" style="display:flex;justify-content:space-between;padding:6px 0">
+            <span class="us-info-label" style="font-size:13px;color:var(--muted-foreground);flex:none;width:64px">教练</span>
+            <span class="us-info-value" style="font-size:14px;color:var(--foreground);line-height:1.5">{{ product?.coachName }}</span>
+          </div>
+          <div class="us-info-row" style="display:flex;justify-content:space-between;padding:6px 0">
+            <span class="us-info-label" style="font-size:13px;color:var(--muted-foreground);flex:none;width:64px">上课时间</span>
+            <span class="us-info-value" style="font-size:14px;color:var(--foreground);line-height:1.5">{{ fmtUserDateTime(successSchedule.date, successSchedule.start, successSchedule.end) }}</span>
+          </div>
+          <div class="us-info-row" style="display:flex;justify-content:space-between;padding:6px 0">
+            <span class="us-info-label" style="font-size:13px;color:var(--muted-foreground);flex:none;width:64px">上课门店</span>
+            <span class="us-info-value" style="font-size:14px;color:var(--foreground);line-height:1.5">{{ successSchedule.store }}</span>
+          </div>
+        </div>
+        <div v-if="successCourseDesc" class="us-desc-card" style="padding:14px 16px;background:var(--muted);border:1px solid var(--border);border-radius:14px;margin-bottom:12px">
+          <div class="us-desc-title" style="font-size:14px;font-weight:600;color:var(--foreground);margin-bottom:8px">课程说明</div>
+          <div class="us-desc-text" style="font-size:13px;color:var(--muted-foreground);line-height:1.7">{{ successCourseDesc }}</div>
+        </div>
+        <div class="us-actions" style="display:flex;justify-content:center;margin-top:20px">
+          <button class="us-btn primary" style="width:200px;height:48px;border-radius:12px;font-size:15px;font-weight:600;cursor:pointer;background:var(--brand);color:var(--brand-foreground);border:0" @click="router.push('/user/bookings')">查看预约</button>
         </div>
       </div>
     </div>

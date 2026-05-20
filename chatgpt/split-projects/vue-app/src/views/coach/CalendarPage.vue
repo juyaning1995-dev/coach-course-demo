@@ -173,11 +173,11 @@ const tipMaskText = ref('')
 
 function goNewSchedule() {
   const dateStr = activeDateStr.value
-  if (!coach.hasWorkTimeForDate(dateStr)) {
-    tipMaskText.value = '请先设置工作时间，再新增排课。'
-    showTipMask.value = true
-    return
-  }
+  // if (!coach.hasWorkTimeForDate(dateStr)) {
+  //   tipMaskText.value = '请先设置工作时间，再新增排课。'
+  //   showTipMask.value = true
+  //   return
+  // }
   coach.currentCalendarWeekStart = fmtISO(weekStart.value)
   router.push('/coach/schedule/new')
 }

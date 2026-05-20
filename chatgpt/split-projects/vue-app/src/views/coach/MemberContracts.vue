@@ -55,3 +55,7 @@ const contracts = computed(() => {
     </div>
   </div>
 </template>
+
+<style scoped>
+.phone{background:var(--background)!important}
+</style>

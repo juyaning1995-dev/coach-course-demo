@@ -43,9 +43,9 @@ function save() {
   const start = schStart.value.slice(11, 16)
   const endt = schEnd.value.slice(11, 16)
   if (timeToMin_util(endt) <= timeToMin_util(start)) { window.__toast?.('结束时间必须晚于开始时间'); return }
-  const ranges = coach.getWorkRangesForDate(dateStr)
-  const ok = ranges.some(r => { const [s1, e1] = String(r).split('–'); return start >= s1 && endt <= e1 })
-  if (!ok) { window.__toast?.('不在工作时间范围内'); return }
+  // const ranges = coach.getWorkRangesForDate(dateStr)
+  // const ok = ranges.some(r => { const [s1, e1] = String(r).split('–'); return start >= s1 && endt <= e1 })
+  // if (!ok) { window.__toast?.('不在工作时间范围内'); return }
   const data = {
     courseId: c.id, courseType: c.type, courseName: c.name,
     date: dateStr,

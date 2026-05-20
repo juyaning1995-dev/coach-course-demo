@@ -7,7 +7,9 @@ export default defineConfig({
   resolve: {
     alias: { '@': resolve(__dirname, 'src') }
   },
+  base: '/coach-app/',
   server: {
+    host: '0.0.0.0',
     port: 8765,
     proxy: {
       '/api': 'http://localhost:3000'

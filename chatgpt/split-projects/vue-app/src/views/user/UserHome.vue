@@ -2,6 +2,7 @@
 import { computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/userStore'
+import { icons } from '@/components/icons'
 import { useCoachStore } from '@/stores/coachStore'
 
 const router = useRouter()
@@ -22,6 +23,7 @@ const pendingCount = computed(() => user.userBookings.filter(b => !['已取消',
 <template>
   <div class="phone">
     <div class="page active">
+      <div class="status-bar"><span>9:41</span><span class="status-icons"><span v-html="icons.signal" style="width:16px;height:12px"></span><span v-html="icons.battery" style="width:27px;height:12px;margin-left:6px"></span></span></div>
       <div class="nav">首页</div>
       <div class="user-shell">
         <div class="user-home-grid">

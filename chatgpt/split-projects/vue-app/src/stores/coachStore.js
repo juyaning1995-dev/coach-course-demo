@@ -5,7 +5,7 @@ import { fmtISO, startOfWeek, normalizeUserCourseName, makeBookingId, hoursUntil
 import { useUserStore } from './userStore'
 
 const DEFAULT_COACH_PROFILE = { name: '王美丽', gender: '女', phone: '182****8474', birthDate: '1995-03-18', idCard: '4108*****5689', tags: ['减脂', '塑形', '瑜伽', '普拉提'], bio: '从业8年，擅长体态矫正与产后恢复训练。注重科学训练方法，为每位学员量身定制训练计划。', avatar: '', photos: [] }
-const DEFAULT_STORE_INFO = { name: '振华商厦店', address: '山东省烟台市芝罘区西大街8号', phone: '0535-6580333' }
+const DEFAULT_STORE_INFO = { name: '大明湖店', address: '山东省济南市历下区大明湖路1号', phone: '0531-86089999' }
 
 export const useCoachStore = defineStore('coach', () => {
   // ============ State ============
@@ -26,8 +26,15 @@ export const useCoachStore = defineStore('coach', () => {
   const schedules = ref(load('schedules', []))
   const coachProfile = ref(load('coachProfile', DEFAULT_COACH_PROFILE))
   const storeInfo = ref(load('storeInfo', DEFAULT_STORE_INFO))
+  // migrate old store name
+  if (storeInfo.value.name === '振华商厦店') {
+    storeInfo.value = { ...DEFAULT_STORE_INFO }
+    save('storeInfo', storeInfo.value)
+  }
   const editingId = ref(null)
   const pendingAuditId = ref(null)
+  const orders = ref(load('orders', []))
+  const studentNotes = ref(load('studentNotes', {}))
   const currentScheduleId = ref(null)
   const editingScheduleId = ref(null)
   const coachInfoEditing = ref(false)
@@ -47,6 +54,8 @@ export const useCoachStore = defineStore('coach', () => {
     save('storeInfo', storeInfo.value)
     save('repeatWorkTime', repeatWorkTime.value)
     save('workTimeWeekStart', workTimeWeekStart.value)
+    save('orders', orders.value)
+    save('studentNotes', studentNotes.value)
   }
 
   function checkAndClearWorkTime() {
@@ -147,6 +156,7 @@ export const useCoachStore = defineStore('coach', () => {
   // ============ Schedule Management ============
   function reloadSchedules() {
     schedules.value = load('schedules', [])
+    orders.value = load('orders', [])
   }
 
   function saveSchedule(data, editingId = null) {
@@ -351,7 +361,7 @@ export const useCoachStore = defineStore('coach', () => {
   }
 
   return {
-    courses, workTimes, schedules, coachProfile, storeInfo,
+    courses, workTimes, schedules, coachProfile, storeInfo, orders, studentNotes,
     editingId, pendingAuditId, currentScheduleId, editingScheduleId, coachInfoEditing, currentCalendarWeekStart,
     repeatWorkTime, workTimeWeekStart,
     onlineCourses, today, todayKey,

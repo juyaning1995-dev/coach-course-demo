@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed, onMounted, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
+import { icons } from '@/components/icons'
 import { useCoachStore } from '@/stores/coachStore'
 import { useUserStore } from '@/stores/userStore'
 
@@ -104,6 +105,7 @@ onMounted(async () => {
 <template>
   <div class="phone">
     <div class="page active">
+      <div class="status-bar"><span>9:41</span><span class="status-icons"><span v-html="icons.signal" style="width:16px;height:12px"></span><span v-html="icons.battery" style="width:27px;height:12px;margin-left:6px"></span></span></div>
       <div class="nav"><div class="back" @click="backFromContract">‹</div>电子合同</div>
       <div class="user-shell">
         <div class="user-contract-sheet">

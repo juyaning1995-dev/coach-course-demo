@@ -10,8 +10,12 @@ const coachKeys = ['courses', 'workTimes', 'schedules', 'coachProfile', 'storeIn
 const userKeys = ['userProducts', 'userBookings', 'userContracts']
 
 function clearData(type) {
-  const keys = type === 'coach' ? coachKeys : type === 'user' ? userKeys : [...coachKeys, ...userKeys]
-  keys.forEach(k => localStorage.removeItem(P + k))
+  if (type === 'all') {
+    Object.keys(localStorage).filter(k => k.startsWith(P)).forEach(k => localStorage.removeItem(k))
+  } else {
+    const keys = type === 'coach' ? coachKeys : userKeys
+    keys.forEach(k => localStorage.removeItem(P + k))
+  }
   window.location.reload()
 }
 </script>
